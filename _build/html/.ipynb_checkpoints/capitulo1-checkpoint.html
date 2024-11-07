@@ -1,0 +1,1718 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>1. INTRODUÇÃO A GRAFOS &#8212; Análise Espacial de Redes</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'capitulo1';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Capítulo 2 - Manipulação de redes espaciais" href="capitulo2.html" />
+    <link rel="prev" title="Welcome to your Jupyter Book" href="intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Análise Espacial de Redes - Home"/>
+    <img src="_static/logo.png" class="logo__image only-dark pst-js-only" alt="Análise Espacial de Redes - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to your Jupyter Book
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">1. INTRODUÇÃO A GRAFOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="capitulo2.html">Capítulo 2 - Manipulação de redes espaciais</a></li>
+<li class="toctree-l1"><a class="reference internal" href="capitulo3.html">Capítulo 3 - Métricas e indicadores de redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="capitulo4.html">Capítulo 4 - Roteamento e análise de tempos de viagem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="capitulo5.html">Capítulo 5 - Mapeamento de isócronas para análise de acessibilidade espacial</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="referencias.html">Bibliografia básica</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/Alexandrogschafer/spatial_network_analysis" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Alexandrogschafer/spatial_network_analysis/issues/new?title=Issue%20on%20page%20%2Fcapitulo1.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/capitulo1.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>1. INTRODUÇÃO A GRAFOS</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introducao">Introdução</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fundamentos-sobre-grafos">1.1 Fundamentos sobre Grafos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-biblioteca-networkx-do-python">1.2 A biblioteca NetworkX do Python</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#criando-e-manipulando-um-grafo-simples">1.3 Criando e Manipulando um Grafo Simples</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#criando-um-digrafo-de-viagens-entre-capitais-brasileiras">1.4 Criando um Digrafo de Viagens entre Capitais Brasileiras</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estrutura-do-exercicio">Estrutura do Exercício:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#encontrando-o-caminho-mais-curto-no-digrafo"><strong>1.4.1 - Encontrando o Caminho Mais Curto no Digrafo</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calculando-o-caminho-com-menor-soma-de-populacoes"><strong>1.4.2 Calculando o Caminho com Menor Soma de Populações</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#criando-um-multigrafo-no-networkx"><strong>1.5 Criando um Multigrafo no NetworkX</strong></a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="introducao-a-grafos">
+<h1>1. INTRODUÇÃO A GRAFOS<a class="headerlink" href="#introducao-a-grafos" title="Link to this heading">#</a></h1>
+<section id="introducao">
+<h2>Introdução<a class="headerlink" href="#introducao" title="Link to this heading">#</a></h2>
+<p>A análise de redes espaciais é uma área de estudo que tem como objetivo investigar a organização e a conectividade de elementos espaciais, seja no contexto de infraestruturas urbanas, distribuição de recursos naturais ou fluxos de informação. A modelagem de relações espaciais por meio de grafos constitui uma abordagem útil para descrever e analisar a complexidade das interações geográficas.</p>
+<p>Os grafos são estruturas matemáticas fundamentais na representação e análise de relações e conexões em diversas áreas do conhecimento. A ideia central de um grafo consiste em um conjunto de nós (ou vértices) conectados por arestas (ou ligações), que podem representar diversas situações reais, como redes de transportes, redes elétricas, redes sociais e, especialmente, redes espaciais. Neste capítulo, vamos explorar os conceitos básicos de grafos e mostrar como eles podem ser aplicados à análise espacial de redes, utilizando o Python e a biblioteca NetworkX.</p>
+<p>O capítulo é organizado para introduzir, de forma progressiva, os conceitos fundamentais de grafos, incluindo vértices, arestas, graus, componentes conectados e o papel de diferentes tipos de grafos, como grafos direcionados e não direcionados. Você também aprenderá como construir grafos simples e representativos utilizando a biblioteca NetworkX, explorando suas principais funções e como elas podem ser utilizadas para responder a perguntas específicas sobre redes espaciais.</p>
+</section>
+<section id="fundamentos-sobre-grafos">
+<h2>1.1 Fundamentos sobre Grafos<a class="headerlink" href="#fundamentos-sobre-grafos" title="Link to this heading">#</a></h2>
+<p>Um grafo é uma estrutura composta por um conjunto de vértices (ou nós) e um conjunto de arestas (ou ligações) que conectam esses vértices. Formalmente, um grafo <strong>G</strong> é definido como <strong>G = (V, E)</strong>, onde <strong>V</strong> é o conjunto de vértices e <strong>E</strong> é o conjunto de arestas que conectam pares de vértices. As arestas podem representar relações de diversos tipos, como conexões físicas, caminhos ou qualquer tipo de vínculo entre os elementos representados pelos nós.</p>
+<p>Grafos são amplamente utilizados em diversas áreas do conhecimento, pois permitem modelar relações e interações de forma intuitiva e visual. Na ciência da computação, são usados para representar redes de computadores, estrutura de dados e algoritmos. Na engenharia, grafos são utilizados para modelar redes de transporte e distribuição, como redes elétricas, sistemas de água e esgoto, e redes de tráfego. Nas ciências sociais, são usados para analisar redes de amizade e interações sociais. Em geografia e análise espacial, grafos ajudam a representar redes espaciais, como estradas, rios e sistemas urbanos.</p>
+<p>Existem diferentes tipos de grafos, cada um com suas características e aplicações específicas:</p>
+<ul class="simple">
+<li><p><strong>Grafos não direcionados</strong>: Neste tipo de grafo, as arestas não possuem uma direção específica, ou seja, a relação entre os nós é bidirecional. Um exemplo típico de grafo não direcionado é uma rede de estradas, onde é possível trafegar em ambos os sentidos entre duas cidades conectadas.</p></li>
+</ul>
+<p><img alt="Descrição da Imagem" src="_images/figura1.png" /></p>
+<ul class="simple">
+<li><p><strong>Grafos direcionados (ou dígrafos)</strong>: Nos grafos direcionados, as arestas possuem uma direção, representando uma relação unidirecional entre os nós. Um exemplo comum é a representação de rotas de voo, onde uma aresta conecta duas cidades, mas apenas em uma direção específica.</p></li>
+</ul>
+<p><img alt="Descrição da Imagem" src="_images/figura2.png" /></p>
+<ul class="simple">
+<li><p><strong>Grafos ponderados</strong>: Nos grafos ponderados, cada aresta tem um valor associado, chamado de peso, que pode representar a distância, o custo ou qualquer outra medida relevante. Por exemplo, em uma rede de transporte, o peso da aresta pode representar a distância entre duas localidades ou o tempo necessário para percorrê-la.</p></li>
+</ul>
+<p><img alt="Descrição da Imagem" src="_images/figura3.png" /></p>
+<ul class="simple">
+<li><p><strong>Grafos não ponderados</strong>: Neste caso, as arestas não possuem pesos associados, ou seja, todas as conexões são consideradas equivalentes.</p></li>
+<li><p><strong>Grafos simples e multigrafos</strong>: Um grafo simples é aquele em que existe, no máximo, uma aresta entre dois nós, e não há laços (arestas que conectam um nó a ele mesmo). Já um multigrafo permite múltiplas arestas entre os mesmos nós, podendo representar, por exemplo, diferentes rotas entre duas cidades.</p></li>
+</ul>
+<p><img alt="Descrição da Imagem" src="_images/figura4.png" /></p>
+<ul class="simple">
+<li><p><strong>Grafos completos</strong>: Um grafo completo é aquele em que todos os nós estão conectados a todos os outros nós. Esses grafos são úteis para estudar cenários em que cada elemento se relaciona diretamente com todos os demais.</p></li>
+</ul>
+<p><img alt="Descrição da Imagem" src="_images/figura5.png" /></p>
+<p>Esses diferentes tipos de grafos permitem modelar uma ampla variedade de problemas e situações.</p>
+</section>
+<section id="a-biblioteca-networkx-do-python">
+<h2>1.2 A biblioteca NetworkX do Python<a class="headerlink" href="#a-biblioteca-networkx-do-python" title="Link to this heading">#</a></h2>
+<p>O Python é amplamente utilizado para a análise espacial de redes. Uma das principais razões é a possibilidade de automatização e reprodutibilidade, já que Python permite a criação de scripts que processam dados de forma consistente, ideal para análises repetidas ou pipelines automatizados. Além disso, o Python oferece controle total sobre o processo analítico, o que proporciona flexibilidade na customização de algoritmos e ajustes que muitas vezes não são possíveis em ferramentas SIG Desktop.</p>
+<p>Outro diferencial importante do Python é a ampla gama de bibliotecas disponíveis, como <strong>NetworkX</strong>, <strong>OSMnx</strong> e <strong>GeoPandas</strong>, que permitem manipular grafos e dados geoespaciais com grande flexibilidade. A escalabilidade também é uma vantagem significativa, pois Python pode lidar com grandes volumes de dados e permitir o uso de técnicas de programação paralela, algo que um SIG Desktop, com sua interface gráfica, pode enfrentar limitações.</p>
+<p>Python se destaca ainda pela sua capacidade de integração com outras ferramentas e fluxos de trabalho, como bibliotecas de aprendizado de máquina (<strong>scikit-learn</strong>) e visualização de dados (<strong>matplotlib</strong>), oferecendo uma solução mais robusta e completa para análises complexas. Além disso, a customização e flexibilidade que Python proporciona são incomparáveis, permitindo a adaptação do código a necessidades muito específicas. Por fim, a possibilidade de executar Python em ambientes não gráficos torna-o ideal para pipelines automatizados e execuções em servidores ou na nuvem. Esses fatores fazem com que Python seja uma escolha vantajosa quando há necessidade de personalização, automação, escalabilidade e controle total sobre o processo analítico, enquanto um SIG Desktop pode ser mais limitado nessas questões.</p>
+<p>No ecossistema do Python, o <strong>NetworkX</strong> é uma biblioteca em Python voltada para a criação, manipulação e análise de grafos e redes complexas. Ele oferece ferramentas eficientes para modelar e estudar redes em diversas áreas, como redes sociais, infraestrutura urbana, sistemas biológicos e redes de transporte. Entre seus principais recursos, destaca-se o suporte à criação de diferentes tipos de grafos, como grafos simples, dígrafos (grafos direcionados) e multigrafos (com múltiplas arestas entre dois nós), permitindo que nós e arestas possuam atributos associados, como rótulos, pesos ou distâncias.</p>
+<p>A biblioteca também possibilita a adição, remoção e modificação de nós e arestas, além de permitir consultas sobre a estrutura do grafo, como vizinhança e grau de conexão. O <strong>NetworkX</strong> oferece uma gama de algoritmos para a análise de redes, incluindo caminhos mínimos, medidas de centralidade, detecção de componentes conexos e identificação de comunidades. Adicionalmente, permite a importação e exportação de grafos em formatos comuns, como <strong>GraphML</strong>, <strong>GML</strong> e <strong>Edgelist</strong>, facilitando a integração com outras ferramentas. Embora a visualização de grafos não seja seu foco principal, a biblioteca inclui funcionalidades básicas de visualização compatíveis com o <strong>Matplotlib</strong>. O <strong>NetworkX</strong> é amplamente utilizado tanto em pesquisas acadêmicas quanto em projetos práticos, sendo uma ferramenta flexível e poderosa para a análise de redes e grafos.</p>
+<p>Ao longo deste capítulo, vamos explorar como criar e manipular esses diferentes tipos de grafos, utilizando a biblioteca <strong>NetworkX</strong>, para que você possa compreender suas características e como aplicá-los na análise espacial de redes.</p>
+<p>Vamos fazer <strong>três exercícios práticos</strong> que permitirão aplicar os conceitos discutidos anteriormente. O primeiro exercício será a criação de um grafo simples; o segundo, de um digrafo; e, finalmente, no terceiro exercício, trabalharemos com um multigrafo. Esses exemplos práticos ajudarão a solidificar sua compreensão sobre os diferentes tipos de grafos e suas aplicações na análise espacial de redes, utilizando a biblioteca <strong>NetworkX</strong>.</p>
+</section>
+<section id="criando-e-manipulando-um-grafo-simples">
+<h2>1.3 Criando e Manipulando um Grafo Simples<a class="headerlink" href="#criando-e-manipulando-um-grafo-simples" title="Link to this heading">#</a></h2>
+<p>Neste exercício, você aprenderá a criar um grafo não direcionado no Python utilizando a biblioteca <code class="docutils literal notranslate"><span class="pre">networkx</span></code>. O foco será a criação de um grafo que represente algumas capitais do Brasil e suas conexões, explorando ferramentas básicas de <code class="docutils literal notranslate"><span class="pre">networkx</span></code> ao longo do processo. Além disso, será abordada a inclusão de atributos como a população das capitais e a manipulação de nós e arestas. No final, o grafo será visualizado, com ênfase nas conexões e nos atributos associados a nós e arestas.</p>
+<p>Inicialmente, vamos importar as bibliotecas necessárias para criar e visualizar o grafo. Utilizaremos a biblioteca <code class="docutils literal notranslate"><span class="pre">networkx</span></code> para manipulação de grafos e <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> para visualização.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Agora, vamos criar um grafo vazio e adicionar alguns atributos globais, como a data de criação, o nome do projeto e a versão. Esses atributos são úteis para registrar informações sobre o grafo, ajudando a documentar quando e para que finalidade ele foi criado.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Criando um grafo vazio</span>
+<span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
+
+<span class="c1"># Adicionando atributos globais ao grafo, como data de criação, nome do projeto e versão</span>
+<span class="n">G</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="s1">&#39;data_criacao&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;2024-01-02&#39;</span>  <span class="c1"># Data de criação do grafo</span>
+<span class="n">G</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="s1">&#39;projeto&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Análise de Capitais Brasileiras&#39;</span>  <span class="c1"># Nome do projeto</span>
+<span class="n">G</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="s1">&#39;versao&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;1.0&#39;</span>  <span class="c1"># Versão do grafo</span>
+
+<span class="c1"># Exibindo os atributos globais do grafo</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Atributos do grafo G:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">graph</span><span class="p">)</span>  <span class="c1"># Imprime o dicionário contendo os atributos globais do grafo</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Atributos do grafo G:
+{&#39;data_criacao&#39;: &#39;2024-01-02&#39;, &#39;projeto&#39;: &#39;Análise de Capitais Brasileiras&#39;, &#39;versao&#39;: &#39;1.0&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+<p>Neste código, estamos criando e configurando um grafo utilizando a biblioteca <code class="docutils literal notranslate"><span class="pre">networkx</span></code>.</p>
+<ul class="simple">
+<li><p><strong>Criação do grafo</strong>: A primeira linha cria um grafo vazio chamado <code class="docutils literal notranslate"><span class="pre">G</span></code> utilizando a <strong>classe</strong> <code class="docutils literal notranslate"><span class="pre">Graph</span></code> da biblioteca <code class="docutils literal notranslate"><span class="pre">networkx</span></code>. Esse grafo será usado para representar um conjunto de nós e conexões (arestas) entre eles.</p></li>
+<li><p><strong>Atributos globais</strong>: Em seguida, estamos adicionando três atributos globais ao grafo:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">data_criacao</span></code>: Define a data de criação do grafo.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">projeto</span></code>: Especifica o nome do projeto relacionado ao grafo.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">versao</span></code>: Indica a versão atual do grafo.</p></li>
+</ul>
+</li>
+</ul>
+<p>Esses atributos são úteis para fornecer informações sobre o grafo como um todo, facilitando o acompanhamento e documentação do projeto.</p>
+<ul class="simple">
+<li><p><strong>Exibição dos atributos</strong>: Por fim, o código imprime os atributos globais do grafo como um dicionário, permitindo visualizar as informações adicionadas ao grafo.</p></li>
+</ul>
+<p>Em seguida, vamos adicionar alguns nós ao grafo, representando as capitais da região sudeste do Brasil. Aqui, estamos apenas incluindo os nós correspondentes às cidades, sem ainda definir conexões entre elas.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s1">&#39;São Paulo&#39;</span><span class="p">)</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s1">&#39;Rio de Janeiro&#39;</span><span class="p">)</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s1">&#39;Belo Horizonte&#39;</span><span class="p">)</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s1">&#39;Vitória&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>O comando <code class="docutils literal notranslate"><span class="pre">G.add_node('São</span> <span class="pre">Paulo')</span></code> adiciona um nó ao grafo <code class="docutils literal notranslate"><span class="pre">G</span></code> com o rótulo <strong>‘São Paulo’</strong>. Neste contexto, <strong>‘São Paulo’</strong> representa uma cidade, que será tratada como um vértice no grafo.</p>
+<p>Agora que já temos os nós no grafo, vamos visualizá-los. Nesta visualização inicial, exibiremos apenas os nós, sem as conexões (arestas) entre eles. Para isso, utilizamos um layout de disposição dos nós e exibimos suas posições no gráfico.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pos</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">spring_layout</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_nodes</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;lightblue&#39;</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">3000</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_labels</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">font_weight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Capitais do Sudeste (Apenas Nós)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/b5cd1a73234afe9f2d63a12eff12d0ebd8d8e8ee203c5c510c698f728ebf11a5.png" src="_images/b5cd1a73234afe9f2d63a12eff12d0ebd8d8e8ee203c5c510c698f728ebf11a5.png" />
+</div>
+</div>
+<p>No código acima:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">pos</span> <span class="pre">=</span> <span class="pre">nx.spring_layout(G,</span> <span class="pre">seed=42)</span></code>: Gera as posições dos nós do grafo <code class="docutils literal notranslate"><span class="pre">G</span></code> utilizando o layout de mola (<strong>spring layout</strong>), que distribui os nós de forma equilibrada no espaço, simulando forças físicas. O parâmetro <code class="docutils literal notranslate"><span class="pre">seed=42</span></code> garante que a disposição dos nós será sempre a mesma, facilitando a reprodução do gráfico.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">plt.figure(figsize=(8,</span> <span class="pre">6))</span></code>: Cria uma nova figura para o gráfico com um tamanho de 8x6 polegadas, especificando as dimensões da visualização.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nx.draw_networkx_nodes(G,</span> <span class="pre">pos,</span> <span class="pre">node_color='lightblue',</span> <span class="pre">node_size=3000)</span></code>: Desenha os nós do grafo <code class="docutils literal notranslate"><span class="pre">G</span></code> utilizando as posições definidas em <code class="docutils literal notranslate"><span class="pre">pos</span></code>. Os nós serão visualizados na cor azul-claro (<code class="docutils literal notranslate"><span class="pre">lightblue</span></code>) com um tamanho de 3000 unidades.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nx.draw_networkx_labels(G,</span> <span class="pre">pos,</span> <span class="pre">font_size=10,</span> <span class="pre">font_weight='bold')</span></code>: Adiciona rótulos aos nós com um tamanho de fonte de 10 e com estilo em negrito (<code class="docutils literal notranslate"><span class="pre">font_weight='bold</span></code>), permitindo identificar cada nó pelo seu nome.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">plt.title(&quot;Capitais</span> <span class="pre">do</span> <span class="pre">Sudeste</span> <span class="pre">(Apenas</span> <span class="pre">Nós)&quot;)</span></code>: Define o título do gráfico como “Capitais do Sudeste (Apenas Nós)”, indicando que estamos visualizando apenas os nós (as capitais), sem suas conexões.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">plt.show()</span></code>: Exibe o gráfico gerado na janela de visualização.</p></li>
+</ul>
+<p>Agora, vamos adicionar o atributo de população a cada nó, representando o número de habitantes de cada capital. Isso permitirá que cada nó tenha uma informação adicional útil para análises futuras:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="s1">&#39;São Paulo&#39;</span><span class="p">][</span><span class="s1">&#39;populacao&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">12396372</span>
+<span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="s1">&#39;Rio de Janeiro&#39;</span><span class="p">][</span><span class="s1">&#39;populacao&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">6747815</span>
+<span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="s1">&#39;Belo Horizonte&#39;</span><span class="p">][</span><span class="s1">&#39;populacao&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2521564</span>
+<span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="s1">&#39;Vitória&#39;</span><span class="p">][</span><span class="s1">&#39;populacao&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">365855</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>No código acima, <code class="docutils literal notranslate"><span class="pre">G.nodes['São</span> <span class="pre">Paulo']['populacao']</span> <span class="pre">=</span> <span class="pre">12396372</span></code> adiciona ou define um atributo chamado <strong>‘populacao’</strong> para o nó <strong>‘São Paulo’</strong> no grafo <code class="docutils literal notranslate"><span class="pre">G</span></code>, com o valor de <strong>12.396.372</strong> (representando a população da cidade).</p>
+<p>Em seguida, vamos consultar o número de nós presentes no grafo, juntamente com seus atributos, para confirmar que os dados foram inseridos corretamente:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Nós no grafo G:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Nós no grafo G:
+[(&#39;São Paulo&#39;, {&#39;populacao&#39;: 12396372}), (&#39;Rio de Janeiro&#39;, {&#39;populacao&#39;: 6747815}), (&#39;Belo Horizonte&#39;, {&#39;populacao&#39;: 2521564}), (&#39;Vitória&#39;, {&#39;populacao&#39;: 365855})]
+</pre></div>
+</div>
+</div>
+</div>
+<p>No código acima:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">print(G.nodes(data=True))</span></code>: Exibe todos os nós presentes no grafo <code class="docutils literal notranslate"><span class="pre">G</span></code>, juntamente com seus atributos. O parâmetro <code class="docutils literal notranslate"><span class="pre">data=True</span></code> faz com que o <code class="docutils literal notranslate"><span class="pre">networkx</span></code> imprima os dados associados a cada nó (como atributos que foram adicionados, por exemplo, a população no caso de São Paulo). O resultado será uma lista de tuplas, onde cada tupla contém o nome do nó e um dicionário com os atributos e seus respectivos valores.</p></li>
+</ul>
+<p>Agora, vamos atualizar a visualização dos nós, incluindo o número de habitantes (população) associado a cada capital. Dessa forma, a visualização será mais informativa:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">labels</span> <span class="o">=</span> <span class="p">{</span><span class="n">n</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="se">\n</span><span class="s2">Pop: </span><span class="si">{</span><span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">n</span><span class="p">][</span><span class="s1">&#39;populacao&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">()}</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_nodes</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;lightblue&#39;</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">3000</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_labels</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">font_weight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Capitais do Sudeste com População&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/a17a9f181dd4f3504cd800d8287b147b2ed15776dd518ccdfc69da24d777f31e.png" src="_images/a17a9f181dd4f3504cd800d8287b147b2ed15776dd518ccdfc69da24d777f31e.png" />
+</div>
+</div>
+<p>Para remover um nó do grafo, podemos utilizar a função <code class="docutils literal notranslate"><span class="pre">remove_node()</span></code>. Por exemplo, vamos remover o nó “Rio de Janeiro”:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">G</span><span class="o">.</span><span class="n">remove_node</span><span class="p">(</span><span class="s1">&#39;Rio de Janeiro&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Agora seu markdown está formatado corretamente com células de código executável identificadas para Jupyter Book.</p>
+<p>Aqui está o markdown revisado com as células de código executável corretamente formatadas para o Jupyter Book:</p>
+<p>Após a remoção do nó, vamos plotar o grafo novamente para verificar o resultado, observando a ausência de “Rio de Janeiro” no grafo:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pos</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">spring_layout</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;lightblue&#39;</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">3000</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">font_weight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Capitais do Sudeste sem Rio de Janeiro&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/24f0bf0155d6f4744e7d6e6618be97994f68d74e715ff112463469695b5c2bde.png" src="_images/24f0bf0155d6f4744e7d6e6618be97994f68d74e715ff112463469695b5c2bde.png" />
+</div>
+</div>
+<p>Agora que vimos como a função <code class="docutils literal notranslate"><span class="pre">remove_node()</span></code> funciona, vamos inserir novamente o nó referente ao <strong>Rio de Janeiro</strong> no grafo, adicionando também o atributo de população, com a função <code class="docutils literal notranslate"><span class="pre">add_node()</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Adicionando o nó referente ao Rio de Janeiro</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s1">&#39;Rio de Janeiro&#39;</span><span class="p">,</span> <span class="n">populacao</span><span class="o">=</span><span class="mi">6747815</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Em seguida, vamos plotar novamente o grafo para verificar a inclusão do nó <strong>Rio de Janeiro</strong>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pos</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">spring_layout</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;lightblue&#39;</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">3000</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">font_weight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Capitais do Sudeste com a Inclusão do Rio de Janeiro&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/210e156e1cda42f2c0fb1cf8340e12893cc7e222ebd149cca90c93451dcd1ba7.png" src="_images/210e156e1cda42f2c0fb1cf8340e12893cc7e222ebd149cca90c93451dcd1ba7.png" />
+</div>
+</div>
+<p>Agora, vamos adicionar as <strong>arestas</strong> que conectam as capitais entre si, usando a função <code class="docutils literal notranslate"><span class="pre">add_edge()</span></code>. Cada aresta representa uma conexão entre duas cidades:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">G</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s1">&#39;São Paulo&#39;</span><span class="p">,</span> <span class="s1">&#39;Rio de Janeiro&#39;</span><span class="p">)</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s1">&#39;São Paulo&#39;</span><span class="p">,</span> <span class="s1">&#39;Belo Horizonte&#39;</span><span class="p">)</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s1">&#39;Rio de Janeiro&#39;</span><span class="p">,</span> <span class="s1">&#39;Belo Horizonte&#39;</span><span class="p">)</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s1">&#39;Rio de Janeiro&#39;</span><span class="p">,</span> <span class="s1">&#39;Vitória&#39;</span><span class="p">)</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s1">&#39;Belo Horizonte&#39;</span><span class="p">,</span> <span class="s1">&#39;Vitória&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>No código acima, <code class="docutils literal notranslate"><span class="pre">G.add_edge('São</span> <span class="pre">Paulo',</span> <span class="pre">'Rio</span> <span class="pre">de</span> <span class="pre">Janeiro')</span></code> adiciona uma <strong>aresta</strong> (conexão) entre os nós <strong>‘São Paulo’</strong> e <strong>‘Rio de Janeiro’</strong> no grafo <code class="docutils literal notranslate"><span class="pre">G</span></code>. Se os nós ainda não existirem no grafo, eles serão automaticamente criados antes de estabelecer a conexão.</p>
+<p>Com as conexões estabelecidas, podemos visualizar o grafo completo, mostrando não só os nós, mas também as conexões entre as capitais:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;lightblue&#39;</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">3000</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">font_weight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Capitais do Sudeste e Conexões&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/c9038fb8f7651ff47b10623c81ba59ce621092d121b8b72b6f548bd2a6803a7c.png" src="_images/c9038fb8f7651ff47b10623c81ba59ce621092d121b8b72b6f548bd2a6803a7c.png" />
+</div>
+</div>
+<p>Agora, vamos contar quantas <strong>arestas</strong> existem no grafo, ou seja, quantas conexões foram feitas entre as capitais. Para tanto, usamos a função <code class="docutils literal notranslate"><span class="pre">number_of_edges()</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">numero_arestas_G</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">number_of_edges</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Número de arestas no grafo G: </span><span class="si">{</span><span class="n">numero_arestas_G</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Número de arestas no grafo G: 5
+</pre></div>
+</div>
+</div>
+</div>
+<p>Em seguida, vamos adicionar o atributo <code class="docutils literal notranslate"><span class="pre">distancia</span></code> a cada aresta, representando a distância aproximada entre as capitais conectadas. Isso nos permitirá ter informações mais detalhadas sobre as conexões:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">G</span><span class="o">.</span><span class="n">edges</span><span class="p">[</span><span class="s1">&#39;São Paulo&#39;</span><span class="p">,</span> <span class="s1">&#39;Rio de Janeiro&#39;</span><span class="p">][</span><span class="s1">&#39;distancia&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">430</span>
+<span class="n">G</span><span class="o">.</span><span class="n">edges</span><span class="p">[</span><span class="s1">&#39;São Paulo&#39;</span><span class="p">,</span> <span class="s1">&#39;Belo Horizonte&#39;</span><span class="p">][</span><span class="s1">&#39;distancia&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">590</span>
+<span class="n">G</span><span class="o">.</span><span class="n">edges</span><span class="p">[</span><span class="s1">&#39;Rio de Janeiro&#39;</span><span class="p">,</span> <span class="s1">&#39;Belo Horizonte&#39;</span><span class="p">][</span><span class="s1">&#39;distancia&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">440</span>
+<span class="n">G</span><span class="o">.</span><span class="n">edges</span><span class="p">[</span><span class="s1">&#39;Rio de Janeiro&#39;</span><span class="p">,</span> <span class="s1">&#39;Vitória&#39;</span><span class="p">][</span><span class="s1">&#39;distancia&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">520</span>
+<span class="n">G</span><span class="o">.</span><span class="n">edges</span><span class="p">[</span><span class="s1">&#39;Belo Horizonte&#39;</span><span class="p">,</span> <span class="s1">&#39;Vitória&#39;</span><span class="p">][</span><span class="s1">&#39;distancia&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">530</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">G.edges['São</span> <span class="pre">Paulo',</span> <span class="pre">'Rio</span> <span class="pre">de</span> <span class="pre">Janeiro']['distancia']</span> <span class="pre">=</span> <span class="pre">430</span></code>: este comando adiciona ou define um atributo chamado <strong>‘distancia’</strong> para a aresta que conecta os nós <strong>‘São Paulo’</strong> e <strong>‘Rio de Janeiro’</strong> no grafo <code class="docutils literal notranslate"><span class="pre">G</span></code>.</p>
+<p>Agora, podemos exibir todas as arestas e seus atributos, como as distâncias entre as capitais, para garantir que os dados foram inseridos corretamente:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Arestas no grafo G com atributos:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">edges</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Arestas no grafo G com atributos:
+[(&#39;São Paulo&#39;, &#39;Rio de Janeiro&#39;, {&#39;distancia&#39;: 430}), (&#39;São Paulo&#39;, &#39;Belo Horizonte&#39;, {&#39;distancia&#39;: 590}), (&#39;Belo Horizonte&#39;, &#39;Rio de Janeiro&#39;, {&#39;distancia&#39;: 440}), (&#39;Belo Horizonte&#39;, &#39;Vitória&#39;, {&#39;distancia&#39;: 530}), (&#39;Vitória&#39;, &#39;Rio de Janeiro&#39;, {&#39;distancia&#39;: 520})]
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">print(G.edges(data=True))</span></code>: este comando exibe todas as arestas presentes no grafo <code class="docutils literal notranslate"><span class="pre">G</span></code>, juntamente com seus atributos. O parâmetro <code class="docutils literal notranslate"><span class="pre">data=True</span></code> faz com que o <code class="docutils literal notranslate"><span class="pre">networkx</span></code> imprima os dados associados a cada aresta (como atributos que foram adicionados, por exemplo, a distância entre <strong>São Paulo</strong> e <strong>Rio de Janeiro</strong>). O resultado será uma lista de tuplas, onde cada tupla contém os dois nós conectados pela aresta e um dicionário com os atributos e seus respectivos valores.</p>
+<p>Com isso, conseguimos visualizar as conexões entre as capitais, juntamente com os atributos associados a cada aresta, como a distância. Isso nos dá uma base sólida para realizar futuras análises no grafo.</p>
+<p>Agora, vamos visualizar novamente o grafo, desta vez incluindo as distâncias nas arestas que conectam as capitais:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pos</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">spring_layout</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;lightblue&#39;</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">3000</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">font_weight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+
+<span class="c1"># Obter as distâncias como rótulos das arestas</span>
+<span class="n">edge_labels</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">get_edge_attributes</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="s1">&#39;distancia&#39;</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_edge_labels</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">edge_labels</span><span class="o">=</span><span class="n">edge_labels</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Capitais do Sudeste com Distâncias nas Arestas&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/51df50e449e8186fa33a21f3ad719f685051feaec6c13135a521184d852e4293.png" src="_images/51df50e449e8186fa33a21f3ad719f685051feaec6c13135a521184d852e4293.png" />
+</div>
+</div>
+<p>Em seguida, vamos acessar uma aresta específica, neste caso, a conexão entre <strong>São Paulo</strong> e <strong>Belo Horizonte</strong>, para verificar a distância entre as duas capitais:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">distancia_sp_bh</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">edges</span><span class="p">[</span><span class="s1">&#39;São Paulo&#39;</span><span class="p">,</span> <span class="s1">&#39;Belo Horizonte&#39;</span><span class="p">][</span><span class="s1">&#39;distancia&#39;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Distância entre São Paulo e Belo Horizonte: </span><span class="si">{</span><span class="n">distancia_sp_bh</span><span class="si">}</span><span class="s2"> km&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Distância entre São Paulo e Belo Horizonte: 590 km
+</pre></div>
+</div>
+</div>
+</div>
+<p>Se quisermos imprimir todas as arestas do grafo com suas respectivas distâncias, podemos percorrer todas as arestas e exibir suas informações:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">edge</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">edges</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Aresta: </span><span class="si">{</span><span class="n">edge</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="n">edge</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">, Distância: </span><span class="si">{</span><span class="n">edge</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="s1">&#39;distancia&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> km&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Aresta: São Paulo - Rio de Janeiro, Distância: 430 km
+Aresta: São Paulo - Belo Horizonte, Distância: 590 km
+Aresta: Belo Horizonte - Rio de Janeiro, Distância: 440 km
+Aresta: Belo Horizonte - Vitória, Distância: 530 km
+Aresta: Vitória - Rio de Janeiro, Distância: 520 km
+</pre></div>
+</div>
+</div>
+</div>
+<p>Agora, vamos remover uma aresta do grafo, especificamente a conexão entre <strong>Belo Horizonte</strong> e <strong>Vitória</strong>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">G</span><span class="o">.</span><span class="n">remove_edge</span><span class="p">(</span><span class="s1">&#39;Belo Horizonte&#39;</span><span class="p">,</span> <span class="s1">&#39;Vitória&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Em seguida, vamos plotar o grafo novamente para verificar a remoção da conexão entre essas duas capitais:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pos</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">spring_layout</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;lightblue&#39;</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">3000</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">font_weight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">edge_labels</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">get_edge_attributes</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="s1">&#39;distancia&#39;</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_edge_labels</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">edge_labels</span><span class="o">=</span><span class="n">edge_labels</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Capitais do Sudeste com Distâncias nas Arestas (Após Remoção)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/d7d09be101895c1d05aadb46371121607f6b839c1b72f9dc297e9113cf6f0531.png" src="_images/d7d09be101895c1d05aadb46371121607f6b839c1b72f9dc297e9113cf6f0531.png" />
+</div>
+</div>
+<p>Agora que vimos como a função <code class="docutils literal notranslate"><span class="pre">remove_edge()</span></code> funciona, podemos adicionar novamente a aresta removida, restabelecendo a conexão entre <strong>Belo Horizonte</strong> e <strong>Vitória</strong>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">G</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s1">&#39;Belo Horizonte&#39;</span><span class="p">,</span> <span class="s1">&#39;Vitória&#39;</span><span class="p">,</span> <span class="n">distancia</span><span class="o">=</span><span class="mi">530</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Vamos plotar o grafo novamente para confirmar a inclusão dessa aresta:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pos</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">spring_layout</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;lightblue&#39;</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">3000</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">font_weight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">edge_labels</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">get_edge_attributes</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="s1">&#39;distancia&#39;</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_edge_labels</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">edge_labels</span><span class="o">=</span><span class="n">edge_labels</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Capitais do Sudeste com Distâncias nas Arestas (Atualizado)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/a445437c2693a6d604ffb52543bb214e9090be42cbc189ec2804f3bad9ff06c2.png" src="_images/a445437c2693a6d604ffb52543bb214e9090be42cbc189ec2804f3bad9ff06c2.png" />
+</div>
+</div>
+<p>Vamos adicionar a cidade de <strong>Curitiba</strong> ao grafo, junto com a informação da população:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s1">&#39;Curitiba&#39;</span><span class="p">,</span> <span class="n">populacao</span><span class="o">=</span><span class="mi">1963726</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Por fim, vamos plotar o grafo mais uma vez para incluir <strong>Curitiba</strong> entre as capitais existentes:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pos</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">spring_layout</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;lightblue&#39;</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">3000</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">font_weight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+
+<span class="c1"># Exibir as distâncias das arestas já existentes</span>
+<span class="n">edge_labels</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">get_edge_attributes</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="s1">&#39;distancia&#39;</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_edge_labels</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">edge_labels</span><span class="o">=</span><span class="n">edge_labels</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Capitais do Sudeste com Curitiba&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/760df774d9d1c20ed3c3a28b626ef3120a998bbd3804308b8357dd70a5220e44.png" src="_images/760df774d9d1c20ed3c3a28b626ef3120a998bbd3804308b8357dd70a5220e44.png" />
+</div>
+</div>
+<p>Com essas operações, você poderá visualizar o grafo atualizado, incluindo a cidade de <strong>Curitiba</strong> e suas conexões, além de garantir que as distâncias entre as capitais sejam claramente exibidas.<br />
+Vamos começar conectando <strong>Curitiba</strong> a <strong>São Paulo</strong>, adicionando uma aresta que representa a distância entre essas duas capitais:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">G</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s1">&#39;Curitiba&#39;</span><span class="p">,</span> <span class="s1">&#39;São Paulo&#39;</span><span class="p">,</span> <span class="n">distancia</span><span class="o">=</span><span class="mi">408</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Em seguida, vamos plotar novamente o grafo para visualizar essa nova conexão:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pos</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">spring_layout</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;lightblue&#39;</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">3000</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">font_weight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">edge_labels</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">get_edge_attributes</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="s1">&#39;distancia&#39;</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_edge_labels</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">edge_labels</span><span class="o">=</span><span class="n">edge_labels</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Capitais com Distâncias nas Arestas (Incluindo Curitiba - São Paulo)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/08766a56a5cb72789e954549e1cc450d2b2e6d7240babc5dc3ce8284815735f9.png" src="_images/08766a56a5cb72789e954549e1cc450d2b2e6d7240babc5dc3ce8284815735f9.png" />
+</div>
+</div>
+<p>Agora, vamos calcular o <strong>grau</strong> de cada nó, que indica o número de conexões (arestas) que cada cidade tem. Esse cálculo nos ajuda a entender a centralidade de cada capital no grafo:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Grau de todos os nós (número de conexões):&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">degree</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Grau de todos os nós (número de conexões):
+{&#39;São Paulo&#39;: 3, &#39;Belo Horizonte&#39;: 3, &#39;Vitória&#39;: 2, &#39;Rio de Janeiro&#39;: 3, &#39;Curitiba&#39;: 1}
+</pre></div>
+</div>
+</div>
+</div>
+<p>Após visualizar o grau de todos os nós, vamos realizar uma verificação específica para <strong>São Paulo</strong>, consultando quais cidades estão diretamente conectadas a ela (nós adjacentes):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Grau de São Paulo: </span><span class="si">{</span><span class="n">G</span><span class="o">.</span><span class="n">degree</span><span class="p">[</span><span class="s1">&#39;São Paulo&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">adjacencias_sao_paulo</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">adj</span><span class="p">[</span><span class="s1">&#39;São Paulo&#39;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Nós adjacentes a São Paulo:&quot;</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">adjacencias_sao_paulo</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Grau de São Paulo: 3
+Nós adjacentes a São Paulo: [&#39;Rio de Janeiro&#39;, &#39;Belo Horizonte&#39;, &#39;Curitiba&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>No código acima:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">G.degree['São</span> <span class="pre">Paulo']</span></code> retorna o <strong>grau</strong> do nó <strong>‘São Paulo’</strong>, ou seja, o número de conexões (arestas) que <strong>São Paulo</strong> tem com outros nós no grafo <code class="docutils literal notranslate"><span class="pre">G</span></code>.</p></li>
+<li><p>O <code class="docutils literal notranslate"><span class="pre">f-string</span></code> é utilizado para formatar a mensagem e exibir o grau de São Paulo.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">G.adj['São</span> <span class="pre">Paulo']</span></code> retorna os nós adjacentes a <strong>São Paulo</strong>, ou seja, as cidades que estão diretamente conectadas a ela por uma aresta.</p></li>
+<li><p>O <code class="docutils literal notranslate"><span class="pre">list(adjacencias_sao_paulo)</span></code> converte o conjunto de nós adjacentes em uma lista, que é então impressa.</p></li>
+</ul>
+<p>Da mesma maneira, podemos verificar as cidades que estão diretamente conectadas a <strong>Curitiba</strong>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Grau de Curitiba: </span><span class="si">{</span><span class="n">G</span><span class="o">.</span><span class="n">degree</span><span class="p">[</span><span class="s1">&#39;Curitiba&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">adjacencias_curitiba</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">adj</span><span class="p">[</span><span class="s1">&#39;Curitiba&#39;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Nós adjacentes a Curitiba:&quot;</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">adjacencias_curitiba</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Grau de Curitiba: 1
+Nós adjacentes a Curitiba: [&#39;São Paulo&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Finalmente, para obter uma visão completa de todas as conexões no grafo, vamos gerar um <strong>relatório de adjacências</strong> usando o método <code class="docutils literal notranslate"><span class="pre">adj</span></code>. Esse relatório mostrará todas as conexões de cada cidade no grafo:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Relatório de adjacências de todo o grafo G:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">adj</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Relatório de adjacências de todo o grafo G:
+{&#39;São Paulo&#39;: {&#39;Rio de Janeiro&#39;: {&#39;distancia&#39;: 430}, &#39;Belo Horizonte&#39;: {&#39;distancia&#39;: 590}, &#39;Curitiba&#39;: {&#39;distancia&#39;: 408}}, &#39;Belo Horizonte&#39;: {&#39;São Paulo&#39;: {&#39;distancia&#39;: 590}, &#39;Rio de Janeiro&#39;: {&#39;distancia&#39;: 440}, &#39;Vitória&#39;: {&#39;distancia&#39;: 530}}, &#39;Vitória&#39;: {&#39;Rio de Janeiro&#39;: {&#39;distancia&#39;: 520}, &#39;Belo Horizonte&#39;: {&#39;distancia&#39;: 530}}, &#39;Rio de Janeiro&#39;: {&#39;São Paulo&#39;: {&#39;distancia&#39;: 430}, &#39;Belo Horizonte&#39;: {&#39;distancia&#39;: 440}, &#39;Vitória&#39;: {&#39;distancia&#39;: 520}}, &#39;Curitiba&#39;: {&#39;São Paulo&#39;: {&#39;distancia&#39;: 408}}}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="criando-um-digrafo-de-viagens-entre-capitais-brasileiras">
+<h2>1.4 Criando um Digrafo de Viagens entre Capitais Brasileiras<a class="headerlink" href="#criando-um-digrafo-de-viagens-entre-capitais-brasileiras" title="Link to this heading">#</a></h2>
+<p>Neste exercício, vamos explorar a criação e manipulação de um <strong>digrafo</strong> (grafo direcionado) utilizando o Python e a biblioteca <code class="docutils literal notranslate"><span class="pre">networkx</span></code>. O digrafo será utilizado para representar rotas de viagem entre capitais brasileiras, começando em <strong>Curitiba</strong> e finalizando em <strong>Vitória</strong>, passando por outras capitais. Além disso, será inserida uma ramificação que conectará <strong>São Paulo</strong> a <strong>Belo Horizonte</strong>. Cada aresta no digrafo representará uma viagem direcionada entre as capitais, e as distâncias entre essas cidades serão adicionadas como atributos das arestas.</p>
+<p>O principal objetivo é entender os conceitos de <strong>grafos direcionados</strong> e suas aplicações práticas, por meio de um exemplo concreto de viagens entre cidades. Durante o exercício, vamos trabalhar com diferentes características dos digrafos, como conexões direcionadas, graus de entrada e saída, além de sucessores e antecessores de cada nó.</p>
+<section id="estrutura-do-exercicio">
+<h3>Estrutura do Exercício:<a class="headerlink" href="#estrutura-do-exercicio" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Nós e Arestas</strong>: Começaremos criando os nós, que representarão as capitais, e as arestas direcionadas, que representarão as viagens entre elas. A cada aresta, será atribuído um valor de distância, simulando a distância real entre as cidades.</p></li>
+<li><p><strong>Adjacências e Conexões</strong>: Exploraremos como verificar as conexões diretas entre os nós. Isso nos permitirá identificar, por exemplo, quais cidades estão diretamente conectadas a outras e em que direção ocorre essa conexão.</p></li>
+<li><p><strong>Graus</strong>: Vamos calcular o <strong>grau de entrada</strong> e o <strong>grau de saída</strong> de cada nó. O grau de entrada indica quantas cidades fazem uma viagem para essa capital, enquanto o grau de saída indica para quantas cidades essa capital faz viagens. Essa análise é importante para entender o papel de cada cidade dentro da rede de viagens.</p></li>
+<li><p><strong>Sucessores e Antecessores</strong>: Analisaremos os <strong>sucessores</strong> (as cidades para as quais uma capital faz viagens) e os <strong>antecessores</strong> (as cidades que fazem viagens para uma capital), ajudando a entender a dinâmica de entrada e saída de cada capital na rede.</p></li>
+</ol>
+<p>Primeiro, vamos criar o nosso digrafo. Um digrafo é um grafo onde as arestas têm uma direção, representando uma viagem de uma cidade para outra.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Criando um digrafo (grafo direcionado)</span>
+<span class="n">D_viagem</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>No primeiro exercício, utilizamos a classe <strong><code class="docutils literal notranslate"><span class="pre">nx.Graph()</span></code></strong> para criar um grafo <strong>não direcionado</strong>, no qual as arestas (conexões) entre os nós não possuem direção específica. Ou seja, uma conexão entre dois nós é bidirecional, representando uma relação simétrica. Neste exercício, estamos usando <strong><code class="docutils literal notranslate"><span class="pre">nx.DiGraph()</span></code></strong>, que cria um <strong>grafo direcionado</strong> (ou digrafo). Nesse tipo de grafo, as arestas possuem direção, o que significa que a relação entre os nós é assimétrica.</p>
+<p>Agora, vamos adicionar os nós, que são as capitais envolvidas na nossa viagem, usando o método <code class="docutils literal notranslate"><span class="pre">add_node()</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Adicionando os nós (capitais)</span>
+<span class="n">D_viagem</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s1">&#39;Curitiba&#39;</span><span class="p">)</span>
+<span class="n">D_viagem</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s1">&#39;São Paulo&#39;</span><span class="p">)</span>
+<span class="n">D_viagem</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s1">&#39;Rio de Janeiro&#39;</span><span class="p">)</span>
+<span class="n">D_viagem</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s1">&#39;Belo Horizonte&#39;</span><span class="p">)</span>
+<span class="n">D_viagem</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s1">&#39;Vitória&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Vamos visualizar os nós do grafo antes de adicionar as conexões (arestas). Isso nos dará uma ideia de como as capitais estão dispostas inicialmente.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plotando os nós (capitais) sem as arestas</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="c1"># Usando um layout para posicionar os nós</span>
+<span class="n">pos</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">spring_layout</span><span class="p">(</span><span class="n">D_viagem</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="c1"># Desenhando apenas os nós</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_nodes</span><span class="p">(</span><span class="n">D_viagem</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;lightblue&#39;</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">800</span><span class="p">)</span>
+<span class="c1"># Desenhando os rótulos (capitais)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_labels</span><span class="p">(</span><span class="n">D_viagem</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">font_weight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="c1"># Exibindo o gráfico</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Capitais (Curitiba, São Paulo, Rio de Janeiro, Belo Horizonte, Vitória)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/f12dbf983ce7778660f23d211bce45263238e57baaafd455c3707d6f279dd4d7.png" src="_images/f12dbf983ce7778660f23d211bce45263238e57baaafd455c3707d6f279dd4d7.png" />
+</div>
+</div>
+<p>Agora, vamos adicionar as arestas direcionadas que representam as viagens de uma capital para outra, junto com as distâncias entre elas.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Adicionando as arestas direcionadas (viagem de Curitiba até Vitória)</span>
+<span class="n">D_viagem</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s1">&#39;Curitiba&#39;</span><span class="p">,</span> <span class="s1">&#39;São Paulo&#39;</span><span class="p">,</span> <span class="n">distancia</span><span class="o">=</span><span class="mi">408</span><span class="p">)</span>  <span class="c1"># Curitiba -&gt; São Paulo</span>
+<span class="n">D_viagem</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s1">&#39;São Paulo&#39;</span><span class="p">,</span> <span class="s1">&#39;Rio de Janeiro&#39;</span><span class="p">,</span> <span class="n">distancia</span><span class="o">=</span><span class="mi">429</span><span class="p">)</span>  <span class="c1"># São Paulo -&gt; Rio de Janeiro</span>
+<span class="n">D_viagem</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s1">&#39;Rio de Janeiro&#39;</span><span class="p">,</span> <span class="s1">&#39;Vitória&#39;</span><span class="p">,</span> <span class="n">distancia</span><span class="o">=</span><span class="mi">521</span><span class="p">)</span>  <span class="c1"># Rio de Janeiro -&gt; Vitória</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>No código acima, o comando <code class="docutils literal notranslate"><span class="pre">D_viagem.add_edge('Curitiba',</span> <span class="pre">'São</span> <span class="pre">Paulo',</span> <span class="pre">distancia=408)</span></code> adiciona uma <strong>aresta direcionada</strong> ao digrafo <code class="docutils literal notranslate"><span class="pre">D_viagem</span></code>, representando uma viagem de <strong>Curitiba</strong> para <strong>São Paulo</strong>. A direção da aresta indica que a conexão é unidirecional, ou seja, de <strong>Curitiba</strong> para <strong>São Paulo</strong>. Além disso, um atributo adicional <strong>‘distancia’</strong> é atribuído à aresta com o valor de <strong>408</strong>, que pode representar a distância entre as duas capitais em quilômetros.</p>
+<p>Vamos visualizar o grafo novamente, agora com as arestas que representam as viagens entre as capitais e as distâncias entre elas.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plotando os nós e arestas</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="c1"># Usando um layout para organizar a posição dos nós</span>
+<span class="n">pos</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">spring_layout</span><span class="p">(</span><span class="n">D_viagem</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="c1"># Desenhando os nós</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_nodes</span><span class="p">(</span><span class="n">D_viagem</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;lightblue&#39;</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">800</span><span class="p">)</span>
+<span class="c1"># Desenhando as arestas direcionadas com setas</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_edges</span><span class="p">(</span><span class="n">D_viagem</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">edge_color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">arrows</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">arrowsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="c1"># Desenhando os rótulos (capitais)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_labels</span><span class="p">(</span><span class="n">D_viagem</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">font_weight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="c1"># Adicionando rótulos de distâncias nas arestas</span>
+<span class="n">edge_labels</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">get_edge_attributes</span><span class="p">(</span><span class="n">D_viagem</span><span class="p">,</span> <span class="s1">&#39;distancia&#39;</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_edge_labels</span><span class="p">(</span><span class="n">D_viagem</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">edge_labels</span><span class="o">=</span><span class="n">edge_labels</span><span class="p">)</span>
+<span class="c1"># Exibindo o gráfico</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Viagem de Curitiba para Vitória (Arestas Direcionadas)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/bc8fc2e0cbc32dcf564a94b6a2820d123bae2fceb421dba8cf1e5f0ae38666bd.png" src="_images/bc8fc2e0cbc32dcf564a94b6a2820d123bae2fceb421dba8cf1e5f0ae38666bd.png" />
+</div>
+</div>
+<p>Agora, vamos adicionar uma ramificação na rota, de São Paulo para Belo Horizonte, conectando também Belo Horizonte a Vitória.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Adicionando a ramificação em São Paulo para Belo Horizonte</span>
+<span class="n">D_viagem</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s1">&#39;São Paulo&#39;</span><span class="p">,</span> <span class="s1">&#39;Belo Horizonte&#39;</span><span class="p">,</span> <span class="n">distancia</span><span class="o">=</span><span class="mi">586</span><span class="p">)</span>  <span class="c1"># São Paulo -&gt; Belo Horizonte</span>
+<span class="n">D_viagem</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s1">&#39;Belo Horizonte&#39;</span><span class="p">,</span> <span class="s1">&#39;Vitória&#39;</span><span class="p">,</span> <span class="n">distancia</span><span class="o">=</span><span class="mi">524</span><span class="p">)</span>  <span class="c1"># Belo Horizonte -&gt; Vitória</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Vamos visualizar o grafo completo, agora com a ramificação de São Paulo para Belo Horizonte e as distâncias nas novas arestas.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plotando os nós e arestas</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">pos</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">spring_layout</span><span class="p">(</span><span class="n">D_viagem</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_nodes</span><span class="p">(</span><span class="n">D_viagem</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;lightblue&#39;</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">800</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_edges</span><span class="p">(</span><span class="n">D_viagem</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">edge_color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">arrows</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">arrowsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_labels</span><span class="p">(</span><span class="n">D_viagem</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">font_weight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">edge_labels</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">get_edge_attributes</span><span class="p">(</span><span class="n">D_viagem</span><span class="p">,</span> <span class="s1">&#39;distancia&#39;</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_edge_labels</span><span class="p">(</span><span class="n">D_viagem</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">edge_labels</span><span class="o">=</span><span class="n">edge_labels</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Viagem de Curitiba para Vitória com Ramificação para Belo Horizonte (Arestas Direcionadas)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/19aa4fcc73dbadbe1ded1feeb5bbb34b20bfbefe021056f6271a9c0dd5091159.png" src="_images/19aa4fcc73dbadbe1ded1feeb5bbb34b20bfbefe021056f6271a9c0dd5091159.png" />
+</div>
+</div>
+<p>Vamos começar exibindo todos os nós do grafo para garantir que todos foram adicionados corretamente.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Verificar os nós do grafo</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Nós no grafo:&quot;</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">D_viagem</span><span class="o">.</span><span class="n">nodes</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Nós no grafo: [&#39;Curitiba&#39;, &#39;São Paulo&#39;, &#39;Rio de Janeiro&#39;, &#39;Belo Horizonte&#39;, &#39;Vitória&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>O comando <code class="docutils literal notranslate"><span class="pre">print(&quot;Nós</span> <span class="pre">no</span> <span class="pre">grafo:&quot;,</span> <span class="pre">list(D_viagem.nodes))</span></code> exibe todos os nós presentes no digrafo <code class="docutils literal notranslate"><span class="pre">D_viagem</span></code>. A função <code class="docutils literal notranslate"><span class="pre">D_viagem.nodes</span></code> retorna uma visão geral dos nós, e o uso de <code class="docutils literal notranslate"><span class="pre">list()</span></code> converte essa visão em uma lista para facilitar a leitura. Essa instrução imprime todos os nós, ou seja, todas as capitais que foram adicionadas ao grafo.</p>
+<p>Depois de listar os nós, verifique as arestas do grafo e os atributos associados.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Verificar as arestas do grafo</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Arestas no grafo:&quot;</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">D_viagem</span><span class="o">.</span><span class="n">edges</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="kc">True</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Arestas no grafo: [(&#39;Curitiba&#39;, &#39;São Paulo&#39;, {&#39;distancia&#39;: 408}), (&#39;São Paulo&#39;, &#39;Rio de Janeiro&#39;, {&#39;distancia&#39;: 429}), (&#39;São Paulo&#39;, &#39;Belo Horizonte&#39;, {&#39;distancia&#39;: 586}), (&#39;Rio de Janeiro&#39;, &#39;Vitória&#39;, {&#39;distancia&#39;: 521}), (&#39;Belo Horizonte&#39;, &#39;Vitória&#39;, {&#39;distancia&#39;: 524})]
+</pre></div>
+</div>
+</div>
+</div>
+<p>No código acima, o comando <code class="docutils literal notranslate"><span class="pre">print(&quot;Arestas</span> <span class="pre">no</span> <span class="pre">grafo:&quot;,</span> <span class="pre">list(D_viagem.edges(data=True)))</span></code> exibe todas as arestas presentes no digrafo <code class="docutils literal notranslate"><span class="pre">D_viagem</span></code>, juntamente com seus atributos. A função <code class="docutils literal notranslate"><span class="pre">D_viagem.edges(data=True)</span></code> retorna uma visão das arestas, incluindo os dados associados a elas (como a <strong>distância</strong>). O uso de <code class="docutils literal notranslate"><span class="pre">list()</span></code> converte essa visão em uma lista, facilitando a leitura e permitindo visualizar tanto as conexões entre os nós quanto os atributos de cada aresta.</p>
+<p>Agora vamos revisar as arestas do digrafo para garantir que todas as distâncias e demais atributos foram adicionados corretamente.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Exibir todas as arestas e seus atributos</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Arestas no digrafo com atributos:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">D_viagem</span><span class="o">.</span><span class="n">edges</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Arestas no digrafo com atributos:
+[(&#39;Curitiba&#39;, &#39;São Paulo&#39;, {&#39;distancia&#39;: 408}), (&#39;São Paulo&#39;, &#39;Rio de Janeiro&#39;, {&#39;distancia&#39;: 429}), (&#39;São Paulo&#39;, &#39;Belo Horizonte&#39;, {&#39;distancia&#39;: 586}), (&#39;Rio de Janeiro&#39;, &#39;Vitória&#39;, {&#39;distancia&#39;: 521}), (&#39;Belo Horizonte&#39;, &#39;Vitória&#39;, {&#39;distancia&#39;: 524})]
+</pre></div>
+</div>
+</div>
+</div>
+<p>O código <code class="docutils literal notranslate"><span class="pre">D_viagem.edges(data=True)</span></code> retorna todas as arestas presentes no digrafo <strong><code class="docutils literal notranslate"><span class="pre">D_viagem</span></code></strong>, juntamente com os atributos associados a cada aresta. O parâmetro <strong><code class="docutils literal notranslate"><span class="pre">data=True</span></code></strong> indica que, além de exibir os nós conectados pelas arestas, ele também deve exibir os dados (ou atributos) armazenados nessas conexões, como <strong>distância</strong> ou outros valores.</p>
+<p>Agora que já visualizamos os nós e arestas, vamos verificar as adjacências de cada nó para entender como eles estão conectados entre si.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Verificar as adjacências</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Adjacências de cada nó:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">D_viagem</span><span class="o">.</span><span class="n">nodes</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">node</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">D_viagem</span><span class="o">.</span><span class="n">adj</span><span class="p">[</span><span class="n">node</span><span class="p">])</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Adjacências de cada nó:
+Curitiba: [&#39;São Paulo&#39;]
+São Paulo: [&#39;Rio de Janeiro&#39;, &#39;Belo Horizonte&#39;]
+Rio de Janeiro: [&#39;Vitória&#39;]
+Belo Horizonte: [&#39;Vitória&#39;]
+Vitória: []
+</pre></div>
+</div>
+</div>
+</div>
+<p>O código percorre todos os nós do digrafo <strong><code class="docutils literal notranslate"><span class="pre">D_viagem</span></code></strong> e exibe as <strong>adjacências</strong> de cada nó, ou seja, os nós aos quais cada cidade (nó) está conectada diretamente.</p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">D_viagem.adj[node]</span></code></strong>: O atributo <strong><code class="docutils literal notranslate"><span class="pre">adj</span></code></strong> retorna os nós adjacentes ao nó atual.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">list(D_viagem.adj[node])</span></code></strong>: Converte a lista de nós adjacentes em uma lista comum.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">print(f&quot;{node}:</span> <span class="pre">{list(D_viagem.adj[node])}&quot;)</span></code></strong>: Exibe o nó atual e seus nós adjacentes. O <code class="docutils literal notranslate"><span class="pre">f-string</span></code> é usado para formatar a saída.</p></li>
+</ul>
+<p>Vamos exibir as adjacências específicas do nó <strong>São Paulo</strong> para detalhar melhor suas conexões diretas com outras capitais.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Exibir as adjacências de São Paulo</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Adjacências de São Paulo:&quot;</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">D_viagem</span><span class="o">.</span><span class="n">adj</span><span class="p">[</span><span class="s1">&#39;São Paulo&#39;</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Adjacências de São Paulo: [&#39;Rio de Janeiro&#39;, &#39;Belo Horizonte&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Este código lista todos os nós (capitais) que estão diretamente conectados a <strong>São Paulo</strong> no digrafo, mostrando as cidades para as quais <strong>São Paulo</strong> possui uma conexão direcionada.</p>
+<p>Em seguida, calcule o grau total de cada nó (quantidade de conexões), sem distinguir entre entrada e saída.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Verificar o grau de cada nó</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Grau dos nós (número de conexões):&quot;</span><span class="p">,</span> <span class="nb">dict</span><span class="p">(</span><span class="n">D_viagem</span><span class="o">.</span><span class="n">degree</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Grau dos nós (número de conexões): {&#39;Curitiba&#39;: 1, &#39;São Paulo&#39;: 3, &#39;Rio de Janeiro&#39;: 2, &#39;Belo Horizonte&#39;: 2, &#39;Vitória&#39;: 2}
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong><code class="docutils literal notranslate"><span class="pre">D_viagem.degree</span></code></strong>: Retorna o grau de cada nó no digrafo <strong><code class="docutils literal notranslate"><span class="pre">D_viagem</span></code></strong>, que representa o número de conexões associadas a cada nó.<br />
+<strong><code class="docutils literal notranslate"><span class="pre">dict(D_viagem.degree)</span></code></strong>: Converte o resultado em um dicionário, onde cada chave é o nó (cidade) e o valor associado é o seu grau, ou seja, o número de conexões desse nó.<br />
+<strong><code class="docutils literal notranslate"><span class="pre">print</span></code></strong>: Exibe o dicionário resultante, mostrando o nome de cada nó e o número de conexões (arestas) que ele possui.</p>
+<p>Após verificar o grau total, separe as conexões em graus de entrada e saída.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Grau total dos nós</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Grau total dos nós:&quot;</span><span class="p">,</span> <span class="nb">dict</span><span class="p">(</span><span class="n">D_viagem</span><span class="o">.</span><span class="n">degree</span><span class="p">))</span>
+
+<span class="c1"># Grau de saída dos nós</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Grau de saída dos nós:&quot;</span><span class="p">,</span> <span class="nb">dict</span><span class="p">(</span><span class="n">D_viagem</span><span class="o">.</span><span class="n">out_degree</span><span class="p">))</span>
+
+<span class="c1"># Grau de entrada dos nós</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Grau de entrada dos nós:&quot;</span><span class="p">,</span> <span class="nb">dict</span><span class="p">(</span><span class="n">D_viagem</span><span class="o">.</span><span class="n">in_degree</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Grau total dos nós: {&#39;Curitiba&#39;: 1, &#39;São Paulo&#39;: 3, &#39;Rio de Janeiro&#39;: 2, &#39;Belo Horizonte&#39;: 2, &#39;Vitória&#39;: 2}
+Grau de saída dos nós: {&#39;Curitiba&#39;: 1, &#39;São Paulo&#39;: 2, &#39;Rio de Janeiro&#39;: 1, &#39;Belo Horizonte&#39;: 1, &#39;Vitória&#39;: 0}
+Grau de entrada dos nós: {&#39;Curitiba&#39;: 0, &#39;São Paulo&#39;: 1, &#39;Rio de Janeiro&#39;: 1, &#39;Belo Horizonte&#39;: 1, &#39;Vitória&#39;: 2}
+</pre></div>
+</div>
+</div>
+</div>
+<p>Esse código examina três tipos de graus associados aos nós em um <strong>digrafo</strong>: o grau total, o grau de saída e o grau de entrada.</p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">D_viagem.degree</span></code></strong>: Retorna o <strong>grau total</strong> de cada nó.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">D_viagem.out_degree</span></code></strong>: Retorna o <strong>grau de saída</strong> de cada nó, ou seja, quantas conexões o nó faz para outros nós.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">D_viagem.in_degree</span></code></strong>: Retorna o <strong>grau de entrada</strong> de cada nó, representando o número de arestas que entram no nó.</p></li>
+</ul>
+<p>Os resultados mostram como cada capital se comporta em termos de conexões dentro do digrafo, com <strong>São Paulo</strong> sendo um nó mais central (com um grau total de 3), enquanto <strong>Vitória</strong> é um nó de destino final, recebendo duas conexões, mas sem emitir nenhuma.</p>
+<p>Agora seu markdown está formatado corretamente para uso no Jupyter Book, com todas as células de código adequadamente indicadas.</p>
+<p>Vamos analisar os <strong>sucessores</strong> (os nós para os quais uma determinada capital faz conexões) e os <strong>antecessores</strong> (os nós que se conectam a essa capital) para cada cidade no nosso digrafo. Começaremos pela cidade de <strong>Curitiba</strong>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Sucessores e antecessores de Curitiba</span>
+<span class="n">sucessores_curitiba</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">D_viagem</span><span class="o">.</span><span class="n">successors</span><span class="p">(</span><span class="s1">&#39;Curitiba&#39;</span><span class="p">))</span>
+<span class="n">antecessores_curitiba</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">D_viagem</span><span class="o">.</span><span class="n">predecessors</span><span class="p">(</span><span class="s1">&#39;Curitiba&#39;</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sucessores de Curitiba: </span><span class="si">{</span><span class="n">sucessores_curitiba</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Antecessores de Curitiba: </span><span class="si">{</span><span class="n">antecessores_curitiba</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sucessores de Curitiba: [&#39;São Paulo&#39;]
+Antecessores de Curitiba: []
+</pre></div>
+</div>
+</div>
+</div>
+<p>Agora, verificamos os sucessores e antecessores de São Paulo.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Sucessores e antecessores de São Paulo</span>
+<span class="n">sucessores_sao_paulo</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">D_viagem</span><span class="o">.</span><span class="n">successors</span><span class="p">(</span><span class="s1">&#39;São Paulo&#39;</span><span class="p">))</span>
+<span class="n">antecessores_sao_paulo</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">D_viagem</span><span class="o">.</span><span class="n">predecessors</span><span class="p">(</span><span class="s1">&#39;São Paulo&#39;</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sucessores de São Paulo: </span><span class="si">{</span><span class="n">sucessores_sao_paulo</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Antecessores de São Paulo: </span><span class="si">{</span><span class="n">antecessores_sao_paulo</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sucessores de São Paulo: [&#39;Rio de Janeiro&#39;, &#39;Belo Horizonte&#39;]
+Antecessores de São Paulo: [&#39;Curitiba&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Aqui, analisamos os sucessores e antecessores do Rio de Janeiro.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Sucessores e antecessores de Rio de Janeiro</span>
+<span class="n">sucessores_rio</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">D_viagem</span><span class="o">.</span><span class="n">successors</span><span class="p">(</span><span class="s1">&#39;Rio de Janeiro&#39;</span><span class="p">))</span>
+<span class="n">antecessores_rio</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">D_viagem</span><span class="o">.</span><span class="n">predecessors</span><span class="p">(</span><span class="s1">&#39;Rio de Janeiro&#39;</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sucessores de Rio de Janeiro: </span><span class="si">{</span><span class="n">sucessores_rio</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Antecessores de Rio de Janeiro: </span><span class="si">{</span><span class="n">antecessores_rio</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sucessores de Rio de Janeiro: [&#39;Vitória&#39;]
+Antecessores de Rio de Janeiro: [&#39;São Paulo&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Agora, fazemos a análise dos sucessores e antecessores de Belo Horizonte.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Sucessores e antecessores de Belo Horizonte</span>
+<span class="n">sucessores_bh</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">D_viagem</span><span class="o">.</span><span class="n">successors</span><span class="p">(</span><span class="s1">&#39;Belo Horizonte&#39;</span><span class="p">))</span>
+<span class="n">antecessores_bh</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">D_viagem</span><span class="o">.</span><span class="n">predecessors</span><span class="p">(</span><span class="s1">&#39;Belo Horizonte&#39;</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sucessores de Belo Horizonte: </span><span class="si">{</span><span class="n">sucessores_bh</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Antecessores de Belo Horizonte: </span><span class="si">{</span><span class="n">antecessores_bh</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sucessores de Belo Horizonte: [&#39;Vitória&#39;]
+Antecessores de Belo Horizonte: [&#39;São Paulo&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Por fim, verificamos os sucessores e antecessores de Vitória.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Sucessores e antecessores de Vitória</span>
+<span class="n">sucessores_vitoria</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">D_viagem</span><span class="o">.</span><span class="n">successors</span><span class="p">(</span><span class="s1">&#39;Vitória&#39;</span><span class="p">))</span>
+<span class="n">antecessores_vitoria</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">D_viagem</span><span class="o">.</span><span class="n">predecessors</span><span class="p">(</span><span class="s1">&#39;Vitória&#39;</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sucessores de Vitória: </span><span class="si">{</span><span class="n">sucessores_vitoria</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Antecessores de Vitória: </span><span class="si">{</span><span class="n">antecessores_vitoria</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sucessores de Vitória: []
+Antecessores de Vitória: [&#39;Rio de Janeiro&#39;, &#39;Belo Horizonte&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="encontrando-o-caminho-mais-curto-no-digrafo">
+<h3><strong>1.4.1 - Encontrando o Caminho Mais Curto no Digrafo</strong><a class="headerlink" href="#encontrando-o-caminho-mais-curto-no-digrafo" title="Link to this heading">#</a></h3>
+<p>Nesta etapa do exercício, você aprenderá a utilizar a função <code class="docutils literal notranslate"><span class="pre">shortest_path</span></code> da biblioteca <code class="docutils literal notranslate"><span class="pre">networkx</span></code> para encontrar o caminho mais curto entre dois nós em um digrafo, considerando o peso das arestas, que neste caso representa as distâncias entre as capitais. Aplicaremos essa função ao digrafo que criamos, identificando a rota mais curta entre <strong>Curitiba</strong> e <strong>Vitória</strong>. Além disso, vamos visualizar esse caminho diretamente no grafo, destacando-o para facilitar a interpretação.</p>
+<p>Primeiramente, vamos calcular o caminho mais curto entre Curitiba e Vitória, usando as distâncias nas arestas como critério de peso.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Encontrando o caminho mais curto de Curitiba até Vitória, baseado na distância</span>
+<span class="n">caminho_mais_curto</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">shortest_path</span><span class="p">(</span><span class="n">D_viagem</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="s1">&#39;Curitiba&#39;</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="s1">&#39;Vitória&#39;</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="s1">&#39;distancia&#39;</span><span class="p">)</span>
+
+<span class="c1"># Exibindo o caminho mais curto</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Caminho mais curto de Curitiba até Vitória: </span><span class="si">{</span><span class="n">caminho_mais_curto</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Caminho mais curto de Curitiba até Vitória: [&#39;Curitiba&#39;, &#39;São Paulo&#39;, &#39;Rio de Janeiro&#39;, &#39;Vitória&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>No código acima:</p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">nx.shortest_path()</span></code></strong>: Esta é uma função da biblioteca <code class="docutils literal notranslate"><span class="pre">networkx</span></code> que encontra o <strong>caminho mais curto</strong> entre dois nós em um grafo.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">D_viagem</span></code></strong>: O <strong>digrafo</strong> representando as capitais brasileiras e as rotas entre elas.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">source='Curitiba'</span></code></strong>: Especifica o nó de origem, <strong>Curitiba</strong>.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">target='Vitória'</span></code></strong>: Indica o nó de destino, <strong>Vitória</strong>.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">weight='distancia'</span></code></strong>: Define que o critério para o caminho mais curto será a <strong>distância</strong> entre as capitais.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">caminho_mais_curto</span></code></strong>: Armazena o resultado da função, que é o caminho mais curto entre <strong>Curitiba</strong> e <strong>Vitória</strong> levando em consideração as distâncias.</p></li>
+</ul>
+<p>O resultado mostra o caminho mais curto de <strong>Curitiba</strong> até <strong>Vitória</strong>, considerando as distâncias entre as capitais no grafo direcionado:</p>
+<p><strong>Caminho mais curto de Curitiba até Vitória</strong>:
+<code class="docutils literal notranslate"><span class="pre">['Curitiba',</span> <span class="pre">'São</span> <span class="pre">Paulo',</span> <span class="pre">'Rio</span> <span class="pre">de</span> <span class="pre">Janeiro',</span> <span class="pre">'Vitória']</span></code></p>
+<p>Este caminho minimiza a soma das distâncias entre essas cidades.</p>
+<p>Após determinar o caminho mais curto, vamos calcular a distância total percorrida. Utilizaremos a função <code class="docutils literal notranslate"><span class="pre">shortest_path_length</span></code> para calcular o comprimento total do caminho, considerando o mesmo peso (distância).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculando o comprimento (distância total) do caminho mais curto</span>
+<span class="n">distancia_caminho_mais_curto</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">shortest_path_length</span><span class="p">(</span><span class="n">D_viagem</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="s1">&#39;Curitiba&#39;</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="s1">&#39;Vitória&#39;</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="s1">&#39;distancia&#39;</span><span class="p">)</span>
+
+<span class="c1"># Exibindo a distância total</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Distância total do caminho mais curto de Curitiba até Vitória: </span><span class="si">{</span><span class="n">distancia_caminho_mais_curto</span><span class="si">}</span><span class="s2"> km&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Distância total do caminho mais curto de Curitiba até Vitória: 1358 km
+</pre></div>
+</div>
+</div>
+</div>
+<p>Este código calcula a <strong>distância total</strong> do caminho mais curto encontrado entre <strong>Curitiba</strong> e <strong>Vitória</strong>, levando em consideração o peso das arestas (distância em quilômetros).</p>
+<p>Agora que temos o caminho e a distância total, vamos visualizar esse caminho no grafo. Para isso, destacaremos as arestas que fazem parte do caminho mais curto, colorindo-as de uma cor diferente das outras.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plotando o grafo e destacando o caminho mais curto</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="c1"># Usando um layout para organizar a posição dos nós</span>
+<span class="n">pos</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">spring_layout</span><span class="p">(</span><span class="n">D_viagem</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="c1"># Desenhando todos os nós</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_nodes</span><span class="p">(</span><span class="n">D_viagem</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;lightblue&#39;</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">800</span><span class="p">)</span>
+<span class="c1"># Desenhando todas as arestas</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_edges</span><span class="p">(</span><span class="n">D_viagem</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">edgelist</span><span class="o">=</span><span class="n">D_viagem</span><span class="o">.</span><span class="n">edges</span><span class="p">(),</span> <span class="n">edge_color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="c1"># Destacando o caminho mais curto (arestas)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_edges</span><span class="p">(</span><span class="n">D_viagem</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">edgelist</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">caminho_mais_curto</span><span class="p">,</span> <span class="n">caminho_mais_curto</span><span class="p">[</span><span class="mi">1</span><span class="p">:])),</span>
+                       <span class="n">edge_color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="c1"># Desenhando os rótulos (nomes das capitais)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_labels</span><span class="p">(</span><span class="n">D_viagem</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">font_weight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="c1"># Adicionando rótulos de distâncias nas arestas</span>
+<span class="n">edge_labels</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">get_edge_attributes</span><span class="p">(</span><span class="n">D_viagem</span><span class="p">,</span> <span class="s1">&#39;distancia&#39;</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_edge_labels</span><span class="p">(</span><span class="n">D_viagem</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">edge_labels</span><span class="o">=</span><span class="n">edge_labels</span><span class="p">)</span>
+<span class="c1"># Exibindo o gráfico</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Caminho Mais Curto de Curitiba até Vitória (Baseado na Distância)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/1ffdd98594afcf1db8c894dfd3eff55509bd3778731f9c585d477fb1ad18a7fb.png" src="_images/1ffdd98594afcf1db8c894dfd3eff55509bd3778731f9c585d477fb1ad18a7fb.png" />
+</div>
+</div>
+</section>
+<section id="calculando-o-caminho-com-menor-soma-de-populacoes">
+<h3><strong>1.4.2 Calculando o Caminho com Menor Soma de Populações</strong><a class="headerlink" href="#calculando-o-caminho-com-menor-soma-de-populacoes" title="Link to this heading">#</a></h3>
+<p>O objetivo desta parte do exercício é calcular o caminho que minimize a soma das populações ao longo do trajeto entre <strong>Curitiba</strong> e <strong>Vitória</strong>. Para isso, primeiro vamos adicionar o atributo <strong>“população”</strong> aos nós do digrafo, onde cada nó representa uma capital brasileira. Em seguida, utilizaremos uma função personalizada para realizar o cálculo e, por fim, visualizaremos esse caminho no grafo.</p>
+<p>O primeiro passo é verificar se os nós do grafo (as capitais) já possuem o atributo <strong>população</strong>. Vamos percorrer todos os nós e imprimir os resultados.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Verificando se todos os nós possuem o atributo &#39;populacao&#39;</span>
+<span class="k">for</span> <span class="n">no</span><span class="p">,</span> <span class="n">dados</span> <span class="ow">in</span> <span class="n">D_viagem</span><span class="o">.</span><span class="n">nodes</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="k">if</span> <span class="s1">&#39;populacao&#39;</span> <span class="ow">in</span> <span class="n">dados</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;O nó </span><span class="si">{</span><span class="n">no</span><span class="si">}</span><span class="s2"> tem a população: </span><span class="si">{</span><span class="n">dados</span><span class="p">[</span><span class="s1">&#39;populacao&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;O nó </span><span class="si">{</span><span class="n">no</span><span class="si">}</span><span class="s2"> não tem o atributo &#39;populacao&#39;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>O nó Curitiba não tem o atributo &#39;populacao&#39;
+O nó São Paulo não tem o atributo &#39;populacao&#39;
+O nó Rio de Janeiro não tem o atributo &#39;populacao&#39;
+O nó Belo Horizonte não tem o atributo &#39;populacao&#39;
+O nó Vitória não tem o atributo &#39;populacao&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<p>Agora que confirmamos a ausência do atributo <strong>população</strong> nos nós, vamos adicionar manualmente a população de cada capital ao grafo.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Inserindo o atributo &#39;populacao&#39; nos nós do grafo D_viagem</span>
+<span class="n">D_viagem</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="s1">&#39;Curitiba&#39;</span><span class="p">][</span><span class="s1">&#39;populacao&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1963726</span>
+<span class="n">D_viagem</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="s1">&#39;São Paulo&#39;</span><span class="p">][</span><span class="s1">&#39;populacao&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">12396372</span>
+<span class="n">D_viagem</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="s1">&#39;Rio de Janeiro&#39;</span><span class="p">][</span><span class="s1">&#39;populacao&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">6747815</span>
+<span class="n">D_viagem</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="s1">&#39;Belo Horizonte&#39;</span><span class="p">][</span><span class="s1">&#39;populacao&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2521564</span>
+<span class="n">D_viagem</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="s1">&#39;Vitória&#39;</span><span class="p">][</span><span class="s1">&#39;populacao&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">365855</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Após inserir os valores, vamos verificar novamente se cada nó contém o atributo <strong>população</strong> corretamente.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Verificando se os atributos foram inseridos corretamente</span>
+<span class="k">for</span> <span class="n">no</span><span class="p">,</span> <span class="n">dados</span> <span class="ow">in</span> <span class="n">D_viagem</span><span class="o">.</span><span class="n">nodes</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="k">if</span> <span class="s1">&#39;populacao&#39;</span> <span class="ow">in</span> <span class="n">dados</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;O nó </span><span class="si">{</span><span class="n">no</span><span class="si">}</span><span class="s2"> tem a população: </span><span class="si">{</span><span class="n">dados</span><span class="p">[</span><span class="s1">&#39;populacao&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;O nó </span><span class="si">{</span><span class="n">no</span><span class="si">}</span><span class="s2"> não tem o atributo &#39;populacao&#39;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>O nó Curitiba tem a população: 1963726
+O nó São Paulo tem a população: 12396372
+O nó Rio de Janeiro tem a população: 6747815
+O nó Belo Horizonte tem a população: 2521564
+O nó Vitória tem a população: 365855
+</pre></div>
+</div>
+</div>
+</div>
+<p>Os atributos foram inseridos corretamente. Vamos criar uma função personalizada que calcula o peso das arestas com base na soma das populações dos nós adjacentes e, em seguida, utilizaremos essa função para encontrar o caminho que minimize a população total entre Curitiba e Vitória.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Função personalizada de peso, que retorna a soma das populações dos nós adjacentes</span>
+<span class="k">def</span> <span class="nf">peso_populacao</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">D_viagem</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="s1">&#39;populacao&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">D_viagem</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="s1">&#39;populacao&#39;</span><span class="p">]</span>
+
+<span class="c1"># Calculando o caminho com menor soma de populações</span>
+<span class="n">caminho_menor_populacao</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">shortest_path</span><span class="p">(</span><span class="n">D_viagem</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="s1">&#39;Curitiba&#39;</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="s1">&#39;Vitória&#39;</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="n">peso_populacao</span><span class="p">)</span>
+
+<span class="c1"># Exibindo o caminho com a menor soma de populações</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Caminho com menor população total de Curitiba até Vitória: </span><span class="si">{</span><span class="n">caminho_menor_populacao</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Caminho com menor população total de Curitiba até Vitória: [&#39;Curitiba&#39;, &#39;São Paulo&#39;, &#39;Belo Horizonte&#39;, &#39;Vitória&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Agora que identificamos o caminho com a menor população total, vamos calcular a soma das populações ao longo desse caminho.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculando a população total do caminho</span>
+<span class="n">populacao_total</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">D_viagem</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">n</span><span class="p">][</span><span class="s1">&#39;populacao&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">caminho_menor_populacao</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;População total ao longo do caminho: </span><span class="si">{</span><span class="n">populacao_total</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>População total ao longo do caminho: 17247517
+</pre></div>
+</div>
+</div>
+</div>
+<p>Por fim, vamos visualizar o grafo, destacando em <strong>vermelho</strong> o caminho com a menor população total entre as capitais.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plotando o grafo e destacando o caminho com menor população</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="c1"># Usando um layout para organizar a posição dos nós</span>
+<span class="n">pos</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">spring_layout</span><span class="p">(</span><span class="n">D_viagem</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="c1"># Desenhando todos os nós</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_nodes</span><span class="p">(</span><span class="n">D_viagem</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;lightblue&#39;</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">800</span><span class="p">)</span>
+<span class="c1"># Desenhando todas as arestas</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_edges</span><span class="p">(</span><span class="n">D_viagem</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">edgelist</span><span class="o">=</span><span class="n">D_viagem</span><span class="o">.</span><span class="n">edges</span><span class="p">(),</span> <span class="n">edge_color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="c1"># Destacando o caminho com menor população (arestas)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_edges</span><span class="p">(</span><span class="n">D_viagem</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">edgelist</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">caminho_menor_populacao</span><span class="p">,</span> <span class="n">caminho_menor_populacao</span><span class="p">[</span><span class="mi">1</span><span class="p">:])),</span>
+                       <span class="n">edge_color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="c1"># Desenhando os rótulos (nomes das capitais)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_labels</span><span class="p">(</span><span class="n">D_viagem</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">font_weight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="c1"># Adicionando rótulos de distâncias nas arestas</span>
+<span class="n">edge_labels</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">get_edge_attributes</span><span class="p">(</span><span class="n">D_viagem</span><span class="p">,</span> <span class="s1">&#39;distancia&#39;</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_edge_labels</span><span class="p">(</span><span class="n">D_viagem</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">edge_labels</span><span class="o">=</span><span class="n">edge_labels</span><span class="p">)</span>
+<span class="c1"># Exibindo o gráfico</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Caminho com Menor População Total de Curitiba até Vitória&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/0fe02c75b779ed9ab7e871fea5a451814649d361eccb0a0ef9de99e4ac0d19a2.png" src="_images/0fe02c75b779ed9ab7e871fea5a451814649d361eccb0a0ef9de99e4ac0d19a2.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="criando-um-multigrafo-no-networkx">
+<h2><strong>1.5 Criando um Multigrafo no NetworkX</strong><a class="headerlink" href="#criando-um-multigrafo-no-networkx" title="Link to this heading">#</a></h2>
+<p>Neste exercício, vamos criar um <strong>multigrafo</strong>, que permite a existência de várias arestas entre os mesmos nós, representando diferentes tipos de conexão entre as cidades. Vamos criar múltiplas conexções entre <strong>Belo Horizonte</strong> e <strong>Vitória</strong>, representando diferentes modos de transporte: <strong>rodovia</strong>, <strong>ferrovia</strong> e <strong>via aérea</strong>. Em seguida, visualizaremos essas conexões no grafo, destacando cada uma delas com arcos para evitar sobreposição.</p>
+<p>O primeiro passo é criar o <strong>multigrafo</strong>, que permitirá adicionar várias arestas entre os mesmos nós, representando diferentes modos de transporte.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Criando um multigrafo</span>
+<span class="n">G_multi</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">MultiGraph</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Agora, vamos adicionar os nós ao multigrafo. Neste caso, os nós representarão as cidades <strong>Belo Horizonte</strong> e <strong>Vitória</strong>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Adicionando os nós (cidades)</span>
+<span class="n">G_multi</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s1">&#39;Belo Horizonte&#39;</span><span class="p">)</span>
+<span class="n">G_multi</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s1">&#39;Vitória&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Esses nós servirão como os pontos de partida e chegada para as múltiplas arestas que iremos adicionar.</p>
+<p>Em seguida, adicionamos múltiplas arestas entre as cidades. Cada aresta representará um tipo de transporte, como <strong>rodovia</strong>, <strong>ferrovia</strong>, e <strong>via aérea</strong>, com suas respectivas distâncias.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Adicionando múltiplas arestas entre os nós Belo Horizonte e Vitória</span>
+<span class="n">G_multi</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s1">&#39;Belo Horizonte&#39;</span><span class="p">,</span> <span class="s1">&#39;Vitória&#39;</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s1">&#39;rodovia&#39;</span><span class="p">,</span> <span class="n">tipo</span><span class="o">=</span><span class="s1">&#39;rodovia&#39;</span><span class="p">,</span> <span class="n">distancia</span><span class="o">=</span><span class="mi">524</span><span class="p">)</span>
+<span class="n">G_multi</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s1">&#39;Belo Horizonte&#39;</span><span class="p">,</span> <span class="s1">&#39;Vitória&#39;</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s1">&#39;ferrovia&#39;</span><span class="p">,</span> <span class="n">tipo</span><span class="o">=</span><span class="s1">&#39;ferrovia&#39;</span><span class="p">,</span> <span class="n">distancia</span><span class="o">=</span><span class="mi">664</span><span class="p">)</span>
+<span class="n">G_multi</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s1">&#39;Belo Horizonte&#39;</span><span class="p">,</span> <span class="s1">&#39;Vitória&#39;</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s1">&#39;via_aerea&#39;</span><span class="p">,</span> <span class="n">tipo</span><span class="o">=</span><span class="s1">&#39;via aérea&#39;</span><span class="p">,</span> <span class="n">distancia</span><span class="o">=</span><span class="mi">450</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;via_aerea&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Aqui, estamos usando a opção <code class="docutils literal notranslate"><span class="pre">key</span></code> para diferenciar as arestas que conectam os mesmos nós, mas com tipos de transporte e distâncias diferentes.</p>
+<p>Depois de adicionar as arestas, vamos exibir todas as conexões (arestas) criadas no multigrafo, juntamente com os atributos associados a elas (tipo de transporte e distância).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Exibindo as arestas e os atributos</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Arestas no multigrafo entre Belo Horizonte e Vitória:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">G_multi</span><span class="o">.</span><span class="n">edges</span><span class="p">(</span><span class="n">keys</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">u</span><span class="si">}</span><span class="s2"> -&gt; </span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2">, Tipo: </span><span class="si">{</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;tipo&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">, Distância: </span><span class="si">{</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;distancia&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> km&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Arestas no multigrafo entre Belo Horizonte e Vitória:
+Belo Horizonte -&gt; Vitória, Tipo: rodovia, Distância: 524 km
+Belo Horizonte -&gt; Vitória, Tipo: ferrovia, Distância: 664 km
+Belo Horizonte -&gt; Vitória, Tipo: via aérea, Distância: 450 km
+</pre></div>
+</div>
+</div>
+</div>
+<p>Agora, vamos visualizar o multigrafo. Para evitar que as múltiplas arestas entre os mesmos nós se sobreponham, criaremos arcos para representar cada tipo de transporte, facilitando a visualização.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plotando o multigrafo com deslocamento nas arestas</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">pos</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">spring_layout</span><span class="p">(</span><span class="n">G_multi</span><span class="p">)</span>
+<span class="c1"># Desenhando nós</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G_multi</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">700</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;lightblue&#39;</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="c1"># Desenhando arestas com diferentes arcos para não sobreporem</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_edges</span><span class="p">(</span><span class="n">G_multi</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">edgelist</span><span class="o">=</span><span class="p">[(</span><span class="s1">&#39;Belo Horizonte&#39;</span><span class="p">,</span> <span class="s1">&#39;Vitória&#39;</span><span class="p">,</span> <span class="s1">&#39;rodovia&#39;</span><span class="p">)],</span>
+                       <span class="n">connectionstyle</span><span class="o">=</span><span class="s1">&#39;arc3,rad=0.2&#39;</span><span class="p">,</span> <span class="n">edge_color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_edges</span><span class="p">(</span><span class="n">G_multi</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">edgelist</span><span class="o">=</span><span class="p">[(</span><span class="s1">&#39;Belo Horizonte&#39;</span><span class="p">,</span> <span class="s1">&#39;Vitória&#39;</span><span class="p">,</span> <span class="s1">&#39;ferrovia&#39;</span><span class="p">)],</span>
+                       <span class="n">connectionstyle</span><span class="o">=</span><span class="s1">&#39;arc3,rad=-0.2&#39;</span><span class="p">,</span> <span class="n">edge_color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_edges</span><span class="p">(</span><span class="n">G_multi</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">edgelist</span><span class="o">=</span><span class="p">[(</span><span class="s1">&#39;Belo Horizonte&#39;</span><span class="p">,</span> <span class="s1">&#39;Vitória&#39;</span><span class="p">,</span> <span class="s1">&#39;via_aerea&#39;</span><span class="p">)],</span>
+                       <span class="n">connectionstyle</span><span class="o">=</span><span class="s1">&#39;arc3,rad=0&#39;</span><span class="p">,</span> <span class="n">edge_color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="c1"># Adicionando rótulos para as arestas</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_edge_labels</span><span class="p">(</span><span class="n">G_multi</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">edge_labels</span><span class="o">=</span><span class="p">{(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;tipo&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">G_multi</span><span class="o">.</span><span class="n">edges</span><span class="p">(</span><span class="n">keys</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">True</span><span class="p">)})</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Multigrafo: Conexões entre Belo Horizonte e Vitória (Rodovia, Ferrovia, Via Aérea)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/fab46730d32aeb0ac7d89eee5a67e611b10473c7ef57b1c6f1298a86a7f6fbec.png" src="_images/fab46730d32aeb0ac7d89eee5a67e611b10473c7ef57b1c6f1298a86a7f6fbec.png" />
+</div>
+</div>
+<p>No códico acima:</p>
+<p><code class="docutils literal notranslate"><span class="pre">pos</span> <span class="pre">=</span> <span class="pre">nx.spring_layout(G_multi)</span></code>:  Essa linha calcula a posição dos nós no grafo utilizando o layout de mola (spring layout). Esse layout funciona como se houvesse forças de repulsão e atração entre os nós, criando uma distribuição mais equilibrada no espaço. A variável <code class="docutils literal notranslate"><span class="pre">pos</span></code> armazena as coordenadas de cada nó geradas pelo layout, que serão usadas para desenhar os nós e as arestas do multigrafo.</p>
+<p><code class="docutils literal notranslate"><span class="pre">nx.draw(G_multi,</span> <span class="pre">pos,</span> <span class="pre">with_labels=True,</span> <span class="pre">node_size=700,</span> <span class="pre">node_color='lightblue',</span> <span class="pre">font_size=10)</span></code>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">nx.draw()</span></code>: Esta função desenha o grafo no layout especificado.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">G_multi</span></code>: O multigrafo que está sendo desenhado.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pos</span></code>: As posições dos nós (calculadas pelo <code class="docutils literal notranslate"><span class="pre">spring_layout</span></code>), garantindo que os nós e as arestas sejam desenhados nos locais corretos.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">with_labels=True</span></code>: Exibe os rótulos dos nós (os nomes das cidades, no caso).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">node_size=700</span></code>: Define o tamanho dos nós no gráfico, tornando-os grandes o suficiente para serem bem visíveis.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">node_color='lightblue'</span></code>: Define a cor dos nós como azul-claro.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">font_size=10</span></code>: Define o tamanho da fonte dos rótulos dos nós como 10.</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">nx.draw_networkx_edges()</span></code>:<br />
+Essa função desenha as arestas (conexões) entre os nós no grafo.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">edgelist=[('Belo</span> <span class="pre">Horizonte',</span> <span class="pre">'Vitória',</span> <span class="pre">'rodovia')]</span></code>: Especifica que estamos desenhando a aresta que representa a <strong>rodovia</strong> entre <strong>Belo Horizonte</strong> e <strong>Vitória</strong>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">connectionstyle='arc3,rad=0.2'</span></code>: Define o estilo da conexão. O valor <code class="docutils literal notranslate"><span class="pre">arc3,rad=0.2</span></code> indica que a aresta deve ser desenhada como um arco curvado, com uma curvatura (raio) de 0,2. Isso impede que as arestas se sobreponham e facilita a visualização de várias conexões entre os mesmos nós.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">edge_color='black'</span></code>: Define a cor da aresta como preta.</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Welcome to your Jupyter Book</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="capitulo2.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Capítulo 2 - Manipulação de redes espaciais</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introducao">Introdução</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fundamentos-sobre-grafos">1.1 Fundamentos sobre Grafos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-biblioteca-networkx-do-python">1.2 A biblioteca NetworkX do Python</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#criando-e-manipulando-um-grafo-simples">1.3 Criando e Manipulando um Grafo Simples</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#criando-um-digrafo-de-viagens-entre-capitais-brasileiras">1.4 Criando um Digrafo de Viagens entre Capitais Brasileiras</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estrutura-do-exercicio">Estrutura do Exercício:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#encontrando-o-caminho-mais-curto-no-digrafo"><strong>1.4.1 - Encontrando o Caminho Mais Curto no Digrafo</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calculando-o-caminho-com-menor-soma-de-populacoes"><strong>1.4.2 Calculando o Caminho com Menor Soma de Populações</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#criando-um-multigrafo-no-networkx"><strong>1.5 Criando um Multigrafo no NetworkX</strong></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Alexandro Gularte Schafer
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
