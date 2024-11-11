@@ -78,7 +78,7 @@ from matplotlib.lines import Line2D
 ```
 
 ```{code-cell}
-warnings.filterwarnings("ignore", category=DeprecationWarning)
+warnings.filterwarnings("ignore")
 print("OSMnx version:", ox.__version__)
 ```
 
@@ -216,6 +216,12 @@ gdf_edificios = ox.features_from_place(bairro, tags)
 print(gdf_edificios.shape)  # Exibe o número de edifícios encontrados
 ```
 
+Os valores retornados pelo print são:
+
+10007: O primeiro valor representa o número de linhas (ou seja, edifícios) encontrados e extraídos para o bairro da Liberdade. Isso significa que foram identificados 10.007 edifícios na área delimitada.
+81: O segundo valor indica o número de colunas ou atributos disponíveis para cada edifício no GeoDataFrame. Esses atributos podem incluir informações como altura, tipo de construção, área, endereço, e talvez até dados geométricos como a forma dos contornos dos edifícios.
+Em resumo, o comando encontrou 10.007 edifícios na área da Liberdade, e cada edifício tem 81 atributos disponíveis no GeoDataFrame gdf_edificios.
+
 ```{code-cell}
 # Plotando os contornos dos edifícios
 fig, ax = ox.plot_footprints(gdf_edificios, figsize=(20, 15))
@@ -266,6 +272,7 @@ tags = {"leisure": "park"}
 gdf_parques = ox.features_from_place(bairro, tags)
 print(gdf_parques.shape)  # Exibe o número de parques encontrados
 ```
+Existem 32 parques na área da Liberdade. Cada parque tem 39 atributos disponíveis no GeoDataFrame gdf_parques.
 
 ```{code-cell}
 # Plotando os contornos dos parques
@@ -302,7 +309,11 @@ gdf_onibus = ox.features_from_place(bairro, tags)
 
 # Exibir o número de pontos de ônibus baixados
 print(gdf_onibus.shape)
+```
 
+Existem 93 pontos de ônibus, com 39 atributos disponíveis no GeoDataFrame gdf_onibus.
+
+```{code-cell}
 # Plotar os pontos de ônibus
 gdf_onibus.plot()
 ```
@@ -323,7 +334,11 @@ gdf_rios = ox.features_from_place(bairro, tags)
 
 # Exibir o número de cursos d'água baixados
 print(gdf_rios.shape)
+```
 
+Existem 11 cursos d'água ou trechos de cursos d'água, com 9 atributos disponíveis no GeoDataFrame gdf_rios.
+
+```{code-cell}
 # Plotar os cursos d'água
 gdf_rios.plot()
 ```
@@ -346,7 +361,11 @@ gdf_amenities = ox.features_from_place(bairro, tags)
 
 # Exibir o número de amenities baixadas
 print(gdf_amenities.shape)  # Mostra quantas amenidades foram baixadas
+```
+Existem 460 pontos de interesse no bairro da Liberdade, com 157 atributos disponíveis no GeoDataFrame gdf_amenities.
 
+
+```{code-cell}
 # Plotar as amenities em uma visualização estática
 gdf_amenities.plot()
 ```
@@ -370,7 +389,11 @@ gdf_hospitais = ox.features_from_place(bairro, tags)
 
 # Exibir o número de hospitais baixados
 print(gdf_hospitais.shape)
+```
 
+Existem 8 hospitais ou postos de saúde no bairro da Liberdade, com 33 atributos disponíveis no GeoDataFrame gdf_hospitais.
+
+```{code-cell}
 # Plotar os hospitais
 gdf_hospitais.plot()
 ```
@@ -636,8 +659,6 @@ m = road_network.explore(m=m, tiles=tiles, color="blue", tooltip="name", style_k
 bus_stops = ox.features_from_place(bairro, tags={"highway": "bus_stop"})
 m = bus_stops.explore(tiles=tiles, color="red", tooltip="name", marker_kwds=mk)
 
-
-
 # Exibir o mapa interativo
 m
 ```
@@ -728,13 +749,7 @@ Os nós representam interseções ou cruzamentos na rede viária e podem conter 
 - Coordenadas de localização (`x` e `y`).
 - Outros dados contextuais, como elevação, se disponível.
 
-```{code-cell}
-# Contar o número de nós
-print("Número total de nós:", len(gdf_nos))
 
-# Exibir as colunas (atributos) dos nós
-print(gdf_nos.columns)
-```
 
 As arestas representam os segmentos de rua entre os nós e possuem diversos atributos, como:
 - `name`: Nome da rua, se mapeado no OSM.
@@ -745,10 +760,7 @@ As arestas representam os segmentos de rua entre os nós e possuem diversos atri
 
 Esses atributos auxiliam na análise de características da rede viária, como a identificação de vias principais e a análise de acessibilidade e de tráfego.
 
-```{code-cell}
-# Exibir as colunas (atributos) das arestas
-print(gdf_arestas.columns)
-```
+
 
 
 #### 2.2.4.1 Explorando Atributos dos Nós
@@ -767,8 +779,20 @@ Os atributos dos nós em um grafo OSMnx armazenam os dados de cada ponto de inte
 
 Para uma análise detalhada dos dados sobre os nós da rede viária no DataFrame gdf_nos, podemos seguir uma sequência de comandos que verificam e exploram os registros referentes a cada atributo.
 
+Inicialmente, vamos contar o número total de nós de nosso conjunto de dados.
+```{code-cell}
+# Contar o número de nós
+print("Número total de nós:", len(gdf_nos))
+```
 
-Inicialmente, vamos definir as colunas que queremos consultar no DataFrame `gdf_nos`, que representa os nós de uma rede viária. Esse conjunto de colunas inclui dados sobre as coordenadas (`y`, `x`), número de ruas conectadas a cada nó (`street_count`), tipo de via (`highway`), referência do nó (`ref`) e geometria da localização (`geometry`).
+Em seguida, podemos verificar os atributos existentes.
+
+```{code-cell}
+# Exibir as colunas (atributos) dos nós
+print(gdf_nos.columns)
+```
+
+Agora, vamos definir os atributos (colunas) que queremos consultar no DataFrame `gdf_nos`, que representa os nós de uma rede viária. Esse conjunto de colunas inclui dados sobre as coordenadas (`y`, `x`), número de ruas conectadas a cada nó (`street_count`), tipo de via (`highway`), referência do nó (`ref`) e geometria da localização (`geometry`).
 
 ```{code-cell}
 colunas = ['y', 'x', 'street_count', 'highway', 'ref', 'geometry']
@@ -847,7 +871,7 @@ gdf_street_count_nos.explore(
     tooltip="street_count",
     cmap="Paired",
     marker_kwds={
-        "radius": 2,
+        "radius": 3,
         "fill": True,
     },
     style_kwds={
@@ -879,7 +903,7 @@ gdf_street_count_nos.explore(
     tooltip="street_count",
     cmap="Paired",
     marker_kwds={
-        "radius": 2,
+        "radius": 3,
         "fill": True,
     },
     style_kwds={
@@ -961,7 +985,7 @@ gdf_street_count_1.explore(
     legend=False,
     tooltip="street_count",
     marker_kwds={
-        "radius": 2,
+        "radius": 3,
         "fill": True,
     },
     style_kwds={
@@ -989,7 +1013,7 @@ gdf_highway_nos.explore(
     tooltip="highway",
     cmap="Set1",
     marker_kwds={
-        "radius": 2,
+        "radius": 3,
         "fill": True,
     },
     style_kwds={
@@ -1014,7 +1038,7 @@ gdf_traffic_signals.explore(
     tooltip="highway",
     cmap="Set1",
     marker_kwds={
-        "radius": 2,
+        "radius": 3,
         "fill": True,
     },
     style_kwds={
