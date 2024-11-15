@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Capítulo 3 - Métricas e indicadores de redes &#8212; Análise Espacial de Redes</title>
+    <title>3. MÉTRICAS E INDICADORES DE REDES &#8212; Análise Espacial de Redes</title>
   
   
   
@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -45,7 +45,7 @@
 <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
 
     <script src="_static/documentation_options.js?v=9eb32ce0"></script>
-    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="_static/copybutton.js?v=f281be69"></script>
@@ -64,7 +64,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Capítulo 4 - Roteamento e análise de tempos de viagem" href="capitulo4.html" />
-    <link rel="prev" title="Capítulo 2 - Manipulação de redes espaciais" href="capitulo2.html" />
+    <link rel="prev" title="2. INTRODUÇÃO AO USO DO OSMnx PARA ANÁLISE DE REDES ESPACIAIS" href="capitulo2.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -170,8 +170,8 @@
         </ul>
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="capitulo1.html">1. INTRODUÇÃO A GRAFOS</a></li>
-<li class="toctree-l1"><a class="reference internal" href="capitulo2.html">Capítulo 2 - Manipulação de redes espaciais</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Capítulo 3 - Métricas e indicadores de redes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="capitulo2.html">2. INTRODUÇÃO AO USO DO OSMnx PARA ANÁLISE DE REDES ESPACIAIS</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">3. MÉTRICAS E INDICADORES DE REDES</a></li>
 <li class="toctree-l1"><a class="reference internal" href="capitulo4.html">Capítulo 4 - Roteamento e análise de tempos de viagem</a></li>
 <li class="toctree-l1"><a class="reference internal" href="capitulo5.html">Capítulo 5 - Mapeamento de isócronas para análise de acessibilidade espacial</a></li>
 
@@ -353,7 +353,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Capítulo 3 - Métricas e indicadores de redes</h1>
+    <h1>3. MÉTRICAS E INDICADORES DE REDES</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -364,14 +364,26 @@
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#obtencao-e-analise-preliminar-da-rede-viaria">3.1 Obtenção e análise preliminar da rede viária</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculo-de-indicadores-da-rede-viaria">3.2 Cálculo de indicadores da rede viária</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estatisticas-basicas">3.2.1 Estatísticas básicas</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#centralidade-de-grau-degree-centrality">3.2.2 Centralidade de grau (Degree Centrality)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#centralidade-de-proximidade">3.2.3 Centralidade de proximidade</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#centralidade-de-intermediacao">3.2.4 Centralidade de intermediação</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estatisticas-basicas-da-rede-viaria">3.2 Estatísticas Básicas da Rede Viária</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estatisticas-topologicas">3.2.1 Estatísticas Topológicas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estatisticas-geometricas">3.2.2 Estatísticas Geométricas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estatisticas-combinadas">3.2.3 Estatísticas Combinadas</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculo-de-orientacao-da-rede-viaria">3.3 Cálculo de orientação da rede viária</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indicadores-de-conectividade">3.3 Indicadores de Conectividade</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#densidade-da-rede">3.3.1 Densidade da rede</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assortatividade-de-grau">3.3.2 Assortatividade de grau</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grau-dos-nos">3.3.3 Grau dos nós</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#eficiencia-global-e-local">3.3.4 Eficiência global e local</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#centralidade">3.4 Centralidade</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#centralidade-de-grau-degree-centrality">3.4.1 Centralidade de grau (Degree Centrality)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#centralidade-de-proximidade-closeness-centrality">3.4.2 Centralidade de proximidade (Closeness Centrality)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#centralidade-de-intermediacao-betweenness-centrality">3.4.3 Centralidade de intermediação (Betweenness Centrality)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculo-da-orientacao-da-rede">3.5 Cálculo da orientação da rede</a></li>
 </ul>
             </nav>
         </div>
@@ -383,28 +395,1379 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="capitulo-3-metricas-e-indicadores-de-redes">
-<h1>Capítulo 3 - Métricas e indicadores de redes<a class="headerlink" href="#capitulo-3-metricas-e-indicadores-de-redes" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="metricas-e-indicadores-de-redes">
+<h1>3. MÉTRICAS E INDICADORES DE REDES<a class="headerlink" href="#metricas-e-indicadores-de-redes" title="Link to this heading">#</a></h1>
 <section id="obtencao-e-analise-preliminar-da-rede-viaria">
 <h2>3.1 Obtenção e análise preliminar da rede viária<a class="headerlink" href="#obtencao-e-analise-preliminar-da-rede-viaria" title="Link to this heading">#</a></h2>
+<p>Inicialmente, instalamos a OSMnx no Google Colab.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># !pip install osmnx</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Em seguida, importamos as bibliotecas necessárias para análise e visualização de redes. Além disso, configuramos o OSMnx para utilizar cache e exibir logs no console. Essas configurações facilitam o trabalho com redes urbanas.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="kn">from</span> <span class="nn">networkx</span> <span class="kn">import</span> <span class="n">ego_graph</span>
+<span class="kn">import</span> <span class="nn">osmnx</span> <span class="k">as</span> <span class="nn">ox</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.lines</span> <span class="k">as</span> <span class="nn">mlines</span>
+<span class="kn">from</span> <span class="nn">matplotlib.lines</span> <span class="kn">import</span> <span class="n">Line2D</span>
+<span class="kn">import</span> <span class="nn">folium</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">ox</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">use_cache</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">log_console</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_26445/3270492796.py:12: FutureWarning: The `utils.config` function is deprecated and will be removed in the v2.0.0 release. Instead, use the `settings` module directly to configure a global setting&#39;s value. For example, `ox.settings.log_console=True`. See the OSMnx v2 migration guide: https://github.com/gboeing/osmnx/issues/1123
+  ox.config(use_cache=True, log_console=True)
+</pre></div>
+</div>
+</div>
+</div>
+<p>A análise será realizada no bairro da Liberdade, localizado em São Paulo, Brasil. Esse local será utilizado para obter a rede viária correspondente.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bairro</span> <span class="o">=</span> <span class="s2">&quot;Liberdade, São Paulo, Brasil&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Utilizamos a função <code class="docutils literal notranslate"><span class="pre">graph_from_place</span></code> do OSMnx para capturar a rede de ruas com o tipo de rede “drive” (ruas acessíveis por veículos motorizados).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grafo_rede_viaria</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">graph_from_place</span><span class="p">(</span><span class="n">bairro</span><span class="p">,</span> <span class="n">network_type</span><span class="o">=</span><span class="s1">&#39;drive&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Plotamos a rede viária utilizando a função <code class="docutils literal notranslate"><span class="pre">plot_graph</span></code> para ter uma visualização inicial da área de estudo.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">plot_graph</span><span class="p">(</span><span class="n">grafo_rede_viaria</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/0e7747918ecfa74f2de7d6134c470d867ab7dd6caa4bbe2070867a552d388697.png" src="_images/0e7747918ecfa74f2de7d6134c470d867ab7dd6caa4bbe2070867a552d388697.png" />
+</div>
+</div>
+<p>A próxima etapa é converter os dados de atributos dos nós e arestas para DataFrames, facilitando a visualização e análise dos mesmos. A função <code class="docutils literal notranslate"><span class="pre">nodes(data=True)</span></code> é usada para extrair os atributos dos nós, que são transformados em um DataFrame.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_nos</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">grafo_rede_viaria</span><span class="o">.</span><span class="n">nodes</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="kc">True</span><span class="p">)),</span> <span class="n">orient</span><span class="o">=</span><span class="s1">&#39;index&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Atributos dos Nós:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_nos</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Atributos dos Nós:
+                  y          x  street_count          highway  ref
+587993   -23.558210 -46.638256             3              NaN  NaN
+25929414 -23.559053 -46.638597             3              NaN  NaN
+25947658 -23.568648 -46.639977             4  traffic_signals  NaN
+60609803 -23.573597 -46.640334             4  traffic_signals  NaN
+60641188 -23.559306 -46.637693             4  traffic_signals  NaN
+</pre></div>
+</div>
+</div>
+</div>
+<p>A função <code class="docutils literal notranslate"><span class="pre">edges(data=True)</span></code> é utilizada para extrair os atributos das arestas, que também são transformados em um DataFrame.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_arestas</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="nb">dict</span><span class="p">(((</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">),</span> <span class="n">d</span><span class="p">)</span> <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">grafo_rede_viaria</span><span class="o">.</span><span class="n">edges</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="kc">True</span><span class="p">)),</span> <span class="n">orient</span><span class="o">=</span><span class="s1">&#39;index&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Atributos das Arestas:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_arestas</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Atributos das Arestas:
+                                      osmid  oneway   lanes     highway  \
+587993   459347433    [780219126, 38738766]    True  [2, 3]  trunk_link   
+25929414 587993                   524487872    True       5       trunk   
+25947658 2627719093               257174614    True       2    tertiary   
+         2627737591  [942915234, 944346220]    True  [2, 3]     primary   
+60641188 2070954431                 8579133    True       2    tertiary   
+
+                    maxspeed reversed   length  \
+587993   459347433        40    False  152.679   
+25929414 587993           60    False   99.942   
+25947658 2627719093      NaN    False   10.448   
+         2627737591       50    False  296.802   
+60641188 2070954431      NaN    False   11.140   
+
+                                                              geometry  \
+587993   459347433   LINESTRING (-46.6382561 -23.55821, -46.6381514...   
+25929414 587993      LINESTRING (-46.6385968 -23.5590528, -46.63857...   
+25947658 2627719093                                                NaN   
+         2627737591  LINESTRING (-46.6399769 -23.5686478, -46.63996...   
+60641188 2070954431                                                NaN   
+
+                                                name bridge access junction  \
+587993   459347433                               NaN    NaN    NaN      NaN   
+25929414 587993         Avenida Vinte e Três de Maio    NaN    NaN      NaN   
+25947658 2627719093  Viaduto Beneficência Portuguesa    NaN    NaN      NaN   
+         2627737591                    Rua Vergueiro    NaN    NaN      NaN   
+60641188 2070954431      Rua Condessa de São Joaquim    NaN    NaN      NaN   
+
+                    width  
+587993   459347433    NaN  
+25929414 587993       NaN  
+25947658 2627719093   NaN  
+         2627737591   NaN  
+60641188 2070954431   NaN  
+</pre></div>
+</div>
+</div>
+</div>
 </section>
-<section id="calculo-de-indicadores-da-rede-viaria">
-<h2>3.2 Cálculo de indicadores da rede viária<a class="headerlink" href="#calculo-de-indicadores-da-rede-viaria" title="Link to this heading">#</a></h2>
-<section id="estatisticas-basicas">
-<h3>3.2.1 Estatísticas básicas<a class="headerlink" href="#estatisticas-basicas" title="Link to this heading">#</a></h3>
+<section id="estatisticas-basicas-da-rede-viaria">
+<h2>3.2 Estatísticas Básicas da Rede Viária<a class="headerlink" href="#estatisticas-basicas-da-rede-viaria" title="Link to this heading">#</a></h2>
+<p>As estatísticas básicas de uma rede espacial são métricas que descrevem as características estruturais elementares de uma rede, como sua conectividade, densidade e organização. Redes espaciais podem representar diversos sistemas, incluindo redes de transporte (estradas, ferrovias), redes de distribuição de recursos (água, eletricidade), redes de comunicação ou redes ecológicas. Essas estatísticas fornecem uma visão quantitativa inicial que ajuda a entender como os elementos da rede, como nós e arestas, estão organizados e interconectados no espaço.</p>
+<p>Essas métricas são fundamentais para analisar a acessibilidade e a eficiência da rede, indicando, por exemplo, a distribuição dos nós (pontos de conexão), a densidade de interconexões entre eles e a complexidade dos caminhos que ligam diferentes elementos. Em redes de transporte, isso pode significar avaliar a facilidade de deslocamento entre pontos; em redes de distribuição, pode ajudar a entender a redundância ou vulnerabilidade do sistema; em redes ecológicas, pode revelar como diferentes habitats estão conectados, facilitando a movimentação de espécies.</p>
+<p>As estatísticas básicas de uma rede espacial servem como ponto de partida para analisar sua funcionalidade e desempenho. Com elas, pesquisadores, planejadores e engenheiros podem identificar áreas de melhoria, comparar redes de diferentes regiões ou setores e tomar decisões informadas para otimizar a estrutura e a eficiência do sistema analisado. Em resumo, essas estatísticas oferecem uma visão geral que permite uma compreensão inicial e objetiva da organização e conectividade da rede, abrindo caminho para estudos mais aprofundados sobre sua funcionalidade e impacto.</p>
+<p>Essas estatísticas podem ser agrupadas em três categorias principais: <strong>Estatísticas Topológicas</strong>, <strong>Estatísticas Geométricas</strong> e <strong>Estatísticas Combinadas</strong>. Essa classificação facilita a organização e interpretação das métricas, proporcionando uma visão mais clara dos diferentes aspectos da rede. Na presente seção, iremos calcular as estatísticas básicas para a rede viária do bairro da Liberdade, explorando como cada uma dessas categorias pode revelar características específicas da estrutura e funcionalidade da rede.</p>
+<p>Nesta seção, iremos calcular as estatísticas básicas para a rede viária do bairro da Liberdade, em São Paulo.</p>
+<p>Inicialmente, vamos calcular a área de abrangência da rede, pois ela é um parâmetro fundamental para o cálculo de estatísticas de densidade, como densidade de nós, interseções e ruas por quilômetro quadrado. Para isso, transformaremos o polígono referente ao bairro em um GeoDataFrame e calcularemos sua área em metros quadrados.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Obter a área da rede viária de um local</span>
+<span class="n">gdf</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">geocode_to_gdf</span><span class="p">(</span><span class="n">bairro</span><span class="p">)</span>
+
+<span class="c1"># Área em metros quadrados</span>
+<span class="n">area</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">projection</span><span class="o">.</span><span class="n">project_gdf</span><span class="p">(</span><span class="n">gdf</span><span class="p">)</span><span class="o">.</span><span class="n">area</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Explicação do código:</strong></p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ox.geocode_to_gdf(bairro)</span></code>: converte o nome do bairro em um polígono espacial representado por um GeoDataFrame.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ox.projection.project_gdf(gdf).area</span></code>: projeta o polígono para um sistema de coordenadas métrico (UTM) e calcula a área em metros quadrados.</p></li>
+</ol>
+<p>Em seguida, utilizaremos a função <code class="docutils literal notranslate"><span class="pre">ox.basic_stats</span></code> da biblioteca OSMnx para calcular as estatísticas básicas da rede viária com base no grafo da rede e na área calculada anteriormente.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calcular as estatísticas básicas da rede</span>
+<span class="n">stats</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">basic_stats</span><span class="p">(</span><span class="n">grafo_rede_viaria</span><span class="p">,</span> <span class="n">area</span><span class="o">=</span><span class="n">area</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">stats</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>n                                                                             399
+m                                                                             837
+k_avg                                                                    4.195489
+edge_length_total                                                       82167.411
+edge_length_avg                                                          98.16895
+streets_per_node_avg                                                     2.987469
+streets_per_node_counts            {0: 0, 1: 54, 2: 1, 3: 247, 4: 91, 5: 5, 6: 1}
+streets_per_node_proportions    {0: 0.0, 1: 0.13533834586466165, 2: 0.00250626...
+intersection_count                                                            345
+street_length_total                                                      56254.13
+street_segment_count                                                          564
+street_length_avg                                                       99.741365
+circuity_avg                                                             1.024899
+self_loop_proportion                                                     0.001773
+node_density_km                                    0    109.737384
+dtype: float64
+intersection_density_km                             0    94.885708
+dtype: float64
+edge_density_km                                  0    22598.588392
+dtype: float64
+street_density_km                                0    15471.631803
+dtype: float64
+dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Explicação do código:</strong></p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ox.basic_stats(grafo_rede_viaria,</span> <span class="pre">area=area)</span></code>: calcula as estatísticas básicas, considerando a área fornecida.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pd.Series(stats)</span></code>: organiza as estatísticas em uma série do Pandas para facilitar a visualização.</p></li>
+</ol>
+<p>As estatísticas calculadas incluem métricas topológicas, geométricas e combinadas, como número de nós e arestas, comprimento total de ruas e densidades.</p>
+<p>Na Serie resultante, algumas informações vêm organizadas em dicionários, especialmente nas chaves streets_per_node_counts e streets_per_node_proportions. Essas chaves armazenam as contagens e proporções das interseções, divididas pelo número de vias conectadas a cada nó. Em outras palavras, elas indicam quantas interseções possuem uma, duas, três ou mais ruas conectadas, e qual a proporção que cada tipo representa na rede.</p>
+<p>Para facilitar a leitura e a interpretação desses dados, é recomendável desempacotar essas informações, criando novas chaves para cada contagem e proporção individualmente. Por exemplo, podemos criar uma nova coluna chamada 1way_int_count para representar a quantidade de interseções conectadas a apenas uma rua, e outra chamada 3way_int_prop para indicar a proporção de interseções com três ruas conectadas.</p>
+<p>Esse processo de desempacotamento permite que esses dados apareçam como colunas distintas em um DataFrame, o que facilita tanto a visualização quanto a análise. Com essa estrutura, torna-se mais intuitivo entender a conectividade da rede, destacando a frequência de diferentes tipos de interseções. Assim, é possível identificar quais tipos de interseções são mais comuns, onde há maior conectividade e quais áreas possuem mais ruas sem saída ou interseções com múltiplas conexões.</p>
+<p>Vamos realizar a descompactação das estatísticas básicas com relação à contagem e proporção das interseções</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Descompactar dicionários em chaves:valores individuais</span>
+<span class="k">for</span> <span class="n">tipo</span><span class="p">,</span> <span class="n">contagem</span> <span class="ow">in</span> <span class="n">stats</span><span class="p">[</span><span class="s2">&quot;streets_per_node_counts&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">stats</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;intersecao_</span><span class="si">{</span><span class="n">tipo</span><span class="si">}</span><span class="s2">_vias_contagem&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">contagem</span>
+<span class="k">for</span> <span class="n">tipo</span><span class="p">,</span> <span class="n">proporcao</span> <span class="ow">in</span> <span class="n">stats</span><span class="p">[</span><span class="s2">&quot;streets_per_node_proportions&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">stats</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;intersecao_</span><span class="si">{</span><span class="n">tipo</span><span class="si">}</span><span class="s2">_vias_proporcao&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">proporcao</span>
+
+<span class="c1"># Remover os elementos desnecessários do dicionário</span>
+<span class="k">del</span> <span class="n">stats</span><span class="p">[</span><span class="s2">&quot;streets_per_node_counts&quot;</span><span class="p">]</span>
+<span class="k">del</span> <span class="n">stats</span><span class="p">[</span><span class="s2">&quot;streets_per_node_proportions&quot;</span><span class="p">]</span>
+
+<span class="c1"># Carregar os dados como um DataFrame Pandas</span>
+<span class="n">estatisticas_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">stats</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;valor&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">estatisticas_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>valor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>n</th>
+      <td>399</td>
+    </tr>
+    <tr>
+      <th>m</th>
+      <td>837</td>
+    </tr>
+    <tr>
+      <th>k_avg</th>
+      <td>4.195489</td>
+    </tr>
+    <tr>
+      <th>edge_length_total</th>
+      <td>82167.411</td>
+    </tr>
+    <tr>
+      <th>edge_length_avg</th>
+      <td>98.16895</td>
+    </tr>
+    <tr>
+      <th>streets_per_node_avg</th>
+      <td>2.987469</td>
+    </tr>
+    <tr>
+      <th>intersection_count</th>
+      <td>345</td>
+    </tr>
+    <tr>
+      <th>street_length_total</th>
+      <td>56254.13</td>
+    </tr>
+    <tr>
+      <th>street_segment_count</th>
+      <td>564</td>
+    </tr>
+    <tr>
+      <th>street_length_avg</th>
+      <td>99.741365</td>
+    </tr>
+    <tr>
+      <th>circuity_avg</th>
+      <td>1.024899</td>
+    </tr>
+    <tr>
+      <th>self_loop_proportion</th>
+      <td>0.001773</td>
+    </tr>
+    <tr>
+      <th>node_density_km</th>
+      <td>0    109.737384
+dtype: float64</td>
+    </tr>
+    <tr>
+      <th>intersection_density_km</th>
+      <td>0    94.885708
+dtype: float64</td>
+    </tr>
+    <tr>
+      <th>edge_density_km</th>
+      <td>0    22598.588392
+dtype: float64</td>
+    </tr>
+    <tr>
+      <th>street_density_km</th>
+      <td>0    15471.631803
+dtype: float64</td>
+    </tr>
+    <tr>
+      <th>intersecao_0_vias_contagem</th>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>intersecao_1_vias_contagem</th>
+      <td>54</td>
+    </tr>
+    <tr>
+      <th>intersecao_2_vias_contagem</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>intersecao_3_vias_contagem</th>
+      <td>247</td>
+    </tr>
+    <tr>
+      <th>intersecao_4_vias_contagem</th>
+      <td>91</td>
+    </tr>
+    <tr>
+      <th>intersecao_5_vias_contagem</th>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>intersecao_6_vias_contagem</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>intersecao_0_vias_proporcao</th>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>intersecao_1_vias_proporcao</th>
+      <td>0.135338</td>
+    </tr>
+    <tr>
+      <th>intersecao_2_vias_proporcao</th>
+      <td>0.002506</td>
+    </tr>
+    <tr>
+      <th>intersecao_3_vias_proporcao</th>
+      <td>0.619048</td>
+    </tr>
+    <tr>
+      <th>intersecao_4_vias_proporcao</th>
+      <td>0.22807</td>
+    </tr>
+    <tr>
+      <th>intersecao_5_vias_proporcao</th>
+      <td>0.012531</td>
+    </tr>
+    <tr>
+      <th>intersecao_6_vias_proporcao</th>
+      <td>0.002506</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>No código acima:
+As contagens e proporções de interseções são descompactadas em novas chaves no dicionário <code class="docutils literal notranslate"><span class="pre">stats</span></code>.</p>
+<p>As informações originais são removidas para evitar redundância.</p>
+<p>Os dados reorganizados são carregados em um DataFrame Pandas para facilitar a análise.</p>
+<p>Por fim, interpretamos os resultados obtidos, organizando-os em três categorias principais:</p>
+<section id="estatisticas-topologicas">
+<h3>3.2.1 Estatísticas Topológicas<a class="headerlink" href="#estatisticas-topologicas" title="Link to this heading">#</a></h3>
+<p>Essas métricas descrevem a conectividade estrutural da rede, auxiliando no entendimento da densidade, complexidade e conectividade da rede.</p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">n</span></code></strong>: Número total de nós (interseções ou extremidades de ruas).</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">m</span></code></strong>: Número total de arestas (segmentos de ruas).</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">k_avg</span></code></strong>: Grau médio dos nós, indicando o número médio de ruas conectadas a cada interseção.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">streets_per_node_avg</span></code></strong>: Número médio de ruas por nó.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">intersection_count</span></code></strong>: Contagem de interseções distintas.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">self_loop_proportion</span></code></strong>: Proporção de arestas que conectam um nó a ele mesmo.</p></li>
+</ul>
+<p>A partir dessas estatísticas topológicas, podemos tirar algumas conclusões sobre a estrutura e a conectividade da rede viária:</p>
+<p>Com 399 nós e 837 arestas, a rede possui um número significativo de interseções e segmentos de rua, sugerindo uma estrutura relativamente densa e conectada. Em contextos urbanos, uma rede com mais nós e arestas indica uma infraestrutura viária que permite vários trajetos e alternativas de deslocamento. O grau médio dos nós de 4,2 reforça essa conectividade, mostrando que, em média, cada nó (interseção) está conectado a mais de quatro outros nós. Esse valor indica uma rede bem conectada, na qual a maioria das interseções oferece múltiplas opções de rota.</p>
+<p>O número médio de ruas por nó (2,987) indica que a maioria das interseções conecta cerca de três ruas, o que é comum em redes de áreas urbanas, com interseções em formato de “T” ou cruzamentos em três vias. Esse valor sugere uma estrutura urbana que combina acessibilidade e continuidade nas rotas, permitindo uma distribuição moderada das conexões em cada interseção.</p>
+<p>A rede possui 345 interseções distintas (nós com pelo menos duas ruas conectadas), o que significa que cerca de 86% dos nós são interseções, enquanto o restante são extremidades (ou nós com apenas uma conexão). Isso indica que a rede não é excessivamente fragmentada em ruas sem saída e que a maior parte dos pontos da rede está integrada ao fluxo viário.</p>
+<p>A proporção de self-loops é muito baixa (0,18%), indicando que apenas uma ínfima fração das ruas conecta um nó a ele mesmo (como vias circulares ou de retorno). Uma baixa presença de self-loops é típica em redes viárias, onde o objetivo é a conectividade entre pontos distintos, sem repetição no ponto de origem.</p>
+<p>Antes de seguir para as estatísticas geométricas, vamos localizar os self-loops em nossa rede.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Identificar as arestas que são self-loops</span>
+<span class="n">self_loops</span> <span class="o">=</span> <span class="p">[(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">grafo_rede_viaria</span><span class="o">.</span><span class="n">edges</span><span class="p">(</span><span class="n">keys</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">if</span> <span class="n">u</span> <span class="o">==</span> <span class="n">v</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Self-loops encontrados:&quot;</span><span class="p">,</span> <span class="n">self_loops</span><span class="p">)</span>
+
+<span class="c1"># Configurar as cores das arestas com base na presença de self-loops</span>
+<span class="n">ec</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">grafo_rede_viaria</span><span class="o">.</span><span class="n">edges</span><span class="p">(</span><span class="n">keys</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="ow">in</span> <span class="n">self_loops</span><span class="p">:</span>
+        <span class="n">ec</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;red&quot;</span><span class="p">)</span>  <span class="c1"># Colorir os self-loops em vermelho</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ec</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;lightgray&quot;</span><span class="p">)</span>  <span class="c1"># Outras arestas em cinza claro</span>
+
+<span class="c1"># Plotar o grafo destacando os self-loops</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">plot_graph</span><span class="p">(</span>
+    <span class="n">grafo_rede_viaria</span><span class="p">,</span>
+    <span class="n">edge_color</span><span class="o">=</span><span class="n">ec</span><span class="p">,</span>
+    <span class="n">edge_linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">node_size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">node_color</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">,</span>
+    <span class="n">bgcolor</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span>
+    <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Self-loops encontrados: [(4293878928, 4293878928), (4293878928, 4293878928)]
+</pre></div>
+</div>
+<img alt="_images/f4417fe46ccc863d3f23b8ce200740a45073325ae230725a9a59511d93d336be.png" src="_images/f4417fe46ccc863d3f23b8ce200740a45073325ae230725a9a59511d93d336be.png" />
+</div>
+</div>
+<p>Temos apenas um self-loop (em vermelho na imagem acima). Vamos criar uma plotagem com um maior nível de zoom.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Selecionar o nó com self-loop</span>
+<span class="n">self_loop_node</span> <span class="o">=</span> <span class="n">self_loops</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> 
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Nó com self-loop: </span><span class="si">{</span><span class="n">self_loop_node</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Extrair sub-rede em torno do nó com self-loop (por exemplo, dentro de 800 metros)</span>
+<span class="n">subgraph</span> <span class="o">=</span> <span class="n">ego_graph</span><span class="p">(</span><span class="n">grafo_rede_viaria</span><span class="p">,</span> <span class="n">self_loop_node</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span> <span class="n">distance</span><span class="o">=</span><span class="s2">&quot;length&quot;</span><span class="p">)</span>
+
+<span class="c1"># Configurar as cores das arestas na sub-rede</span>
+<span class="n">ec</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;red&quot;</span> <span class="k">if</span> <span class="n">u</span> <span class="o">==</span> <span class="n">v</span> <span class="k">else</span> <span class="s2">&quot;lightgray&quot;</span>
+    <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">subgraph</span><span class="o">.</span><span class="n">edges</span><span class="p">(</span><span class="n">keys</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="p">]</span>
+
+<span class="c1"># Plotar a sub-rede destacando o self-loop</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">plot_graph</span><span class="p">(</span>
+    <span class="n">subgraph</span><span class="p">,</span>
+    <span class="n">edge_color</span><span class="o">=</span><span class="n">ec</span><span class="p">,</span>
+    <span class="n">edge_linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">node_size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">node_color</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">,</span>
+    <span class="n">bgcolor</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span>
+    <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Nó com self-loop: 4293878928
+</pre></div>
+</div>
+<img alt="_images/2ad6b7f73db145ba555a7cd6fdb681312dfe56e6401fe78ee35262ee6e70cb95.png" src="_images/2ad6b7f73db145ba555a7cd6fdb681312dfe56e6401fe78ee35262ee6e70cb95.png" />
+</div>
+</div>
 </section>
+<section id="estatisticas-geometricas">
+<h3>3.2.2 Estatísticas Geométricas<a class="headerlink" href="#estatisticas-geometricas" title="Link to this heading">#</a></h3>
+<p>Essas métricas analisam os comprimentos de ruas e segmentos, fornecendo informações sobre a fragmentação e continuidade da rede viária.</p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">edge_length_total</span></code></strong>: Comprimento total de todas as arestas em metros.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">edge_length_avg</span></code></strong>: Comprimento médio das arestas em metros.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">street_length_total</span></code></strong>: Comprimento total de todas as ruas.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">street_segment_count</span></code></strong>: Número total de segmentos de rua.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">street_length_avg</span></code></strong>: Comprimento médio dos segmentos de rua.</p></li>
+</ul>
+<p>A partir dessas estatísticas geométricas, podemos tirar algumas conclusões sobre a estrutura e a conectividade da rede viária:</p>
+<p>O comprimento total das arestas é de aproximadamente 82,2 km, enquanto o comprimento total das ruas é de 56,3 km. A diferença entre esses valores indica que, embora o comprimento total de todos os segmentos de rua (arestas) seja significativo, a rede em si (considerando ruas exclusivas, sem duplicações de sentido) possui uma extensão um pouco menor. Esse valor reflete uma infraestrutura urbana extensa e conectada, capaz de suportar um tráfego considerável.</p>
+<p>O comprimento médio das arestas é de 98,17 metros, enquanto o comprimento médio dos segmentos de rua é ligeiramente maior, com 99,7 metros. Esses valores médios indicam que a maioria dos blocos ou quarteirões na rede é relativamente curta. Essa configuração permite múltiplas interseções e oportunidades de mudança de rota.</p>
+<p>O número total de segmentos de rua é 564, o que sugere que a rede é fragmentada em pequenas seções, permitindo a formação de múltiplos blocos e interseções em uma área relativamente compacta. Uma rede com muitos segmentos curtos geralmente promove a acessibilidade e a mobilidade, pois oferece mais opções de rota e facilita o tráfego.</p>
+</section>
+<section id="estatisticas-combinadas">
+<h3>3.2.3 Estatísticas Combinadas<a class="headerlink" href="#estatisticas-combinadas" title="Link to this heading">#</a></h3>
+<p>As estatísticas combinadas (topológicas e geométricas) fornecem uma visão geral sobre a estrutura e a conectividade da rede viária, combinando aspectos relacionados à organização espacial com medidas estruturais mais abstratas.</p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">circuity_avg</span></code></strong>: Circuidade média da rede, que avalia a relação entre o comprimento real e a distância em linha reta das ruas.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">node_density_km</span></code></strong>: Densidade de nós por quilômetro quadrado.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">intersection_density_km</span></code></strong>: Densidade de interseções por quilômetro quadrado.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">edge_density_km</span></code></strong>: Densidade de arestas por quilômetro quadrado.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">street_density_km</span></code></strong>: Densidade de ruas por quilômetro quadrado.</p></li>
+</ul>
+<p>A circuidade média da rede é de 1.025, indicando que, em média, a distância percorrida nas ruas é apenas 2,5% maior que a distância em linha reta entre os pontos conectados. Isso sugere que a rede viária é bastante eficiente em termos de alinhamento, com ruas relativamente diretas e poucas curvas excessivas ou desvios significativos.</p>
+<p>A densidade de nós é de aproximadamente 110 nós por km², representando a frequência de pontos de conexão (interseções ou extremidades) na área estudada. Isso reflete uma rede moderadamente densa, característica de áreas urbanas bem desenvolvidas, onde interseções são frequentes.</p>
+<p>A densidade de interseções* é de cerca de 95 por km², indicando que a maioria dos nós na rede são interseções e não apenas extremidades de ruas. Essa proporção alta de interseções reforça a ideia de uma rede altamente conectada, permitindo múltiplos caminhos alternativos e maior flexibilidade de mobilidade.</p>
+<p>A densidade de arestas (ou densidade de ruas) é de 22,6 km de ruas por km². Isso representa a quantidade total de segmentos de rua disponíveis na área estudada, considerando todas as direções e conexões. Esse valor reflete uma rede densa em termos de infraestrutura viária.</p>
+<p>A densidade de ruas exclusivas é de 15,5 km por km². Essa métrica considera cada rua apenas uma vez, independentemente de seu sentido, e mostra o comprimento total de ruas distintas na área. O valor é menor que a densidade de arestas, como esperado, pois ruas bidirecionais e múltiplas conexões aumentam o número total de segmentos, mas não o número de ruas únicas.</p>
+<p>As métricas de conectividade por tipo de interseção oferecem uma análise detalhada sobre a complexidade e a densidade da rede viária, evidenciando padrões estruturais e características específicas do sistema de ruas.</p>
+<p>A análise revela que a maioria das interseções (61,9%) possuem três ruas conectadas, totalizando 247 interseções desse tipo. Esse padrão é comum em redes urbanas, especialmente em áreas com ruas formando ângulos em “T”, típicos de bairros residenciais. Essa configuração reflete um layout estruturado em blocos ou quarteirões.</p>
+<p>A segunda maior proporção (22,8%) corresponde a interseções de quatro vias, abrangendo 91 nós. Essas interseções são características de layouts de grade, onde ruas se cruzam perpendicularmente. E</p>
+<p>Além disso, cerca de 13,5% dos nós (54 no total) têm apenas uma conexão, indicando que são extremidades ou pontos de término de ruas. Esses nós estão frequentemente localizados em ruas sem saída ou em regiões menos conectadas da rede, como áreas periféricas ou limites de bairros, onde a continuidade do fluxo é limitada.</p>
+<p>A rede também apresenta interseções mais complexas, como as de cinco vias (5-way) e seis vias (6-way), embora essas sejam raras, com apenas cinco e uma interseção, respectivamente. Esses nós geralmente são encontrados em pontos estratégicos da rede, como grandes cruzamentos ou áreas de alta densidade de tráfego.</p>
+</section>
+</section>
+<section id="indicadores-de-conectividade">
+<h2>3.3 Indicadores de Conectividade<a class="headerlink" href="#indicadores-de-conectividade" title="Link to this heading">#</a></h2>
+<p>Embora as estatísticas básicas ofereçam um panorama geral e descritivo da rede, abrangendo informações estruturais simples, como o número de nós, a densidade de ruas, o comprimento total das arestas e a distribuição de interseções, elas são mais adequadas para caracterizar a estrutura geral da rede. Essas métricas são permitem entender a organização básica, mas têm limitações quando se trata de explorar aspectos específicos da conectividade ou o comportamento funcional da rede.</p>
+<p>Por outro lado, os indicadores de conectividade vão além da estrutura, focando em análises mais específicas e funcionais. Eles são métricas que medem o nível de interligação entre os elementos de uma rede, fornecendo uma visão quantitativa sobre sua estrutura, eficiência e resiliência. Eles ajudam a identificar padrões de conectividade entre os nós (pontos de interseção) e as arestas (conexões), permitindo entender o funcionamento da rede e sua resposta a diferentes demandas ou falhas.</p>
+<p>Em redes espaciais, como redes viárias, de transporte ou de distribuição, esses indicadores são indispensáveis para identificar padrões estruturais, analisar a acessibilidade entre diferentes partes da rede e avaliar a eficiência de deslocamento. Além disso, eles ajudam a localizar pontos críticos, áreas de baixa conectividade e hubs, fornecendo informações que podem auxiliar no planejamento e na gestão da rede.</p>
+<p>Nesta análise, calcularemos indicadores como a densidade da rede, o grau dos nós, a assortatividade de grau e as eficiências global e local médias. Esses parâmetros proporcionarão uma visão detalhada e abrangente da conectividade da rede, permitindo identificar padrões, avaliar sua eficiência e destacar características importantes de sua organização estrutural.</p>
+<section id="densidade-da-rede">
+<h3>3.3.1 Densidade da rede<a class="headerlink" href="#densidade-da-rede" title="Link to this heading">#</a></h3>
+<p>A densidade da rede é uma métrica específica que mede o nível de conectividade relativa da estrutura da rede, enquanto as densidades espaciais (<code class="docutils literal notranslate"><span class="pre">node_density_km</span></code>, etc.) refletem a concentração de componentes viários por área. Portanto, a <strong>densidade da rede</strong> calculada com <code class="docutils literal notranslate"><span class="pre">nx.density</span></code> é uma métrica complementar e oferece uma perspectiva diferente sobre a conectividade geral da rede.</p>
+<p>Na biblioteca OSMnx, a função <code class="docutils literal notranslate"><span class="pre">nx.density</span></code> calcula a densidade da rede como a razão entre o número de arestas existentes e o número máximo de arestas possíveis em uma rede totalmente conectada. Em termos práticos:</p>
+<ul class="simple">
+<li><p>A densidade varia entre 0 e 1:</p>
+<ul>
+<li><p><strong>Densidade próxima de 1</strong>: indica que a rede está altamente conectada, com a maioria dos nós ligados diretamente uns aos outros (mais comum em redes de pequeno porte).</p></li>
+<li><p><strong>Densidade baixa</strong>: sugere uma rede esparsa, onde poucos nós estão conectados entre si (típico de redes viárias).</p></li>
+</ul>
+</li>
+</ul>
+<p>Vamos calcular a densidade da rede viária do bairro da Liberdade.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calcular a densidade da rede:</span>
+<span class="n">densidade</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">density</span><span class="p">(</span><span class="n">grafo_rede_viaria</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Densidade da rede:&quot;</span><span class="p">,</span> <span class="n">densidade</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Densidade da rede: 0.005270714474628783
+</pre></div>
+</div>
+</div>
+</div>
+<p>A densidade de 0,0053 indica que a rede possui uma conectividade relativamente baixa em relação ao número máximo de conexões possíveis. Em termos práticos, isso é comum em redes viárias, pois as ruas normalmente não conectam todos os nós entre si. Essa baixa densidade confirma a ideia de que a rede viária é composta de ruas específicas e interseções controladas, o que permite a circulação de forma estruturada, em vez de uma rede totalmente conectada.</p>
+</section>
+<section id="assortatividade-de-grau">
+<h3>3.3.2 Assortatividade de grau<a class="headerlink" href="#assortatividade-de-grau" title="Link to this heading">#</a></h3>
+<p>A assortatividade de grau em uma rede mede a tendência de nós com graus semelhantes estarem conectados entre si, funcionando como uma medida de correlação entre os graus dos nós conectados por uma aresta. Em redes viárias, essa métrica indica se interseções com muitas conexões (alto grau) tendem a se conectar a outras interseções igualmente bem conectadas ou, ao contrário, a interseções com poucas conexões.</p>
+<ul class="simple">
+<li><p><strong>Assortatividade positiva</strong>: Indica que nós com alto grau tendem a se conectar com outros nós de alto grau. Esse padrão é comum em redes sociais.</p></li>
+<li><p><strong>Assortatividade negativa</strong>: Indica que nós de alto grau tendem a se conectar a nós de baixo grau, típico de redes hierárquicas como redes viárias.</p></li>
+<li><p><strong>Assortatividade próxima de zero</strong>: Não há um padrão claro de conexão entre graus altos e baixos.</p></li>
+</ul>
+<p>Vamos agora calcular a assortatividade de grau.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calcular a assortatividade de grau</span>
+<span class="n">assortatividade_grau</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">degree_assortativity_coefficient</span><span class="p">(</span><span class="n">grafo_rede_viaria</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Assortatividade de Grau:&quot;</span><span class="p">,</span> <span class="n">assortatividade_grau</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Assortatividade de Grau: 0.26610364815200793
+</pre></div>
+</div>
+</div>
+</div>
+<p>A assortatividade de grau de aproximadamente 0,27 indica uma assortatividade positiva moderada na rede viária. Isso sugere que interseções com muitas conexões tendem a se conectar a outras interseções também bem conectadas.</p>
+</section>
+<section id="grau-dos-nos">
+<h3>3.3.3 Grau dos nós<a class="headerlink" href="#grau-dos-nos" title="Link to this heading">#</a></h3>
+<p>O grau de um nó em uma rede representa o número de conexões (ou arestas) que ele possui com outros nós. Em redes viárias, isso corresponde ao número de ruas que convergem em uma determinada interseção. Essa métrica ajuda a identificar interseções estratégicas, com altos graus representando locais de maior fluxo e conectividade.</p>
+<p>Vamos visualizar os graus dos nós com uma coloração específica.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Definir as cores para cada grau de 1 a 8</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;#4B0082&#39;</span><span class="p">,</span> <span class="s1">&#39;#5D3FD3&#39;</span><span class="p">,</span> <span class="s1">&#39;#4682B4&#39;</span><span class="p">,</span> <span class="s1">&#39;#40E0D0&#39;</span><span class="p">,</span> <span class="s1">&#39;#32CD32&#39;</span><span class="p">,</span> <span class="s1">&#39;#ADFF2F&#39;</span><span class="p">,</span> <span class="s1">&#39;#FFFF00&#39;</span><span class="p">,</span> <span class="s1">&#39;#FFD700&#39;</span><span class="p">]</span>
+
+<span class="c1"># Obter a posição dos nós do grafo para usar na plotagem</span>
+<span class="n">node_positions</span> <span class="o">=</span> <span class="p">{</span><span class="n">node</span><span class="p">:</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">])</span> <span class="k">for</span> <span class="n">node</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">grafo_rede_viaria</span><span class="o">.</span><span class="n">nodes</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="kc">True</span><span class="p">)}</span>
+
+<span class="c1"># Obter o grau de cada nó</span>
+<span class="n">node_degrees</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">grafo_rede_viaria</span><span class="o">.</span><span class="n">degree</span><span class="p">())</span>
+<span class="n">unique_degrees</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">node_degrees</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>  <span class="c1"># Graus únicos presentes no grafo</span>
+
+<span class="c1"># Mapear os graus para as cores definidas manualmente</span>
+<span class="n">node_colors</span> <span class="o">=</span> <span class="p">[</span><span class="n">colors</span><span class="p">[</span><span class="nb">min</span><span class="p">(</span><span class="n">degree</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">)]</span> <span class="k">for</span> <span class="n">degree</span> <span class="ow">in</span> <span class="n">node_degrees</span><span class="o">.</span><span class="n">values</span><span class="p">()]</span>  <span class="c1"># Limitar ao índice 7 para graus &gt; 8</span>
+
+<span class="c1"># Configurar a figura e o fundo preto</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>  <span class="c1"># Define o fundo da figura como preto</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>  <span class="c1"># Define o fundo do gráfico como preto</span>
+
+<span class="c1"># Plotar a rede viária com coloração de grau dos nós</span>
+<span class="n">nc</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_nodes</span><span class="p">(</span>
+    <span class="n">grafo_rede_viaria</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="n">node_positions</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="n">node_colors</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span>
+<span class="p">)</span>
+<span class="n">ec</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_edges</span><span class="p">(</span><span class="n">grafo_rede_viaria</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="n">node_positions</span><span class="p">,</span> <span class="n">edge_color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">arrows</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Criar a legenda personalizada com círculos menores para cada grau presente na rede</span>
+<span class="n">legend_elements</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">mlines</span><span class="o">.</span><span class="n">Line2D</span><span class="p">([],</span> <span class="p">[],</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Grau </span><span class="si">{</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>  <span class="c1"># Criar a legenda para os graus de 1 a 8</span>
+<span class="p">]</span>
+<span class="n">legend</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="o">=</span><span class="n">legend_elements</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.15</span><span class="p">,</span> <span class="mf">0.96</span><span class="p">),</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Grau dos Nós&quot;</span><span class="p">,</span> <span class="n">title_fontsize</span><span class="o">=</span><span class="s1">&#39;11&#39;</span><span class="p">,</span> <span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="s1">&#39;9&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">legend</span><span class="o">.</span><span class="n">get_texts</span><span class="p">(),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">)</span>  <span class="c1"># Define a cor do texto da legenda para branco</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">legend</span><span class="o">.</span><span class="n">get_title</span><span class="p">(),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">)</span>  <span class="c1"># Define a cor do título da legenda para branco</span>
+
+<span class="c1"># Adicionar título e exibir o gráfico</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Rede Viária com Visualização do Grau dos Nós (Legenda por Grau Específico)&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/4d4149a31cd68716e3947987032ff4f5d076f65924620fae8e07a2f8e87b1847.png" src="_images/4d4149a31cd68716e3947987032ff4f5d076f65924620fae8e07a2f8e87b1847.png" />
+</div>
+</div>
+</section>
+<section id="eficiencia-global-e-local">
+<h3>3.3.4 Eficiência global e local<a class="headerlink" href="#eficiencia-global-e-local" title="Link to this heading">#</a></h3>
+<p>A eficiência global mede como a rede conecta pares de nós de forma eficiente, enquanto a eficiência local avalia a conectividade entre os vizinhos imediatos de cada nó.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Converter o grafo para não-direcionado</span>
+<span class="n">grafo_rede_viaria_nao_direcionado</span> <span class="o">=</span> <span class="n">grafo_rede_viaria</span><span class="o">.</span><span class="n">to_undirected</span><span class="p">()</span>
+
+<span class="c1"># Calcular a eficiência global</span>
+<span class="n">eficiencia_global</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">global_efficiency</span><span class="p">(</span><span class="n">grafo_rede_viaria_nao_direcionado</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Eficiência Global:&quot;</span><span class="p">,</span> <span class="n">eficiencia_global</span><span class="p">)</span>
+
+<span class="c1"># Calcular a eficiência local média</span>
+<span class="n">eficiencia_local</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">local_efficiency</span><span class="p">(</span><span class="n">grafo_rede_viaria_nao_direcionado</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Eficiência Local Média:&quot;</span><span class="p">,</span> <span class="n">eficiencia_local</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Eficiência Global: 0.11070327841838423
+Eficiência Local Média: 0.05547201336675017
+</pre></div>
+</div>
+</div>
+</div>
+<p>No caso do bairro da Liberdade, uma eficiência global de 0,11 sugere que a rede viária não é altamente eficiente para conectar pares de nós de forma direta ou com trajetos curtos. A eficiência local média de 0,055 indica que os vizinhos imediatos não estão bem interconectados, refletindo uma estrutura hierárquica típica de redes viárias urbanas.</p>
+</section>
+</section>
+<section id="centralidade">
+<h2>3.4 Centralidade<a class="headerlink" href="#centralidade" title="Link to this heading">#</a></h2>
+<p>Centralidade é um conceito na teoria de redes que busca medir a importância ou influência dos nós em uma rede. Redes são estruturas compostas de nós (ou vértices) conectados por arestas (ou links), e podem representar uma variedade de sistemas: redes sociais (onde os nós são pessoas e as arestas representam amizades ou interações), redes de comunicação (com servidores e conexões), redes biológicas (como proteínas e suas interações), e muito mais. A centralidade fornece uma maneira de quantificar quais nós desempenham papéis de destaque dentro dessas estruturas, revelando quais elementos são mais conectados, acessíveis ou influentes. Em redes viárias, que são compostas por interseções (nós) e ruas (arestas), as medidas de centralidade ajudam a identificar quais interseções são mais conectadas, acessíveis ou críticas para o fluxo de deslocamento.</p>
+<p>As métricas de centralidade ajudam a entender a estrutura de uma rede urbana, otimizar o fluxo de tráfego, planejar rotas e identificar áreas centrais ou periféricas em uma cidade.</p>
+<p>Existem diferentes tipos de centralidade, cada uma abordando a “importância” de nós e arestas de maneira diferente. Aqui vamos estudar:</p>
+<ul class="simple">
+<li><p>Centralidade de grau;</p></li>
+<li><p>Centralidade de proximidade;</p></li>
+<li><p>Centralidade de intermediação (betweenness).</p></li>
+</ul>
 <section id="centralidade-de-grau-degree-centrality">
-<h3>3.2.2 Centralidade de grau (Degree Centrality)<a class="headerlink" href="#centralidade-de-grau-degree-centrality" title="Link to this heading">#</a></h3>
+<h3>3.4.1 Centralidade de grau (Degree Centrality)<a class="headerlink" href="#centralidade-de-grau-degree-centrality" title="Link to this heading">#</a></h3>
+<p>A centralidade de grau é a maneira mais simples de centralidade, medindo o número de conexões diretas que um nó possui. Em redes sociais, por exemplo, a centralidade de grau indica quantas conexões diretas uma pessoa tem com outras pessoas. Quanto mais conexões, maior o grau de centralidade.</p>
+<p>A centralidade de grau é útil para identificar nós altamente conectados, que frequentemente possuem um papel central em redes de colaboração, comércio, redes de comunicação e outras.</p>
+<p>Em redes viárias, a centralidade de grau representa o número de ruas que convergem em uma interseção. Quanto maior o grau, mais acessível e importante é essa interseção localmente.</p>
+<p>Os grafos obtidos a partir do OSMnx são, por padrão, multigrafos não direcionados, ou seja, permitem múltiplas arestas entre os mesmos pares de nós, mas as informações sobre as direções das vias não estão representadas. Na análise de centralidade, é possível realizar os cálculos tanto considerando quanto ignorando essas direções.</p>
+<p>Se a rede viária tiver muitas ruas de mão única, o uso de um multigrafo pode não ser ideal. Isso ocorre porque o multigrafo trata todas as conexões como bidirecionais, o que ignora restrições de direção nas vias e pode distorcer a análise de acessibilidade e navegabilidade. Em redes com muitas ruas de mão única, o uso de um multidigrafo é mais apropriado, pois permite representar a direção real de cada via, capturando com precisão as limitações de direção e refletindo a dinâmica verdadeira do tráfego e da acessibilidade.</p>
+<p>Vamos verificar se a rede viária do bairro da liberdade possui muitas vias de mão única.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Configurar as cores das arestas com base no atributo &#39;mão única&#39;</span>
+<span class="n">cores_arestas</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;red&quot;</span> <span class="k">if</span> <span class="n">dados</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;oneway&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="s2">&quot;blue&quot;</span> <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">dados</span> <span class="ow">in</span> <span class="n">grafo_rede_viaria</span><span class="o">.</span><span class="n">edges</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="kc">True</span><span class="p">)]</span>
+
+<span class="c1"># Plotar o grafo</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">plot_graph</span><span class="p">(</span>
+    <span class="n">grafo_rede_viaria</span><span class="p">,</span>
+    <span class="n">edge_color</span><span class="o">=</span><span class="n">cores_arestas</span><span class="p">,</span>
+    <span class="n">edge_linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">node_size</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+    <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">close</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">)</span>
+
+<span class="c1"># Adicionar o título</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;Vias de Mão Única (vermelho) e de Mão Dupla (azul)&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/7868b63fac0d490ba380e3372b2c86763d6530a19ee5c49239699374b55ca6aa.png" src="_images/7868b63fac0d490ba380e3372b2c86763d6530a19ee5c49239699374b55ca6aa.png" />
+</div>
+</div>
+<p>Devido à predominância de ruas de mão única, como mostrado no mapa, é mais apropriado utilizar um multidigrafo para representar a rede viária do bairro da Liberdade. O uso de um multidigrafo permite que as direções das ruas sejam consideradas nas análises, o que proporciona uma visão mais realista e precisa da conectividade e acessibilidade da área. Em redes com muitas vias de mão única, o multidigrafo captura melhor as restrições de direção.</p>
+<p>O primeiro passo é converter o <code class="docutils literal notranslate"><span class="pre">grafo_rede_viaria</span></code> para um <code class="docutils literal notranslate"><span class="pre">MultiDiGraph</span></code>, para preservar as direções das vias. Isso garantirá que todas as análises de centralidade, acessibilidade e navegabilidade considerem corretamente as direções.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Converter o grafo para MultiDiGraph para preservar direções</span>
+<span class="n">multidigrafo_rede_viaria</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">utils_graph</span><span class="o">.</span><span class="n">get_digraph</span><span class="p">(</span><span class="n">grafo_rede_viaria</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_26445/2972035766.py:2: FutureWarning: The `get_digraph` function is deprecated and will be removed in the v2.0.0 release. Replace it with `convert.to_digraph` instead. See the OSMnx v2 migration guide: https://github.com/gboeing/osmnx/issues/1123
+  multidigrafo_rede_viaria = ox.utils_graph.get_digraph(grafo_rede_viaria)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Agora, calculamos três tipos de centralidade de grau:</p>
+<ul class="simple">
+<li><p>Centralidade de Grau de Entrada: Quantas conexões chegam a cada nó (pontos acessíveis de várias direções).</p></li>
+<li><p>Centralidade de Grau de Saída: Quantas conexões saem de cada nó (pontos que podem levar a várias direções).</p></li>
+<li><p>Centralidade de Grau Total: A soma do grau de entrada e do grau de saída, representando o total de conexões.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calcular as centralidades de grau</span>
+<span class="n">centralidade_grau_entrada</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">in_degree_centrality</span><span class="p">(</span><span class="n">multidigrafo_rede_viaria</span><span class="p">)</span>
+<span class="n">centralidade_grau_saida</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">out_degree_centrality</span><span class="p">(</span><span class="n">multidigrafo_rede_viaria</span><span class="p">)</span>
+<span class="n">centralidade_grau_total</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">degree_centrality</span><span class="p">(</span><span class="n">multidigrafo_rede_viaria</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Após calcular as centralidades, atribuímos esses valores como atributos dos nós. Isso facilita a visualização e a análise.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Atribuir as centralidades como atributos dos nós</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">set_node_attributes</span><span class="p">(</span><span class="n">grafo_rede_viaria</span><span class="p">,</span> <span class="n">centralidade_grau_entrada</span><span class="p">,</span> <span class="s1">&#39;centralidade_grau_entrada&#39;</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">set_node_attributes</span><span class="p">(</span><span class="n">grafo_rede_viaria</span><span class="p">,</span> <span class="n">centralidade_grau_saida</span><span class="p">,</span> <span class="s1">&#39;centralidade_grau_saida&#39;</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">set_node_attributes</span><span class="p">(</span><span class="n">grafo_rede_viaria</span><span class="p">,</span> <span class="n">centralidade_grau_total</span><span class="p">,</span> <span class="s1">&#39;centralidade_grau_total&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Cada tipo de centralidade é armazenado como um atributo dos nós, facilitando o acesso e visualização no grafo. Vamos consultar os atributos de <code class="docutils literal notranslate"><span class="pre">grafo_rede_viaria</span></code> para verificar se esses atributos foram adicionados corretamente ao grafo.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Obter os nomes dos atributos do primeiro nó como exemplo</span>
+<span class="n">atributos_nos</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">grafo_rede_viaria</span><span class="o">.</span><span class="n">nodes</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="kc">True</span><span class="p">)))[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Atributos dos Nós:&quot;</span><span class="p">,</span> <span class="n">atributos_nos</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Atributos dos Nós: [&#39;y&#39;, &#39;x&#39;, &#39;street_count&#39;, &#39;centralidade_grau_entrada&#39;, &#39;centralidade_grau_saida&#39;, &#39;centralidade_grau_total&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Para facilitar a manipulação dos registros, iremos criar um dataframe para armazenar os valores de centralidade de grau de cada nó.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Criar um DataFrame para armazenar os valores de centralidade</span>
+<span class="n">centralidade_grau_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;grau_entrada&quot;</span><span class="p">:</span> <span class="n">centralidade_grau_entrada</span><span class="p">,</span>
+    <span class="s2">&quot;grau_saida&quot;</span><span class="p">:</span> <span class="n">centralidade_grau_saida</span><span class="p">,</span>
+    <span class="s2">&quot;grau_total&quot;</span><span class="p">:</span> <span class="n">centralidade_grau_total</span>
+<span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Vamos visualizar os cinco primeiros registros do dataframe criado.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Exibir os primeiros registros do DataFrame</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">centralidade_grau_df</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>          grau_entrada  grau_saida  grau_total
+587993        0.002513    0.002513    0.005025
+25929414      0.005025    0.002513    0.007538
+25947658      0.002513    0.005025    0.007538
+60609803      0.002513    0.000000    0.002513
+60641188      0.005025    0.007538    0.012563
+</pre></div>
+</div>
+</div>
+</div>
+<p>Antes de visualizar a centralidade de grau dos nós, ajustamos o tamanho deles para refletir melhor suas centralidades no gráfico.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Ajustar os tamanhos dos nós para a visualização</span>
+<span class="n">centralidade_grau_df</span><span class="p">[</span><span class="s2">&quot;tamanho_nos_entrada&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">centralidade_grau_df</span><span class="p">[</span><span class="s2">&quot;grau_entrada&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2500</span>
+<span class="n">centralidade_grau_df</span><span class="p">[</span><span class="s2">&quot;tamanho_nos_saida&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">centralidade_grau_df</span><span class="p">[</span><span class="s2">&quot;grau_saida&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2500</span>
+<span class="n">centralidade_grau_df</span><span class="p">[</span><span class="s2">&quot;tamanho_nos_total&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">centralidade_grau_df</span><span class="p">[</span><span class="s2">&quot;grau_total&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">1500</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Por fim, vamos plotar os nós na rede viária, ressaltando o valor da centralidade de grau.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plotar as centralidades de grau</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">eixos</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">wspace</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+
+<span class="c1"># Centralidade de Grau de Entrada</span>
+<span class="n">eixo</span> <span class="o">=</span> <span class="n">eixos</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">eixo</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
+<span class="n">cores_nos_entrada</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">get_node_colors_by_attr</span><span class="p">(</span><span class="n">grafo_rede_viaria</span><span class="p">,</span> <span class="s2">&quot;centralidade_grau_entrada&quot;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;plasma&quot;</span><span class="p">)</span>
+<span class="n">ox</span><span class="o">.</span><span class="n">plot_graph</span><span class="p">(</span>
+    <span class="n">grafo_rede_viaria</span><span class="p">,</span>
+    <span class="n">ax</span><span class="o">=</span><span class="n">eixo</span><span class="p">,</span>
+    <span class="n">node_size</span><span class="o">=</span><span class="n">centralidade_grau_df</span><span class="p">[</span><span class="s2">&quot;tamanho_nos_entrada&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+    <span class="n">node_color</span><span class="o">=</span><span class="n">cores_nos_entrada</span><span class="p">,</span>
+    <span class="n">edge_linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+    <span class="n">edge_color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span>
+    <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">close</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">)</span>
+<span class="n">eixo</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Centralidade de Grau de Entrada&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">)</span>
+
+<span class="c1"># Centralidade de Grau de Saída</span>
+<span class="n">eixo</span> <span class="o">=</span> <span class="n">eixos</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">eixo</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
+<span class="n">cores_nos_saida</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">get_node_colors_by_attr</span><span class="p">(</span><span class="n">grafo_rede_viaria</span><span class="p">,</span> <span class="s2">&quot;centralidade_grau_saida&quot;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;plasma&quot;</span><span class="p">)</span>
+<span class="n">ox</span><span class="o">.</span><span class="n">plot_graph</span><span class="p">(</span>
+    <span class="n">grafo_rede_viaria</span><span class="p">,</span>
+    <span class="n">ax</span><span class="o">=</span><span class="n">eixo</span><span class="p">,</span>
+    <span class="n">node_size</span><span class="o">=</span><span class="n">centralidade_grau_df</span><span class="p">[</span><span class="s2">&quot;tamanho_nos_saida&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+    <span class="n">node_color</span><span class="o">=</span><span class="n">cores_nos_saida</span><span class="p">,</span>
+    <span class="n">edge_linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+    <span class="n">edge_color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span>
+    <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">close</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">)</span>
+<span class="n">eixo</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Centralidade de Grau de Saída&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">)</span>
+
+<span class="c1"># Centralidade de Grau Total</span>
+<span class="n">eixo</span> <span class="o">=</span> <span class="n">eixos</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+
+
+<span class="n">eixo</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
+<span class="n">cores_nos_total</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">get_node_colors_by_attr</span><span class="p">(</span><span class="n">grafo_rede_viaria</span><span class="p">,</span> <span class="s2">&quot;centralidade_grau_total&quot;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;plasma&quot;</span><span class="p">)</span>
+<span class="n">ox</span><span class="o">.</span><span class="n">plot_graph</span><span class="p">(</span>
+    <span class="n">grafo_rede_viaria</span><span class="p">,</span>
+    <span class="n">ax</span><span class="o">=</span><span class="n">eixo</span><span class="p">,</span>
+    <span class="n">node_size</span><span class="o">=</span><span class="n">centralidade_grau_df</span><span class="p">[</span><span class="s2">&quot;tamanho_nos_total&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+    <span class="n">node_color</span><span class="o">=</span><span class="n">cores_nos_total</span><span class="p">,</span>
+    <span class="n">edge_linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+    <span class="n">edge_color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span>
+    <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">close</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">)</span>
+<span class="n">eixo</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Centralidade de Grau Total&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/d2dc5e84c2cfb97c1b47269ad0f2dd6859ef85904009c204ede894e0187c96c8.png" src="_images/d2dc5e84c2cfb97c1b47269ad0f2dd6859ef85904009c204ede894e0187c96c8.png" />
+</div>
+</div>
+<p>Com base nessa análise visual, será gerado um histograma para examinar a distribuição da centralidade de grau.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plotar os histogramas das centralidades de grau</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">eixos</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="c1"># Histograma da Centralidade de Grau de Entrada</span>
+<span class="n">eixos</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">centralidade_grau_entrada</span><span class="o">.</span><span class="n">values</span><span class="p">(),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;skyblue&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">eixos</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Centralidade de Grau de Entrada&quot;</span><span class="p">)</span>
+<span class="n">eixos</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Número de Nós&quot;</span><span class="p">)</span>
+<span class="n">eixos</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Distribuição da Centralidade de Grau de Entrada&quot;</span><span class="p">)</span>
+
+<span class="c1"># Histograma da Centralidade de Grau de Saída</span>
+<span class="n">eixos</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">centralidade_grau_saida</span><span class="o">.</span><span class="n">values</span><span class="p">(),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightgreen&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">eixos</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Centralidade de Grau de Saída&quot;</span><span class="p">)</span>
+<span class="n">eixos</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Número de Nós&quot;</span><span class="p">)</span>
+<span class="n">eixos</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Distribuição da Centralidade de Grau de Saída&quot;</span><span class="p">)</span>
+
+<span class="c1"># Histograma da Centralidade de Grau Total</span>
+<span class="n">eixos</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">centralidade_grau_total</span><span class="o">.</span><span class="n">values</span><span class="p">(),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;salmon&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">eixos</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Centralidade de Grau Total&quot;</span><span class="p">)</span>
+<span class="n">eixos</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Número de Nós&quot;</span><span class="p">)</span>
+<span class="n">eixos</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Distribuição da Centralidade de Grau Total&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/074e31d23458e87b62f468507d2a3518a2e73e27a5f19f27cb6ba6152b1877e8.png" src="_images/074e31d23458e87b62f468507d2a3518a2e73e27a5f19f27cb6ba6152b1877e8.png" />
+</div>
+</div>
+<p>O primeiro histograma mostra a distribuição da centralidade de grau de entrada dos nós, ou seja, o número de ruas que chegam a cada ponto da rede. Observamos que a maioria dos nós tem uma centralidade de entrada baixa, concentrada em torno de 0,002 a 0,004. Isso indica que muitos pontos na rede possuem poucas conexões de entrada, provavelmente representando interseções simples ou extremidades da rede. Apenas alguns nós têm centralidade de entrada mais alta, sugerindo que poucos pontos funcionam como interseções principais para o fluxo de chegada.</p>
+<p>O segundo histograma representa a centralidade de grau de saída, ou seja, o número de ruas que saem de cada nó. A distribuição é similar à centralidade de entrada, com a maioria dos nós apresentando valores de centralidade de saída baixos, em torno de 0,002 a 0,004. Isso indica que a maioria dos nós permite que o tráfego flua para poucas direções. Novamente, apenas alguns nós apresentam um número elevado de saídas, o que sugere que apenas algumas interseções desempenham um papel importante no escoamento do tráfego.</p>
+<p>O terceiro histograma mostra a distribuição da centralidade de grau total, que é a soma das centralidades de entrada e saída. Aqui, a distribuição é mais ampla, com um maior número de nós em faixas de centralidade mais altas, alcançando valores em torno de 0,01 a 0,015. Isso indica que alguns nós têm uma alta conectividade geral, seja para entrada ou saída, o que os torna pontos centrais na rede. Esses nós provavelmente representam interseções principais, com alta acessibilidade e importância para a mobilidade geral da rede.</p>
+<p>Esses histogramas mostram que a maioria dos nós na rede possui baixa conectividade de entrada e saída, enquanto apenas alguns nós têm alta centralidade, tanto para entrada quanto para saída. Esse padrão sugere uma rede onde alguns pontos específicos (interseções principais) são centrais para a conectividade geral, enquanto a maioria dos nós serve como pontos de conexão menores.</p>
 </section>
-<section id="centralidade-de-proximidade">
-<h3>3.2.3 Centralidade de proximidade<a class="headerlink" href="#centralidade-de-proximidade" title="Link to this heading">#</a></h3>
+<section id="centralidade-de-proximidade-closeness-centrality">
+<h3>3.4.2 Centralidade de proximidade (Closeness Centrality)<a class="headerlink" href="#centralidade-de-proximidade-closeness-centrality" title="Link to this heading">#</a></h3>
+<p>A <strong>Centralidade de Proximidade</strong> avalia a proximidade de um nó em relação a todos os outros na rede. Ela mede a acessibilidade de um nó, indicando quão rapidamente ele pode ser alcançado a partir de outros pontos.</p>
+<p>Em redes de comunicação, um nó com alta centralidade de proximidade pode ser um ponto eficiente de distribuição de informações, devido ao seu fácil acesso por outros nós. Em redes sociais, pessoas com alta proximidade podem se comunicar rapidamente com qualquer outra pessoa, direta ou indiretamente.</p>
+<p>Em redes viárias, interseções com alta centralidade de proximidade são aquelas mais “centrais” e facilmente acessíveis, sugerindo uma posição vantajosa em termos de deslocamento.</p>
+<p>Agora, calculamos três tipos de centralidade de proximidade:</p>
+<ul class="simple">
+<li><p><strong>Centralidade de proximidade de Entrada</strong>: Mede o quão acessível um nó é a partir de outros pontos da rede.</p></li>
+<li><p><strong>Centralidade de proximidade de Saída</strong>: Mede o quão bem um nó conecta a rede a partir dele.</p></li>
+<li><p><strong>Centralidade de proximidade Total</strong>: Combina as centralidades de entrada e saída, representando o total de conexões.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calcular a centralidade de proximidade considerando o peso das arestas (&#39;length&#39;)</span>
+
+<span class="c1"># Centralidade de Proximidade de Entrada (usando .reverse() e peso)</span>
+<span class="n">centralidade_proximidade_entrada</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">closeness_centrality</span><span class="p">(</span><span class="n">multidigrafo_rede_viaria</span><span class="o">.</span><span class="n">reverse</span><span class="p">(),</span> <span class="n">distance</span><span class="o">=</span><span class="s1">&#39;length&#39;</span><span class="p">)</span>
+
+<span class="c1"># Centralidade de Proximidade de Saída (usando o grafo original e peso)</span>
+<span class="n">centralidade_proximidade_saida</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">closeness_centrality</span><span class="p">(</span><span class="n">multidigrafo_rede_viaria</span><span class="p">,</span> <span class="n">distance</span><span class="o">=</span><span class="s1">&#39;length&#39;</span><span class="p">)</span>
+
+<span class="c1"># Centralidade de Proximidade Total (usando .to_undirected() e peso)</span>
+<span class="n">centralidade_proximidade_total</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">closeness_centrality</span><span class="p">(</span><span class="n">multidigrafo_rede_viaria</span><span class="o">.</span><span class="n">to_undirected</span><span class="p">(),</span> <span class="n">distance</span><span class="o">=</span><span class="s1">&#39;length&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Após calcular as centralidades, atribuímos esses valores como atributos dos nós. Isso facilita a visualização e a análise.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Atribuir centralidade de proximidade como atributos dos nós</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">set_node_attributes</span><span class="p">(</span><span class="n">grafo_rede_viaria</span><span class="p">,</span> <span class="n">centralidade_proximidade_entrada</span><span class="p">,</span> <span class="s1">&#39;centralidade_proximidade_entrada&#39;</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">set_node_attributes</span><span class="p">(</span><span class="n">grafo_rede_viaria</span><span class="p">,</span> <span class="n">centralidade_proximidade_saida</span><span class="p">,</span> <span class="s1">&#39;centralidade_proximidade_saida&#39;</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">set_node_attributes</span><span class="p">(</span><span class="n">grafo_rede_viaria</span><span class="p">,</span> <span class="n">centralidade_proximidade_total</span><span class="p">,</span> <span class="s1">&#39;centralidade_proximidade_total&#39;</span><span class="p">)</span>
+
+<span class="c1"># Obter os nomes dos atributos do primeiro nó como exemplo</span>
+<span class="n">atributos_nos</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">grafo_rede_viaria</span><span class="o">.</span><span class="n">nodes</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="kc">True</span><span class="p">)))[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Atributos dos Nós:&quot;</span><span class="p">,</span> <span class="n">atributos_nos</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Atributos dos Nós: [&#39;y&#39;, &#39;x&#39;, &#39;street_count&#39;, &#39;centralidade_grau_entrada&#39;, &#39;centralidade_grau_saida&#39;, &#39;centralidade_grau_total&#39;, &#39;centralidade_proximidade_entrada&#39;, &#39;centralidade_proximidade_saida&#39;, &#39;centralidade_proximidade_total&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Para facilitar a manipulação dos registros, iremos criar um dataframe para armazenar os valores de centralidade de cada nó.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Criar DataFrame para armazenar as centralidades de proximidade</span>
+<span class="n">centralidade_proximidade_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;proximidade_entrada&quot;</span><span class="p">:</span> <span class="n">centralidade_proximidade_entrada</span><span class="p">,</span>
+    <span class="s2">&quot;proximidade_saida&quot;</span><span class="p">:</span> <span class="n">centralidade_proximidade_saida</span><span class="p">,</span>
+    <span class="s2">&quot;proximidade_total&quot;</span><span class="p">:</span> <span class="n">centralidade_proximidade_total</span>
+<span class="p">})</span>
+
+<span class="c1"># Exibir os cinco primeiros registros do DataFrame</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">centralidade_proximidade_df</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>          proximidade_entrada  proximidade_saida  proximidade_total
+587993               0.000428           0.000424           0.000548
+25929414             0.000410           0.000444           0.000562
+25947658             0.000565           0.000409           0.000616
+60609803             0.000000           0.000331           0.000571
+60641188             0.000539           0.000513           0.000647
+</pre></div>
+</div>
+</div>
+</div>
+<p>Os valores de centralidade de proximidade são baixos porque a métrica leva em conta as distâncias reais entre os nós (no caso, o atributo <code class="docutils literal notranslate"><span class="pre">length</span></code>, que representa a distância física). Em redes viárias, especialmente em áreas urbanas grandes, as distâncias podem ser grandes o suficiente para fazer com que as centralidades de proximidade resultem em valores baixos, uma vez que esta métrica é inversamente proporcional à soma das distâncias até outros nós.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Ajustar os tamanhos dos nós para a visualização</span>
+<span class="n">centralidade_proximidade_df</span><span class="p">[</span><span class="s2">&quot;tamanho_nos_entrada&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">centralidade_proximidade_df</span><span class="p">[</span><span class="s2">&quot;proximidade_entrada&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">50000</span>
+<span class="n">centralidade_proximidade_df</span><span class="p">[</span><span class="s2">&quot;tamanho_nos_saida&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">centralidade_proximidade_df</span><span class="p">[</span><span class="s2">&quot;proximidade_saida&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">50000</span>
+<span class="n">centralidade_proximidade_df</span><span class="p">[</span><span class="s2">&quot;tamanho_nos_total&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">centralidade_proximidade_df</span><span class="p">[</span><span class="s2">&quot;proximidade_total&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">50000</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Por fim, vamos plotar os nós na rede viária, ressaltando o valor da centralidade de proximidade.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Configurar a figura para 3 gráficos em linha com fundo preto</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">eixos</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+
+<span class="c1"># Ajustar o espaçamento entre os gráficos</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">wspace</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+
+<span class="c1"># Plotar Centralidade de Proximidade de Entrada com fundo preto</span>
+<span class="n">eixo</span> <span class="o">=</span> <span class="n">eixos</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">eixo</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
+<span class="n">cores_nos_entrada</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">get_node_colors_by_attr</span><span class="p">(</span><span class="n">grafo_rede_viaria</span><span class="p">,</span> <span class="s2">&quot;centralidade_proximidade_entrada&quot;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;plasma&quot;</span><span class="p">)</span>
+<span class="n">ox</span><span class="o">.</span><span class="n">plot_graph</span><span class="p">(</span>
+    <span class="n">grafo_rede_viaria</span><span class="p">,</span>
+    <span class="n">ax</span><span class="o">=</span><span class="n">eixo</span><span class="p">,</span>
+    <span class="n">node_size</span><span class="o">=</span><span class="n">centralidade_proximidade_df</span><span class="p">[</span><span class="s2">&quot;tamanho_nos_entrada&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+    <span class="n">node_color</span><span class="o">=</span><span class="n">cores_nos_entrada</span><span class="p">,</span>
+    <span class="n">node_zorder</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">edge_linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+    <span class="n">edge_color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span>
+    <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">close</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">)</span>
+<span class="n">eixo</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Centralidade de Proximidade de Entrada&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">)</span>
+
+<span class="c1"># Plotar Centralidade de Proximidade de Saída com fundo preto</span>
+<span class="n">eixo</span> <span class="o">=</span> <span class="n">eixos</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">eixo</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
+<span class="n">cores_nos_saida</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">get_node_colors_by_attr</span><span class="p">(</span><span class="n">grafo_rede_viaria</span><span class="p">,</span> <span class="s2">&quot;centralidade_proximidade_saida&quot;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;plasma&quot;</span><span class="p">)</span>
+<span class="n">ox</span><span class="o">.</span><span class="n">plot_graph</span><span class="p">(</span>
+    <span class="n">grafo_rede_viaria</span><span class="p">,</span>
+    <span class="n">ax</span><span class="o">=</span><span class="n">eixo</span><span class="p">,</span>
+    <span class="n">node_size</span><span class="o">=</span><span class="n">centralidade_proximidade_df</span><span class="p">[</span><span class="s2">&quot;tamanho_nos_saida&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+    <span class="n">node_color</span><span class="o">=</span><span class="n">cores_nos_saida</span><span class="p">,</span>
+    <span class="n">node_zorder</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">edge_linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+    <span class="n">edge_color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span>
+    <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">close</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">)</span>
+<span class="n">eixo</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Centralidade de Proximidade de Saída&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">)</span>
+
+<span class="c1"># Plotar Centralidade de Proximidade Total com fundo preto</span>
+<span class="n">eixo</span> <span class="o">=</span> <span class="n">eixos</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">eixo</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
+<span class="n">cores_nos_total</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">get_node_colors_by_attr</span><span class="p">(</span><span class="n">grafo_rede_viaria</span><span class="p">,</span> <span class="s2">&quot;centralidade_proximidade_total&quot;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;plasma&quot;</span><span class="p">)</span>
+<span class="n">ox</span><span class="o">.</span><span class="n">plot_graph</span><span class="p">(</span>
+    <span class="n">grafo_rede_viaria</span><span class="p">,</span>
+    <span class="n">ax</span><span class="o">=</span><span class="n">eixo</span><span class="p">,</span>
+    <span class="n">node_size</span><span class="o">=</span><span class="n">centralidade_proximidade_df</span><span class="p">[</span><span class="s2">&quot;tamanho_nos_total&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+    <span class="n">node_color</span><span class="o">=</span><span class="n">cores_nos_total</span><span class="p">,</span>
+    <span class="n">node_zorder</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">edge_linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+    <span class="n">edge_color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span>
+    <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">close</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">)</span>
+<span class="n">eixo</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Centralidade de Proximidade Total&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/2d7fed6df5cb0edc4851acc276b082bd4c9a6bc46ae5ede5392f34162a4e215a.png" src="_images/2d7fed6df5cb0edc4851acc276b082bd4c9a6bc46ae5ede5392f34162a4e215a.png" />
+</div>
+</div>
+<p>Com base nessa análise visual, será gerado um histograma para examinar a distribuição da centralidade de proximidade entre os nós da rede.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plotar os histogramas das centralidades de proximidade</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">eixos</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="c1"># Histograma da Centralidade de Proximidade de Entrada</span>
+<span class="n">eixos</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">centralidade_proximidade_entrada</span><span class="o">.</span><span class="n">values</span><span class="p">(),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;skyblue&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">eixos</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Centralidade de Proximidade de Entrada&quot;</span><span class="p">)</span>
+<span class="n">eixos</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Número de Nós&quot;</span><span class="p">)</span>
+<span class="n">eixos</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Distribuição da Centralidade de Proximidade de Entrada&quot;</span><span class="p">)</span>
+
+<span class="c1"># Histograma da Centralidade de Proximidade de Saída</span>
+<span class="n">eixos</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">centralidade_proximidade_saida</span><span class="o">.</span><span class="n">values</span><span class="p">(),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightgreen&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">eixos</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Centralidade de Proximidade de Saída&quot;</span><span class="p">)</span>
+<span class="n">eixos</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Número de Nós&quot;</span><span class="p">)</span>
+<span class="n">eixos</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Distribuição da Centralidade de Proximidade de Saída&quot;</span><span class="p">)</span>
+
+<span class="c1"># Histograma da Centralidade de Proximidade Total</span>
+<span class="n">eixos</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">centralidade_proximidade_total</span><span class="o">.</span><span class="n">values</span><span class="p">(),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;salmon&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">eixos</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Centralidade de Proximidade Total&quot;</span><span class="p">)</span>
+<span class="n">eixos</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Número de Nós&quot;</span><span class="p">)</span>
+<span class="n">eixos</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Distribuição da Centralidade de Proximidade Total&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/a404c6cdee40630da1d92f0906ef786e46470bdd2147a8f25cc05992dbffc76f.png" src="_images/a404c6cdee40630da1d92f0906ef786e46470bdd2147a8f25cc05992dbffc76f.png" />
+</div>
+</div>
+<p>Vamos interpretar cada um dos histogramas:</p>
+<p><em>Centralidade de Proximidade de Entrada</em></p>
+<ul class="simple">
+<li><p><strong>Distribuição</strong>: A maioria dos nós apresenta valores de centralidade de proximidade de entrada entre 0.0004 e 0.0008, o que indica que muitos nós podem ser alcançados a partir de outros nós na rede com relativa facilidade (em termos de caminhos curtos ponderados).</p></li>
+<li><p><strong>Nós com valor próximo de zero</strong>: Há alguns nós com valores muito baixos (próximos de 0), sugerindo que esses nós são menos acessíveis ou mais isolados para serem alcançados de outras partes da rede. Esses podem representar extremidades ou pontos periféricos.</p></li>
+<li><p><strong>Pico na distribuição</strong>: O pico na faixa de 0.0006 a 0.0008 indica que a maior parte dos nós tem uma acessibilidade de entrada moderada, tornando-os relativamente bem conectados na rede em termos de proximidade.</p></li>
+</ul>
+<p><em>Centralidade de Proximidade de Saída</em></p>
+<ul class="simple">
+<li><p><strong>Distribuição</strong>: A centralidade de proximidade de saída mostra uma distribuição similar, com a maioria dos valores concentrados entre 0.0004 e 0.0008. Isso indica que muitos nós têm uma conectividade de saída moderada, permitindo o acesso a outros nós na rede em caminhos curtos.</p></li>
+<li><p><strong>Nós com valores muito baixos</strong>: Assim como na centralidade de entrada, alguns nós apresentam valores baixos próximos de zero, indicando que eles fornecem pouca acessibilidade para outras partes da rede. Esses nós podem estar em áreas periféricas ou representar pontos menos centrais em termos de saída.</p></li>
+<li><p><strong>Pico</strong>: O pico está entre 0.0006 e 0.0008, sugerindo que a rede tem uma estrutura onde muitos nós estão moderadamente conectados para acesso de saída.</p></li>
+</ul>
+<p><em>Centralidade de Proximidade Total</em></p>
+<ul class="simple">
+<li><p><strong>Distribuição</strong>: A centralidade de proximidade total apresenta uma distribuição mais concentrada entre 0.0005 e 0.0010, com um pico entre 0.0006 e 0.0008.</p></li>
+<li><p><strong>Valores próximos a zero</strong>: Existem poucos nós com centralidade de proximidade total muito baixa, indicando que a maioria dos nós tem uma acessibilidade geral razoável (considerando tanto entrada quanto saída).</p></li>
+<li><p><strong>Interpretação Geral</strong>: A centralidade total fornece uma visão mais equilibrada da proximidade dos nós, sugerindo que a rede é relativamente bem conectada em termos de proximidade geral. A faixa mais concentrada na região central do histograma indica uma distribuição relativamente uniforme de acessibilidade na rede.</p></li>
+</ul>
+<p>Esses histogramas indicam que a maioria dos nós na rede viária possui uma acessibilidade moderada, tanto para entrada quanto para saída, o que resulta em uma centralidade de proximidade total similar para muitos nós. Essa distribuição sugere uma rede onde a maioria dos pontos é razoavelmente acessível e conectada, mas existem alguns nós com acessibilidade reduzida, provavelmente em regiões periféricas ou de baixa conectividade.</p>
+<p>A análise da centralidade de proximidade ajuda a entender quais nós estão mais “centralmente” localizados em termos de facilidade de acesso, sendo que a maioria parece estar bem conectada, com alguns nós periféricos e menos acessíveis.</p>
 </section>
-<section id="centralidade-de-intermediacao">
-<h3>3.2.4 Centralidade de intermediação<a class="headerlink" href="#centralidade-de-intermediacao" title="Link to this heading">#</a></h3>
+<section id="centralidade-de-intermediacao-betweenness-centrality">
+<h3>3.4.3 Centralidade de intermediação (Betweenness Centrality)<a class="headerlink" href="#centralidade-de-intermediacao-betweenness-centrality" title="Link to this heading">#</a></h3>
+<p>A centralidade de intermediação mede quantas vezes um nó está presente nos caminhos mais curtos entre pares de nós na rede. Ela avalia o papel de um nó como “ponte” ou intermediário, facilitando o fluxo ou a comunicação entre diferentes partes da rede.</p>
+<p>A centralidade de intermediação difere da centralidade de grau e da centralidade de proximidade em sua abrangência e foco analítico. Enquanto as centralidades de grau e proximidade são mais locais ou quase-locais, a centralidade de intermediação tem um caráter global, avaliando o papel do nó em toda a estrutura da rede.</p>
+<p>Em redes viárias, a centralidade de intermediação ajuda a identificar interseções importantes que funcionam como pontos críticos de passagem. Esses nós são fundamentais para a conectividade global, pois sustentam o fluxo entre diferentes partes da rede. Incorporar o comprimento das ruas como peso torna a métrica mais alinhada com a realidade física, priorizando caminhos que minimizam a distância total. Isso é crucial para análises de mobilidade e acessibilidade.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calcular a centralidade de intermediação com base no comprimento das ruas (&#39;length&#39;)</span>
+<span class="n">centralidade_intermediacao</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">betweenness_centrality</span><span class="p">(</span><span class="n">multidigrafo_rede_viaria</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="s1">&#39;length&#39;</span><span class="p">)</span>
+
+<span class="c1"># Exibir os valores calculados</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">centralidade_intermediacao</span><span class="p">)</span>
+
+<span class="c1"># Atribuir os valores como atributos dos nós no grafo</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">set_node_attributes</span><span class="p">(</span><span class="n">grafo_rede_viaria</span><span class="p">,</span> <span class="n">centralidade_intermediacao</span><span class="p">,</span> <span class="s1">&#39;centralidade_intermediacao&#39;</span><span class="p">)</span>
+
+<span class="c1"># Obter os nomes dos atributos dos nós como exemplo</span>
+<span class="n">atributos_nos</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">grafo_rede_viaria</span><span class="o">.</span><span class="n">nodes</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="kc">True</span><span class="p">)))[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Atributos dos Nós:&quot;</span><span class="p">,</span> <span class="n">atributos_nos</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{587993: 0.020657443388225765, 25929414: 0.020524537042897105, 25947658: 0.023315570294798933, 60609803: 0.0, 60641188: 0.05279546346341278, 60641336: 0.0, 60641341: 0.014860195182461426, 60641427: 0.010056580129868486, 60641430: 0.006493424300343025, 60641438: 0.003164436793539486, 60641444: 0.009721149829753301, 60685370: 0.007809830006455451, 85723130: 0.08173107350353784, 85723131: 0.099293697707682, 85728632: 0.019360024302874576, 132347429: 0.01108185765097528, 132347430: 0.011214763996303938, 133491023: 0.00016455071326405328, 172004065: 0.017695530549472805, 172004067: 0.06102299912661545, 172004069: 0.06875688265002596, 172004070: 0.06587091629431795, 172008334: 0.052124602863182413, 176017405: 0.030682379150158857, 176019578: 0.028771059326861005, 176019579: 0.08641443995797628, 176020582: 0.05183347467817678, 176020585: 0.09481918408161716, 176020912: 0.062396364695011586, 176021082: 0.04981456400389859, 176021768: 0.06925053478981812, 246650787: 0.04516917079098262, 246650791: 0.04122628254623242, 246650792: 0.036479627355923194, 246650793: 0.040973127602749265, 246650794: 0.04846651392985077, 246650796: 0.020897940584534765, 296284378: 0.12432439274457932, 296284381: 0.06795311570446692, 296284434: 0.1383301899927851, 296284447: 0.04512486867587307, 296284449: 0.11359062314089338, 296284452: 0.12815969013834919, 296284453: 0.06275078161588801, 296284458: 0.10307836411275521, 296284464: 0.1779046365327899, 296284465: 0.14431097553257471, 296284473: 0.12447628571066922, 296284491: 0.2089604192245864, 296284497: 0.06538359302811286, 296284498: 0.06442160424287685, 296284505: 0.04081490576307229, 296284506: 0.0681682974064276, 296284523: 0.05232712681796894, 296284524: 0.021644747667810084, 296284526: 0.09299013961495134, 296284527: 0.009721149829753301, 296284551: 0.041719934686024585, 296284554: 0.03944786906826323, 296284555: 0.028606508613596954, 296284588: 0.035194866017746164, 296284589: 0.046504563117856286, 296284626: 0.005018796754553625, 296284632: 0.0648582965203853, 296284639: 0.03568218928395124, 296284684: 0.12950141133880994, 296284760: 0.002651798032986089, 296284761: 0.00923382656354822, 296284798: 0.007847803247977925, 296284912: 0.015689277622368773, 296284914: 0.008151589180157716, 296285071: 0.019897978557776287, 296285245: 0.1426907838942825, 296285246: 0.05434603749224713, 296285247: 0.02627115425996481, 296285271: 0.04500462007771857, 296285314: 0.12647620976418616, 296285317: 0.09700897434274648, 296285318: 0.058959786337227704, 296285340: 0.05208030074807286, 296285362: 0.05327645785603079, 296285367: 0.04737161879928611, 296285430: 0.07094667291115528, 296285491: 0.0391567408832576, 296285584: 0.027366049390529473, 296285586: 0.055934584762603955, 296285610: 0.05478272976975558, 296285612: 0.046757718061339444, 296285617: 0.04832727871093503, 296285621: 0.017809450274040226, 296285858: 0.02198017796792527, 296285860: 0.04266926572408643, 296285871: 0.059681277926154706, 296285873: 0.037346683037353015, 296285891: 0.08649038644102124, 296285897: 0.04140349100667064, 296285901: 0.06087743503411263, 296285919: 0.03494803994785008, 296285920: 0.05854208068048049, 296285923: 0.014803235320177716, 296285946: 0.014619697986152425, 296285949: 0.08849031049453819, 296285950: 0.05598521575130059, 296285952: 0.05764338063111528, 296285963: 0.07056061162234346, 296286010: 0.022663696315329798, 396034417: 0.04527043276837588, 396034420: 0.038675746490639595, 396034426: 0.0007784514512107135, 445043191: 0.02517625912940015, 445043819: 0.00393655937116312, 445044063: 0.03009379390656051, 445044100: 0.032397503892257255, 445044137: 0.046548865232965836, 445044376: 0.031625381314633626, 445044382: 0.013917193017986659, 445044395: 0.003379618495500171, 445044666: 0.021378934977152767, 445044713: 0.0, 459335418: 0.06511145146386846, 459335423: 0.03721377669202436, 459335444: 0.06359252180296951, 459335447: 0.01465134235408782, 459335448: 0.0802691037049226, 459335449: 0.0, 459335450: 0.02185992936977077, 459335453: 0.08197157069984684, 459335455: 0.04025163601382226, 459335457: 0.06546586838474489, 459335459: 0.05549156361150843, 459335465: 0.008809792033213928, 459335479: 0.02709390782628508, 459335529: 0.06015594344518563, 459335537: 0.09202182195612825, 459335542: 0.07366808855359923, 459335555: 0.12359657228206525, 459335562: 0.14060858448413352, 459335566: 0.15779780514664002, 459335570: 0.028555877624900323, 459335604: 0.0027467311367922738, 459335613: 0.04097945647633634, 459335624: 0.03754287811855246, 459335697: 0.1647469083452527, 459335698: 0.17027201498677266, 459347404: 0.018290444666658228, 459347407: 0.059934432869637864, 459347433: 0.02079034973355442, 459347494: 0.016733541764236803, 459347541: 0.02494841968026531, 459347548: 0.023480121008062987, 459347600: 0.012790653519486602, 459347673: 0.042802172069415084, 459347762: 0.022625723073807325, 466919091: 0.08802830272268142, 466919092: 0.18615115881675381, 466919096: 0.0757249724693999, 466919103: 0.015309545207144034, 466919146: 0.09352176499626597, 466919177: 0.08468665746870373, 466919178: 0.0327455919395466, 466919179: 0.045700796172297255, 466919184: 0.004803615052592939, 466919189: 0.025707884510714783, 466919197: 0.12390668708783212, 466919212: 0.1324000354416921, 466919226: 0.046276723668721445, 466929907: 0.016087996658354746, 466929967: 0.02627115425996481, 466929988: 0.019353695429287495, 466929995: 0.019872663063427973, 466929998: 0.011157804134020228, 466930004: 0.039239016239889624, 466930007: 0.02197384909433819, 466938041: 0.0, 466938048: 0.025625609154082758, 466938049: 0.0, 466938053: 0.02301811323620622, 466938055: 0.0052403073301013885, 466938062: 0.040182018404364396, 466938063: 0.03164436793539486, 466938137: 0.01639178259053454, 467743658: 0.007974380719719504, 467743659: 0.0010505930154551093, 467743664: 0.006309886966317735, 467743760: 0.0, 467743769: 0.0025442071820057466, 467743773: 0.014752604331481083, 467743780: 0.0, 467743785: 0.0026074959178765365, 467743813: 0.011860309102185993, 467743816: 0.020910598331708923, 467743819: 0.024226928091338303, 467743843: 0.0, 467743917: 0.0, 477359022: 0.04094148323481387, 477359023: 0.027688821943470502, 477359869: 0.10200245560295179, 477359870: 0.055744718554991586, 477359871: 0.03644165411440072, 660826332: 0.06314950065187398, 679159955: 0.04239712415984203, 679160576: 0.03680239990886422, 679160621: 0.03084060098983583, 679496612: 0.009594572358011722, 679496613: 0.019100540485804337, 715554815: 0.023416832272192198, 715554822: 0.08743971747908308, 748729280: 0.05182081693100262, 778098426: 0.0, 778764174: 0.005202334088578915, 778764176: 0.002949255091578801, 792621942: 0.06320013164057062, 792621943: 0.09813551384124654, 792649556: 0.05292204093515436, 924932890: 0.030739339012442565, 924932934: 0.041466779742541426, 1214249065: 0.06769363188739669, 1420099938: 0.035422705466881005, 1420099939: 0.029593812893181273, 1420099953: 0.0, 1420099960: 0.06013062795083731, 1436835505: 0.03957444654000481, 1563749619: 0.05144741338936496, 1833396339: 0.023961115400680986, 1833396340: 0.014562738123868714, 1833396358: 0.002487247319722036, 1836039186: 0.012056504183385441, 1836039193: 0.00763262154601724, 1938339274: 0.0, 1938339290: 0.0, 1938339383: 0.02795463463412782, 1938339452: 0.05961798919028392, 1941595914: 0.008018682834829058, 1941595927: 0.008284495525486374, 2070954422: 0.04116932268394871, 2070954431: 0.05199169651785376, 2082358176: 0.04970697315291825, 2210583012: 0.0, 2210723698: 0.022752300545548904, 2210723825: 0.03885295495107781, 2214691543: 0.025043352784071493, 2214691545: 0.028796374821209322, 2214691546: 0.03576446464058327, 2214691548: 0.05466248117160108, 2214691551: 0.05482703188486513, 2214691552: 0.04401731579813425, 2225397474: 0.008835107527562246, 2267452793: 0.019360024302874576, 2370325053: 0.02654329582420921, 2382948291: 0.031359568623976306, 2382948300: 0.03149247496930496, 2382948305: 0.029346986823285192, 2390857079: 0.0009430021644747668, 2396850243: 0.03686568864473501, 2396850246: 0.052827107831348176, 2396850249: 0.05925724339582041, 2397820354: 0.0, 2419247847: 0.028049567737934003, 2435474915: 0.011379314709567991, 2489402583: 0.040954140981988026, 2489402591: 0.0, 2489402593: 0.025524347176689492, 2522075891: 0.00036707466805058035, 2522075893: 0.0028036909990759844, 2537138042: 0.06373808589547232, 2578935808: 0.006980747566548106, 2578935825: 0.007379466602534081, 2583653699: 0.022442185739782034, 2621638099: 0.059390149741149076, 2627719093: 0.008759161044517298, 2627737591: 0.01626520511879296, 2832670839: 0.08778147665278534, 2832670843: 0.0, 2832670844: 0.0, 3158767971: 0.0, 3375721677: 0.0, 3375721678: 0.0, 3462901999: 0.019803045453970103, 3462902001: 0.0, 3462902010: 0.004803615052592939, 3462902011: 0.026277483133551893, 3824975757: 0.08855992810399606, 4076916681: 0.03961874865511437, 4293765312: 0.039523815551308177, 4293770355: 0.0, 4293773377: 0.0, 4293806222: 0.006265584851208182, 4293806233: 0.12338771945369163, 4293806243: 0.03035327772363075, 4293806245: 0.0, 4293806251: 0.0, 4293806263: 0.0, 4293806265: 0.026676202169537866, 4293815199: 0.0, 4293815203: 0.0, 4293815207: 0.009594572358011722, 4293815208: 0.0, 4293818314: 0.0, 4293818327: 0.0, 4293820100: 0.0, 4293820104: 0.01169575838892194, 4293820106: 0.02099920256192803, 4293820107: 0.0, 4293820110: 0.030378593217979064, 4293820113: 0.0, 4293845129: 0.010910978064124147, 4293845130: 0.0, 4293861649: 0.0, 4293861650: 0.0171259319266357, 4293863196: 0.023796564687416935, 4293874099: 0.0625735731554498, 4293874100: 0.013739984557548449, 4293874101: 0.0, 4293878826: 0.03294811589433313, 4293878827: 0.0, 4293878829: 0.0, 4293878921: 0.016208245256509247, 4293878928: 0.0, 4293887737: 0.03337215042466742, 4293894973: 0.011157804134020228, 4293895396: 0.05896611521081478, 4293897138: 0.0318722073845297, 4293897139: 0.027492626862271056, 4293897141: 0.0, 4293897142: 0.027758439552928373, 4293897144: 0.0, 4293906838: 0.011613483032289913, 4293906839: 0.0, 4293910187: 0.0, 4293910188: 0.00967051884105667, 4293910291: 0.02499272179537486, 4293910298: 0.025258534486032175, 4293910983: 0.01829677354024531, 4293911305: 0.01741706011164133, 4293911307: 0.0, 4293911323: 0.009449008265508905, 4293911324: 0.009714820956166222, 4293911328: 0.0, 4293914654: 0.045264103894788806, 4293914657: 0.0, 4293923366: 0.009550270242902168, 4293923367: 0.0, 4293923369: 0.06701011353999216, 4293923370: 0.0, 4293923371: 0.0, 4293923373: 0.016961381213371644, 4293923379: 0.009980633646823538, 4293925864: 0.0, 4431221624: 0.0, 4662148911: 0.002316367732870904, 4849861793: 0.07216181663987443, 4855872498: 0.00726554687796666, 4855901667: 0.03994785008164247, 4855901669: 0.004658050960090123, 4887828631: 0.026809108514866526, 4887828634: 0.039814943736313814, 5043959851: 0.009594572358011722, 5043965921: 0.004803615052592939, 5043974887: 0.0, 5043974890: 0.009594572358011722, 5043974900: 0.009594572358011722, 5043977466: 0.009594572358011722, 5043977467: 0.041099705074490844, 5043980815: 0.009594572358011722, 5061224884: 0.0, 5062838245: 0.038447907041504754, 5063103855: 0.033100008860423025, 5063103856: 0.0, 5407688432: 0.029479893168613852, 5652194186: 0.0008607268078427402, 6707729722: 0.06271280837436553, 6707729726: 0.02375226257230738, 6937807246: 0.0, 7033857126: 0.0, 7033857127: 0.0, 7035978862: 0.0, 7035978865: 0.0, 7468767015: 0.0, 7991502349: 0.002480918446134957, 7991725199: 0.10549599382301938, 7991725206: 0.04239712415984203, 7991725207: 0.06880751363872259, 7991923055: 0.023416832272192198, 7991923056: 0.004708681948786755, 8076487196: 0.0035315114615900663, 8076487197: 0.06334569573307343, 8081258686: 0.0032213966558231966, 8083712851: 0.007499715200688582, 8722222981: 0.026005341569307495, 8722380519: 0.0, 8728690614: 0.07297824133260762, 8728690615: 0.06362416617090491, 8728849348: 0.0, 8728849349: 0.0, 8728849355: 0.0038922572560535678, 8728849356: 0.047688062478640054, 8740325985: 0.034865764591218054, 8740325989: 0.0466817715782945, 11453986130: 0.010328721694112883}
+Atributos dos Nós: [&#39;y&#39;, &#39;x&#39;, &#39;street_count&#39;, &#39;centralidade_grau_entrada&#39;, &#39;centralidade_grau_saida&#39;, &#39;centralidade_grau_total&#39;, &#39;centralidade_proximidade_entrada&#39;, &#39;centralidade_proximidade_saida&#39;, &#39;centralidade_proximidade_total&#39;, &#39;centralidade_intermediacao&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Para facilitar a manipulação dos registros, criamos um dataframe para armazenar os valores de centralidade de intermediação.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Criar um DataFrame para armazenar os valores de centralidade de intermediação</span>
+<span class="n">centralidade_intermediacao_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;centralidade_intermediacao&quot;</span><span class="p">:</span> <span class="n">centralidade_intermediacao</span>
+<span class="p">})</span>
+
+<span class="c1"># Exibir os cinco primeiros registros do DataFrame</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">centralidade_intermediacao_df</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>          centralidade_intermediacao
+587993                      0.020657
+25929414                    0.020525
+25947658                    0.023316
+60609803                    0.000000
+60641188                    0.052795
+</pre></div>
+</div>
+</div>
+</div>
+<p>Por fim, vamos plotar os nós na rede viária, ressaltando o valor da centralidade de intermediação.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Visualizar os nós na rede viária com base na centralidade de intermediação</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">osmnx</span> <span class="k">as</span> <span class="nn">ox</span>
+
+<span class="c1"># Configurar a figura para um único gráfico com fundo preto</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>  <span class="c1"># Fundo preto para a figura</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>  <span class="c1"># Fundo preto para o gráfico</span>
+
+<span class="c1"># Gerar as cores dos nós com base na centralidade de intermediação</span>
+<span class="n">cores_intermediacao</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">get_node_colors_by_attr</span><span class="p">(</span><span class="n">grafo_rede_viaria</span><span class="p">,</span> <span class="s2">&quot;centralidade_intermediacao&quot;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;plasma&quot;</span><span class="p">)</span>
+
+<span class="c1"># Ajustar os tamanhos dos nós para torná-los mais visíveis</span>
+<span class="n">tamanhos_nos</span> <span class="o">=</span> <span class="p">[</span><span class="mi">20</span> <span class="o">+</span> <span class="mi">200</span> <span class="o">*</span> <span class="n">valor</span> <span class="k">for</span> <span class="n">valor</span> <span class="ow">in</span> <span class="n">centralidade_intermediacao_df</span><span class="p">[</span><span class="s2">&quot;centralidade_intermediacao&quot;</span><span class="p">]]</span>
+
+<span class="c1"># Plotar o grafo com a centralidade de intermediação</span>
+<span class="n">ox</span><span class="o">.</span><span class="n">plot_graph</span><span class="p">(</span>
+    <span class="n">grafo_rede_viaria</span><span class="p">,</span>
+    <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
+    <span class="n">node_size</span><span class="o">=</span><span class="n">tamanhos_nos</span><span class="p">,</span>
+    <span class="n">node_color</span><span class="o">=</span><span class="n">cores_intermediacao</span><span class="p">,</span>
+    <span class="n">node_zorder</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">edge_linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+    <span class="n">edge_color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span>
+    <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">close</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">)</span>
+
+<span class="c1"># Adicionar título e exibir o gráfico</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Centralidade de Intermediação&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/a97d6bf137710d5847c9f019b358c1184c75f0c3569b2b7d66b9dea97489eb7d.png" src="_images/a97d6bf137710d5847c9f019b358c1184c75f0c3569b2b7d66b9dea97489eb7d.png" />
+</div>
+</div>
+<p>A centralidade de intermediação mede a importância de um nó como ponto de passagem nos caminhos mais curtos entre pares de nós. Nós com alta centralidade (tons quentes como amarelo e laranja) desempenham papéis importantes como pontos de passagem na rede, localizados em áreas de maior fluxo. Já os nós com baixa centralidade (tons frios como azul e roxo) são menos utilizados como pontos de passagem, geralmente localizados nas extremidades da rede ou em áreas menos conectadas.</p>
+<p>Com base nessa análise visual, geramos um histograma para examinar a distribuição da centralidade de intermediação.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plotar o histograma da centralidade de intermediação</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">centralidade_intermediacao</span><span class="o">.</span><span class="n">values</span><span class="p">(),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;skyblue&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Centralidade de Intermediação&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Número de Nós&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Distribuição da Centralidade de Intermediação&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/cec7fc0ab9421e32f671d6175b6bfe7a6dd2db7fb681b6fe575edd25c11a70af.png" src="_images/cec7fc0ab9421e32f671d6175b6bfe7a6dd2db7fb681b6fe575edd25c11a70af.png" />
+</div>
+</div>
+<p>O histograma da centralidade de intermediação mostra a distribuição dos nós na rede viária de acordo com sua importância para o fluxo de caminhos mais curtos. A centralidade de intermediação mede quantas vezes um nó atua como ponto de passagem em rotas entre pares de outros nós, indicando sua relevância na conectividade da rede.</p>
+<p>A análise do histograma revela que a maioria dos nós possui valores de centralidade de intermediação próximos de zero, conforme evidenciado pela alta concentração de nós na extremidade esquerda do gráfico. Isso sugere que grande parte dos nós tem pouca ou nenhuma importância como pontos de passagem em rotas mais curtas, provavelmente por serem interseções simples ou terminais que não desempenham um papel estratégico no fluxo geral da rede.</p>
+<p>Conforme os valores de centralidade aumentam, a frequência de nós diminui rapidamente, havendo uma quantidade pequena de nós com centralidade em torno de 0,05 e um número ainda menor com valores entre 0,1 e 0,2. Isso indica que apenas alguns nós atuam como pontos de passagem significativos, conectando diferentes partes da rede.</p>
+<p>Finalmente, observa-se que existem alguns poucos nós com valores de centralidade de intermediação mais altos, próximos de 0,2. Esses nós provavelmente representam interseções principais ou rotas centrais onde muitos caminhos mais curtos passam, tornando-os cruciais para a conectividade e fluidez do tráfego na rede.</p>
+<p>Em resumo, o padrão observado sugere uma estrutura hierárquica na rede viária, onde a maioria dos nós apresenta baixa importância para o fluxo de caminhos mais curtos, enquanto um número reduzido de nós atua como pontos centrais, suportando a maior parte da intermediação na rede. Esses nós de alta centralidade de intermediação são importantes para o fluxo e devem ser considerados em análises de acessibilidade e mobilidade, pois interrupções neles podem impactar significativamente a conectividade da rede.</p>
+<p>Após realizar a análise individual das centralidades de grau, proximidade e intermediação, agora iremos criar um gráfico consolidando as três métricas (grau total, proximidade total e intermediação). Esse plot permitirá uma visão mais ampla e comparativa, facilitando a análise geral da conectividade e da importância dos nós na rede viária.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Configurar a figura com 3 colunas e 1 linha, fundo preto</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">eixos</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="n">facecolor</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
+
+<span class="c1"># Ajustar o fundo preto para cada eixo</span>
+<span class="k">for</span> <span class="n">eixo</span> <span class="ow">in</span> <span class="n">eixos</span><span class="p">:</span>
+    <span class="n">eixo</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
+
+<span class="c1"># Plotar a Centralidade de Grau Total</span>
+<span class="n">cores_grau_total</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">get_node_colors_by_attr</span><span class="p">(</span><span class="n">grafo_rede_viaria</span><span class="p">,</span> <span class="s2">&quot;centralidade_grau_total&quot;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;plasma&quot;</span><span class="p">)</span>
+<span class="n">ox</span><span class="o">.</span><span class="n">plot_graph</span><span class="p">(</span>
+    <span class="n">grafo_rede_viaria</span><span class="p">,</span>
+    <span class="n">node_color</span><span class="o">=</span><span class="n">cores_grau_total</span><span class="p">,</span>
+    <span class="n">node_size</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+    <span class="n">edge_linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+    <span class="n">edge_color</span><span class="o">=</span><span class="s2">&quot;lightgray&quot;</span><span class="p">,</span>
+    <span class="n">bgcolor</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span>
+    <span class="n">ax</span><span class="o">=</span><span class="n">eixos</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+    <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">close</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">)</span>
+<span class="n">eixos</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Centralidade de Grau Total&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">)</span>
+
+<span class="c1"># Plotar a Centralidade de Proximidade Total</span>
+<span class="n">cores_proximidade_total</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">get_node_colors_by_attr</span><span class="p">(</span><span class="n">grafo_rede_viaria</span><span class="p">,</span> <span class="s2">&quot;centralidade_proximidade_total&quot;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;plasma&quot;</span><span class="p">)</span>
+<span class="n">ox</span><span class="o">.</span><span class="n">plot_graph</span><span class="p">(</span>
+    <span class="n">grafo_rede_viaria</span><span class="p">,</span>
+    <span class="n">node_color</span><span class="o">=</span><span class="n">cores_proximidade_total</span><span class="p">,</span>
+    <span class="n">node_size</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+    <span class="n">edge_linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+    <span class="n">edge_color</span><span class="o">=</span><span class="s2">&quot;lightgray&quot;</span><span class="p">,</span>
+    <span class="n">bgcolor</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span>
+    <span class="n">ax</span><span class="o">=</span><span class="n">eixos</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+    <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">close</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">)</span>
+<span class="n">eixos</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Centralidade de Proximidade Total&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">)</span>
+
+<span class="c1"># Plotar a Centralidade de Intermediação</span>
+<span class="n">cores_intermediacao</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">get_node_colors_by_attr</span><span class="p">(</span><span class="n">grafo_rede_viaria</span><span class="p">,</span> <span class="s2">&quot;centralidade_intermediacao&quot;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;plasma&quot;</span><span class="p">)</span>
+<span class="n">ox</span><span class="o">.</span><span class="n">plot_graph</span><span class="p">(</span>
+    <span class="n">grafo_rede_viaria</span><span class="p">,</span>
+    <span class="n">node_color</span><span class="o">=</span><span class="n">cores_intermediacao</span><span class="p">,</span>
+    <span class="n">node_size</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+    <span class="n">edge_linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+    <span class="n">edge_color</span><span class="o">=</span><span class="s2">&quot;lightgray&quot;</span><span class="p">,</span>
+    <span class="n">bgcolor</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span>
+    <span class="n">ax</span><span class="o">=</span><span class="n">eixos</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+    <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">close</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">)</span>
+<span class="n">eixos</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Centralidade de Intermediação&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">)</span>
+
+<span class="c1"># Ajustar o layout e exibir o gráfico</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/29397d78d652c69489ad8176ded5fcc0d36a157f1d8c9e038dad0484515137c2.png" src="_images/29397d78d652c69489ad8176ded5fcc0d36a157f1d8c9e038dad0484515137c2.png" />
+</div>
+</div>
+<p>Cada plot ilustra o papel distinto que os nós desempenham na conectividade e acessibilidade da rede.</p>
+<p>O primeiro plot mostra a centralidade de grau total, que mede o número de conexões diretas de cada nó. Nós com maior grau (cores mais claras) correspondem a interseções onde várias ruas convergem, representando pontos centrais de movimentação local. A predominância de nós com grau menor (cores mais escuras) indica que a maioria das interseções conecta apenas algumas ruas, enquanto poucos nós desempenham um papel mais relevante na estrutura geral da rede.</p>
+<p>O segundo plot apresenta a centralidade de proximidade total, que reflete a facilidade com que um nó pode alcançar outros pontos da rede. Nós com alta centralidade de proximidade (cores claras) estão posicionados de forma estratégica, permitindo acessar outras áreas da rede com poucas etapas. Já os nós com centralidade mais baixa (cores escuras) estão localizados em áreas periféricas ou menos acessíveis, refletindo sua posição mais afastada do centro da rede.</p>
+<p>O terceiro plot exibe a centralidade de intermediação, que mede o quanto um nó é usado como ponto de passagem nos caminhos mais curtos entre outros pares de nós. Nós com alta centralidade de intermediação (cores quentes) são críticos para o fluxo de tráfego, conectando diferentes partes da rede. Esses nós geralmente estão em posições estratégicas, como grandes interseções ou áreas centrais. Por outro lado, nós com baixa centralidade de intermediação (cores frias) têm menor relevância para o fluxo geral, atuando mais como pontos terminais ou locais de menor conectividade global.</p>
+<p>Com base nessa análise visual, será gerado um histograma para examinar a distribuição das centtralidades, permitindo uma visão quantitativa complementar ao padrão espacial observado.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Criar uma figura com 3 colunas e 1 linha</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="c1"># Plotar a distribuição da centralidade de grau</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">centralidade_grau_total</span><span class="o">.</span><span class="n">values</span><span class="p">(),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;skyblue&quot;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Centralidade de Grau&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Número de Nós&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Distribuição da Centralidade de Grau&quot;</span><span class="p">)</span>
+
+<span class="c1"># Plotar a distribuição da centralidade de proximidade</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">centralidade_proximidade_total</span><span class="o">.</span><span class="n">values</span><span class="p">(),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;lightgreen&quot;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Centralidade de Proximidade&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Número de Nós&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Distribuição da Centralidade de Proximidade&quot;</span><span class="p">)</span>
+
+<span class="c1"># Criar um DataFrame para a centralidade de intermediação e plotar o histograma</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">centralidade_intermediacao</span><span class="o">.</span><span class="n">values</span><span class="p">(),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;salmon&quot;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Centralidade de Intermediação&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Número de Nós&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Distribuição da Centralidade de Intermediação&quot;</span><span class="p">)</span>
+
+<span class="c1"># Ajustar o layout e exibir o gráfico</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/5e18e315403059b838a3b8ab788c04dbd8202de345c4b40ecc1453e1abe0bc82.png" src="_images/5e18e315403059b838a3b8ab788c04dbd8202de345c4b40ecc1453e1abe0bc82.png" />
+</div>
+</div>
+<p>Os histogramas fornecem uma visão detalhada sobre a conectividade e acessibilidade dos nós na rede viária. O histograma da centralidade de grau mostra a quantidade de conexões diretas de cada nó, representando a conectividade local. A distribuição apresenta picos concentrados principalmente entre 0,005 e 0,015, indicando que a maioria dos nós possui um número moderado de conexões, característicos de interseções simples. Apenas alguns nós possuem valores mais altos de centralidade de grau, sugerindo interseções principais, conectadas a várias ruas.</p>
+<p>O histograma da centralidade de proximidade reflete como os nós estão distribuídos em relação à acessibilidade de toda a rede. A maioria dos nós apresenta valores entre 0,0006 e 0,0010, indicando que a rede viária é razoavelmente bem conectada, permitindo alcançar a maior parte dos nós em poucas etapas. A baixa presença de valores extremos, tanto baixos quanto altos, sugere uma rede homogênea em termos de acessibilidade, sem áreas isoladas ou desproporcionalmente conectadas.</p>
+<p>Já o histograma da centralidade de intermediação revela que a maioria dos nós possui valores próximos de zero, com apenas alguns exibindo valores elevados. Esse padrão reflete que poucos nós desempenham papéis estratégicos como pontos de passagem em caminhos mais curtos entre outros nós. Esses nós, com alta centralidade de intermediação, representam interseções principais ou pontos críticos para o fluxo de tráfego, enquanto a maioria dos nós é composta por terminais ou interseções menos significativas para o fluxo geral.</p>
+<p>Em resumo, os histogramas mostram que a rede viária apresenta uma estrutura hierárquica: a centralidade de grau aponta para uma maioria de nós com conectividade moderada e alguns altamente conectados; a centralidade de proximidade indica uma acessibilidade bem distribuída, sem grandes desigualdades; e a centralidade de intermediação destaca poucos nós como cruciais para a conectividade global e o fluxo entre diferentes partes da rede.</p>
 </section>
 </section>
-<section id="calculo-de-orientacao-da-rede-viaria">
-<h2>3.3 Cálculo de orientação da rede viária<a class="headerlink" href="#calculo-de-orientacao-da-rede-viaria" title="Link to this heading">#</a></h2>
+<section id="calculo-da-orientacao-da-rede">
+<h2>3.5 Cálculo da orientação da rede<a class="headerlink" href="#calculo-da-orientacao-da-rede" title="Link to this heading">#</a></h2>
+<p>O cálculo da orientação da rede em redes espaciais refere-se à análise das direções predominantes dos segmentos de conexão, como ruas, trilhas ou qualquer outro tipo de conexão espacial. Esse processo permite identificar as direções ou ângulos mais frequentes dos segmentos em uma determinada área, revelando padrões de organização espacial e o layout da rede. A orientação é geralmente expressa em graus (de 0 a 360) ou em radianos e é frequentemente visualizada em gráficos polares ou histogramas que representam os ângulos das conexões.</p>
+<p>A análise de orientação permite extrair informações relevantes sobre a estrutura e organização da rede. Em redes com estrutura planejada, como bairros ou áreas construídas com regularidade, é comum encontrar orientações dominantes, como segmentos dispostos em ângulos retos ou seguindo uma mesma direção. Em contrapartida, em redes formadas de maneira orgânica, como trilhas em florestas ou caminhos em áreas rurais, a orientação dos segmentos tende a ser mais variada e sem direções predominantes. Essa análise revela se a rede segue um padrão organizado ou apresenta uma estrutura mais aleatória.</p>
+<p>O cálculo da orientação pode também ser usado para comparar diferentes regiões, setores ou áreas dentro de uma rede espacial. Áreas planejadas geralmente exibem orientações mais consistentes, enquanto áreas desenvolvidas de forma não estruturada apresentam orientações mais dispersas. Essa comparação é útil para identificar contrastes entre áreas com planejamento e sem planejamento, bem como para observar o impacto do desenvolvimento urbano ou natural.</p>
+<p>A orientação dos segmentos impacta ainda a forma como os indivíduos percebem e navegam pela rede. Em redes organizadas (por exemplo, com segmentos perpendiculares ou paralelos), é mais fácil para as pessoas se localizarem e encontrarem rotas. Em redes mais caóticas, com orientações diversas, a navegação pode ser mais desafiadora.</p>
+<p>Além disso, redes com orientações uniformes, como aquelas dispostas em ângulos consistentes, tendem a oferecer caminhos mais curtos e eficientes, enquanto redes com segmentos orientados de forma irregular podem aumentar o comprimento dos trajetos.</p>
+<p>Para analisar a orientação, inicialmente vamos transformar o grafo em um grafo não-direcionado. Isso é necessário porque estamos interessados apenas na direção das ruas, independentemente do sentido de direção de cada via.
+Além disso, vamos adicionar aos segmentos de rua (arestas) o atributo de “bearing” (orientação), que indica o ângulo de cada segmento em relação ao norte.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grafo_nao_direcionado</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">add_edge_bearings</span><span class="p">(</span><span class="n">ox</span><span class="o">.</span><span class="n">convert</span><span class="o">.</span><span class="n">to_undirected</span><span class="p">(</span><span class="n">grafo_rede_viaria</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Para visualizar a orientação de forma clara, vamos criar um gráfico polar. Essa projeção permite mostrar os ângulos em um círculo, destacando as direções predominantes das ruas.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Configurar a Visualização com Projeção Polar</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">subplot_kw</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;projection&quot;</span><span class="p">:</span> <span class="s2">&quot;polar&quot;</span><span class="p">})</span>
+
+<span class="c1"># Gerar o Histograma de Orientação</span>
+<span class="n">ox</span><span class="o">.</span><span class="n">plot_orientation</span><span class="p">(</span><span class="n">grafo_nao_direcionado</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Orientação da Rede Viária - Liberdade&quot;</span><span class="p">,</span> <span class="n">area</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Plotar</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/23c0efac67aa98eff195682e419206c46c70a0f7192b2d76b030919fcac30d99.png" src="_images/23c0efac67aa98eff195682e419206c46c70a0f7192b2d76b030919fcac30d99.png" />
+</div>
+</div>
+<p>O gráfico de orientação apresenta a distribuição das direções das ruas do bairro da Liberdade, em relação aos pontos cardeais (Norte, Sul, Leste e Oeste).</p>
+<p>As barras representam a quantidade de segmentos de rua orientados em cada direção específica, com a altura de cada barra indicando essa quantidade. As direções mostram picos em diversas posições, sugerindo que as ruas não seguem uma única orientação predominante, mas sim uma variedade de direções distribuídas de forma relativamente uniforme.</p>
+<p>Em termos de <em>padrões de orientação</em>, esses múltiplos picos ao redor do círculo indicam que o bairro da Liberdade possui ruas orientadas em várias direções, com uma leve predominância nos eixos Norte-Sul e Leste-Oeste. A presença dessas múltiplas orientações sugere um crescimento urbano menos planejado, ou adaptado à topografia local, onde o traçado das ruas foi moldado de acordo com o terreno e as construções existentes, em vez de seguir um layout estritamente ortogonal.</p>
+<p>Na <em>análise de organização espacial</em>, a ausência de um padrão claro e dominante nas direções das ruas (como uma forte predominância em Norte-Sul e Leste-Oeste) indica que o bairro não apresenta uma estrutura viária em grade regular, característica de áreas planejadas. Essa variedade de orientações pode afetar a trafegabilidade e a percepção espacial, tornando a área potencialmente mais confusa para quem não conhece bem a região.</p>
 </section>
 </section>
 
@@ -444,7 +1807,7 @@
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Capítulo 2 - Manipulação de redes espaciais</p>
+        <p class="prev-next-title">2. INTRODUÇÃO AO USO DO OSMnx PARA ANÁLISE DE REDES ESPACIAIS</p>
       </div>
     </a>
     <a class="right-next"
@@ -474,14 +1837,26 @@
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#obtencao-e-analise-preliminar-da-rede-viaria">3.1 Obtenção e análise preliminar da rede viária</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculo-de-indicadores-da-rede-viaria">3.2 Cálculo de indicadores da rede viária</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estatisticas-basicas">3.2.1 Estatísticas básicas</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#centralidade-de-grau-degree-centrality">3.2.2 Centralidade de grau (Degree Centrality)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#centralidade-de-proximidade">3.2.3 Centralidade de proximidade</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#centralidade-de-intermediacao">3.2.4 Centralidade de intermediação</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estatisticas-basicas-da-rede-viaria">3.2 Estatísticas Básicas da Rede Viária</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estatisticas-topologicas">3.2.1 Estatísticas Topológicas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estatisticas-geometricas">3.2.2 Estatísticas Geométricas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estatisticas-combinadas">3.2.3 Estatísticas Combinadas</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculo-de-orientacao-da-rede-viaria">3.3 Cálculo de orientação da rede viária</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indicadores-de-conectividade">3.3 Indicadores de Conectividade</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#densidade-da-rede">3.3.1 Densidade da rede</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assortatividade-de-grau">3.3.2 Assortatividade de grau</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grau-dos-nos">3.3.3 Grau dos nós</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#eficiencia-global-e-local">3.3.4 Eficiência global e local</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#centralidade">3.4 Centralidade</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#centralidade-de-grau-degree-centrality">3.4.1 Centralidade de grau (Degree Centrality)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#centralidade-de-proximidade-closeness-centrality">3.4.2 Centralidade de proximidade (Closeness Centrality)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#centralidade-de-intermediacao-betweenness-centrality">3.4.3 Centralidade de intermediação (Betweenness Centrality)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculo-da-orientacao-da-rede">3.5 Cálculo da orientação da rede</a></li>
 </ul>
   </nav></div>
 
