@@ -432,7 +432,7 @@ plt.show()
 
 
 
-## 2.2 Trabalhando com a rede viária
+## 2.3 Trabalhando com a rede viária
 
 A análise da infraestrutura de transporte em áreas urbanas depende, essencialmente, do entendimento da rede viária. A seguir, exploraremos como as redes viárias são representadas e como utilizar o OSMnx para manipular e analisar esses dados de maneira eficaz.
 
@@ -450,7 +450,7 @@ Em uma rede viária:
 
 
 
-### 2.2.1 Obtenção de dados da Rede viária do OSM
+### 2.3.1 Obtenção de dados da Rede viária do OSM
 
 Para baixar a rede viária do bairro da Liberdade, utilizamos o parâmetro `network_type="all"`.
 
@@ -618,7 +618,7 @@ print("Número total de arestas:", num_arestas)
 ```
 
 
-### 2.2.2 Visualização Interativa com GeoPandas e Folium
+### 2.3.2 Visualização Interativa com GeoPandas e Folium
 
 A função `.explore()` da GeoPandas permite criar visualizações interativas dos dados geoespaciais, utilizando a Folium para gerar mapas.
 
@@ -693,7 +693,7 @@ m
 
 
 
-## 2.2.3 Conversão de grafos de redes viárias
+## 2.3.3 Conversão de grafos de redes viárias
 
 
 Para realizar diferentes tipos de análises com redes viárias, é útil converter o grafo de uma rede viária em outras estruturas, como um grafo não direcionado, um grafo simplificado ou GeoDataFrames para manipulação geoespacial. 
@@ -739,27 +739,9 @@ gdf_arestas.plot()
 
 
 
-### 2.2.4 Atributos dos Nós e Arestas de grafos
+### 2.3.4 Atributos dos Nós e Arestas de grafos
 
-Após converter para GeoDataFrames, podemos acessar e analisar os atributos disponíveis para cada nó e aresta. Esses atributos são úteis para entender as características de cada ponto de interseção e de cada segmento de rua.
-
-
-Os nós representam interseções ou cruzamentos na rede viária e podem conter atributos como:
-- `osmid`: ID do OpenStreetMap.
-- Coordenadas de localização (`x` e `y`).
-- Outros dados contextuais, como elevação, se disponível.
-
-
-
-As arestas representam os segmentos de rua entre os nós e possuem diversos atributos, como:
-- `name`: Nome da rua, se mapeado no OSM.
-- `length`: Comprimento do segmento de rua em metros.
-- `maxspeed`: Velocidade máxima permitida, se disponível.
-- `highway`: Tipo de via, por exemplo, `residential` ou `primary`.
-- `oneway`: Indica se a via é de mão única.
-
-Esses atributos auxiliam na análise de características da rede viária, como a identificação de vias principais e a análise de acessibilidade e de tráfego.
-
+Após converter os grafos para GeoDataFrames, podemos acessar e analisar os atributos disponíveis para cada nó e aresta. Os nós representam interseções ou cruzamentos na rede viária, enquanto as arestas  representam os segmentos de rua entre os nós.
 
 
 
