@@ -397,6 +397,10 @@
                   
   <section class="tex2jax_ignore mathjax_ignore" id="metricas-e-indicadores-de-redes">
 <h1>3. MÉTRICAS E INDICADORES DE REDES<a class="headerlink" href="#metricas-e-indicadores-de-redes" title="Link to this heading">#</a></h1>
+<p>Redes espaciais representam estruturas formadas por elementos conectados distribuídos no espaço, como nós (pontos) e arestas (conexões). Essas redes aparecem em diversos contextos, como transporte (ferrovias, rotas aéreas), infraestrutura (redes de energia, abastecimento de água), ecologia (conexões entre habitats) e telecomunicações (fibra óptica e redes móveis). A análise de redes espaciais combina a topologia da rede com suas propriedades geométricas, permitindo compreender a organização e o funcionamento de sistemas complexos que operam em um espaço físico definido.</p>
+<p>Diferente de outras redes, as redes espaciais integram a dimensão geográfica como um componente essencial. A localização dos nós e o comprimento ou direção das arestas frequentemente influenciam a funcionalidade dessas redes, afetando fatores como custo, eficiência, acessibilidade e vulnerabilidade. Por exemplo, em uma rede de distribuição de energia, a distância física entre subestações impacta a eficiência do sistema, enquanto em redes ecológicas, a conectividade entre habitats pode determinar a sobrevivência de espécies.</p>
+<p>A análise dessas redes possibilita avaliar características estruturais, como densidade, conectividade e centralidade, bem como métricas específicas que levam em conta as restrições espaciais. Essas métricas ajudam a identificar padrões de organização, otimizar a gestão de recursos e planejar expansões ou intervenções, garantindo maior eficiência e resiliência dos sistemas analisados.</p>
+<p>Ao longo deste capítulo, exploraremos algumas dessas métricas e métodos aplicados ao estudo de redes espaciais, com um foco particular na análise de uma rede viária. Esse estudo servirá como exemplo para ilustrar como essas ferramentas podem ser usadas na prática para compreender a conectividade, a acessibilidade e a eficiência em um contexto real.</p>
 <section id="obtencao-e-analise-preliminar-da-rede-viaria">
 <h2>3.1 Obtenção e análise preliminar da rede viária<a class="headerlink" href="#obtencao-e-analise-preliminar-da-rede-viaria" title="Link to this heading">#</a></h2>
 <p>Inicialmente, instalamos a OSMnx no Google Colab.</p>
@@ -420,14 +424,9 @@
 <span class="kn">import</span> <span class="nn">folium</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
 <span class="n">ox</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">use_cache</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">log_console</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_26445/3270492796.py:12: FutureWarning: The `utils.config` function is deprecated and will be removed in the v2.0.0 release. Instead, use the `settings` module directly to configure a global setting&#39;s value. For example, `ox.settings.log_console=True`. See the OSMnx v2 migration guide: https://github.com/gboeing/osmnx/issues/1123
-  ox.config(use_cache=True, log_console=True)
 </pre></div>
 </div>
 </div>
@@ -493,10 +492,10 @@
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Atributos das Arestas:
                                       osmid  oneway   lanes     highway  \
-587993   459347433    [780219126, 38738766]    True  [2, 3]  trunk_link   
+587993   459347433    [780219126, 38738766]    True  [3, 2]  trunk_link   
 25929414 587993                   524487872    True       5       trunk   
 25947658 2627719093               257174614    True       2    tertiary   
-         2627737591  [942915234, 944346220]    True  [2, 3]     primary   
+         2627737591  [942915234, 944346220]    True  [3, 2]     primary   
 60641188 2070954431                 8579133    True       2    tertiary   
 
                     maxspeed reversed   length  \
@@ -1093,12 +1092,6 @@ Eficiência Local Média: 0.05547201336675017
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Converter o grafo para MultiDiGraph para preservar direções</span>
 <span class="n">multidigrafo_rede_viaria</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">utils_graph</span><span class="o">.</span><span class="n">get_digraph</span><span class="p">(</span><span class="n">grafo_rede_viaria</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_26445/2972035766.py:2: FutureWarning: The `get_digraph` function is deprecated and will be removed in the v2.0.0 release. Replace it with `convert.to_digraph` instead. See the OSMnx v2 migration guide: https://github.com/gboeing/osmnx/issues/1123
-  multidigrafo_rede_viaria = ox.utils_graph.get_digraph(grafo_rede_viaria)
 </pre></div>
 </div>
 </div>
