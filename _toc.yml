@@ -4,9 +4,14 @@
 format: jb-book
 root: intro
 chapters:
-- file: capitulo1
-- file: capitulo2
-- file: capitulo3
-- file: capitulo4
-- file: capitulo5
+  - file: capitulo1
+    title: Introdução a grafos
+  - file: capitulo2
+    title: Manipulação de redes espaciais
+  - file: capitulo3
+    title: Métricas e indicadores de redes
+  - file: capitulo4
+    title: Roteamento e análise de tempos de viagem
+  - file: capitulo5
+    title: Mapeamento de isócronas para análise de acessibilidade espacial
 - file: referencias
