@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>4. ROTEAMENTO EM REDES ESPACIAIS: CÁLCULO E ANÁLISE DE CAMINHOS OTIMIZADOS &#8212; Análise Espacial de Redes</title>
+    <title>4. TÉCNICAS DE ROTEAMENTO EM REDES ESPACIAIS &#8212; Análise Espacial de Redes</title>
   
   
   
@@ -172,10 +172,10 @@
         </ul>
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="capitulo1.html">1. INTRODUÇÃO A GRAFOS</a></li>
-<li class="toctree-l1"><a class="reference internal" href="capitulo2.html">2. INTRODUÇÃO AO USO DO OSMnx PARA ANÁLISE DE REDES ESPACIAIS</a></li>
-<li class="toctree-l1"><a class="reference internal" href="capitulo3.html">3. MÉTRICAS E INDICADORES DE REDES</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">4. ROTEAMENTO EM REDES ESPACIAIS: CÁLCULO E ANÁLISE DE CAMINHOS OTIMIZADOS</a></li>
-<li class="toctree-l1"><a class="reference internal" href="capitulo5.html">Capítulo 5 - Mapeamento de isócronas para análise de acessibilidade espacial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="capitulo2.html">2. ANÁLISE DE REDES COM OSMnx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="capitulo3.html">3. MÉTRICAS E INDICADORES DE ESTRUTURA E CONECTIVIDADE</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">4. TÉCNICAS DE ROTEAMENTO EM REDES ESPACIAIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="capitulo5.html">Capítulo 5 - ISÓCRONAS E AVALIAÇÃO DA ACESSIBILIDADE ESPACIAL</a></li>
 
 <li class="toctree-l1"><a class="reference internal" href="referencias.html">Bibliografia básica</a></li>
 </ul>
@@ -355,7 +355,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>4. ROTEAMENTO EM REDES ESPACIAIS: CÁLCULO E ANÁLISE DE CAMINHOS OTIMIZADOS</h1>
+    <h1>4. TÉCNICAS DE ROTEAMENTO EM REDES ESPACIAIS</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -393,7 +393,7 @@
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="roteamento-em-redes-espaciais-calculo-e-analise-de-caminhos-otimizados">
-<h1>4. ROTEAMENTO EM REDES ESPACIAIS: CÁLCULO E ANÁLISE DE CAMINHOS OTIMIZADOS<a class="headerlink" href="#roteamento-em-redes-espaciais-calculo-e-analise-de-caminhos-otimizados" title="Link to this heading">#</a></h1>
+<h1>4. TÉCNICAS DE ROTEAMENTO EM REDES ESPACIAIS<a class="headerlink" href="#roteamento-em-redes-espaciais-calculo-e-analise-de-caminhos-otimizados" title="Link to this heading">#</a></h1>
 <p><a class="reference external" href="https://colab.research.google.com/github//Alexandrogschafer/spatial_network_analysis/blob/gh-pages/capitulo4.ipynb">Abrir no Google Colab</a></p>
 <p><strong>Roteamento</strong> é o processo de determinar o melhor caminho ou sequência de caminhos entre dois ou mais pontos dentro de uma rede espacial, desempenhando um papel essencial em redes viárias. Ele otimiza deslocamentos para pedestres, ciclistas, veículos e transporte público, com base em critérios como menor distância, menor tempo de viagem ou menor custo operacional.</p>
 <p>Esse processo utiliza algoritmos matemáticos que analisam e calculam caminhos com base em pesos atribuídos às arestas da rede, representando fatores como distância, tempo ou custo monetário. Entre os algoritmos mais comuns estão o <strong>algoritmo de Dijkstra</strong>, que calcula o caminho mais curto em redes ponderadas; o <strong>algoritmo A</strong>*, que utiliza heurísticas para acelerar a busca; e o <strong>algoritmo de Bellman-Ford</strong>, capaz de lidar com pesos negativos nas arestas.</p>
