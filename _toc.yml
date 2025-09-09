@@ -14,4 +14,6 @@ chapters:
     title: Roteamento e análise de tempos de viagem
   - file: capitulo5
     title: Mapeamento de isócronas para análise de acessibilidade espacial
+  - file: capitulo6
+    title: Geocodificação
 - file: referencias
