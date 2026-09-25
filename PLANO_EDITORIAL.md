@@ -35,7 +35,7 @@ Os notebooks originais **não continham outputs**: não havia saídas corrompida
 | 2 | Mapa com paradas de ônibus sobrescrevia a camada anterior (faltava `m=m`) | Encadeamento correto de camadas |
 | 2 | Inclusão de feições uma a uma por `iterrows()` (lento) | Uma única camada por `GeoDataFrame` |
 | 2 | Contagens fixas no texto (por exemplo, "10.007 edificações"), que mudam com o OSM | Tabelas calculadas no código e aviso sobre variação temporal |
-| 2 | `tiles="CartoDB Positron"`: a xyzservices passou a exigir chave de API | Mapa base padrão (OpenStreetMap) |
+| 2 | `tiles="CartoDB Positron"`: a xyzservices passou a exigir chave de API | Mapa base da Esri (`Esri.WorldGrayCanvas`), sem chave de API; os blocos do OpenStreetMap são bloqueados em ambientes como o Colab |
 | 3 | `ox.basic_stats(G, area=GeoSeries)`: a função espera um escalar | `area_m2 = float(... .area.iloc[0])` |
 | 3 | Afirmação de que a OSMnx retorna "multigrafos não direcionados" | Correção: retorna `MultiDiGraph` |
 | 3 | Proximidade de **entrada** e de **saída** invertidas (`G.reverse()` rotulado como entrada) | Correção com a definição formal e aviso sobre a convenção da NetworkX |
