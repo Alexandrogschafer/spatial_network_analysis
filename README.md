@@ -21,12 +21,41 @@ Se você deseja contribuir para este projeto, relatar problemas ou sugerir melho
 
 Contribuições, correções e sugestões são muito bem-vindas!
 
-## Como Usar
+## Estrutura do repositório
 
-- O livro está disponível em formato Markdown na pasta `capitulos`.
-- Os exemplos de código podem ser acessados diretamente nos notebooks ou blocos de código incorporados ao livro.
-- Todos os exemplos foram desenvolvidos com Python e podem ser executados localmente ou em ambientes como Google Colab.
-- Recursos adicionais sobre bibliotecas utilizadas podem ser encontrados nos capítulos correspondentes.
+```
+├── _config.yml            # configuração do Jupyter Book (numeração, bibliografia, execução)
+├── _toc.yml               # sumário: quatro partes, seis capítulos
+├── intro.md               # prefácio
+├── parte1/                # Parte I · Fundamentos de Grafos e Estruturas Espaciais
+├── parte2/                # Parte II · Modelagem e Aquisição de Dados (OpenStreetMap/OSMnx)
+├── parte3/                # Parte III · Algoritmos e Métricas de Centralidade Espacial
+├── parte4/                # Parte IV · Roteamento Avançado e Aplicações Práticas
+├── images/                # figuras estáticas
+├── references.bib         # bibliografia (sphinxcontrib-bibtex)
+├── referencias.md         # página de referências
+├── requirements.txt       # dependências (pip)
+├── environment.yml        # dependências (conda)
+└── PLANO_EDITORIAL.md     # diagnóstico, decisões editoriais e roteiro
+```
+
+Cada capítulo é um *notebook* Jupyter (`.ipynb`) que pode ser executado localmente ou no Google Colab.
+
+## Como construir o livro localmente
+
+```bash
+# com conda
+conda env create -f environment.yml
+conda activate analise-espacial-redes
+
+# ou com pip
+pip install -r requirements.txt
+
+# construção do HTML (os notebooks são executados e armazenados em cache)
+jupyter-book build .
+```
+
+O resultado fica em `_build/html/index.html`. Os capítulos 2 a 6 consultam as APIs do OpenStreetMap (Overpass e Nominatim) e exigem conexão com a internet.
 
 ## Licença
 
