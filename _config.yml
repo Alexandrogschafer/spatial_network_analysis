@@ -1,0 +1,90 @@
+# Configuração do Jupyter Book (v1)
+# Documentação: https://jupyterbook.org/en/stable/customize/config.html
+
+title: Análise Espacial de Redes
+author: Alexandro Gularte Schafer
+copyright: "2024–2026"
+logo: logo.png
+only_build_toc_files: true
+exclude_patterns:
+  - _build
+  - README.md
+  - PLANO_EDITORIAL.md
+  - "**.ipynb_checkpoints"
+  - cache
+  - dados
+
+# ---------------------------------------------------------------------------
+# Execução dos notebooks
+# ---------------------------------------------------------------------------
+# "cache" executa cada notebook apenas quando seu código muda (jupyter-cache),
+# evitando consultas repetidas às APIs do OpenStreetMap a cada build.
+# Os capítulos das Partes II a IV exigem acesso à internet (Overpass/Nominatim).
+execute:
+  execute_notebooks: cache
+  timeout: 1200
+  allow_errors: false
+  stderr_output: remove-warn
+
+# ---------------------------------------------------------------------------
+# Sintaxe MyST: matemática, admonitions com ":::" e listas de definição
+# ---------------------------------------------------------------------------
+parse:
+  myst_enable_extensions:
+    - amsmath
+    - colon_fence
+    - deflist
+    - dollarmath
+    - html_image
+    - substitution
+
+# ---------------------------------------------------------------------------
+# Bibliografia
+# ---------------------------------------------------------------------------
+bibtex_bibfiles:
+  - references.bib
+
+# ---------------------------------------------------------------------------
+# Saída LaTeX/PDF
+# ---------------------------------------------------------------------------
+latex:
+  latex_documents:
+    targetname: analise_espacial_redes.tex
+
+# ---------------------------------------------------------------------------
+# Repositório e interface HTML
+# ---------------------------------------------------------------------------
+repository:
+  url: https://github.com/Alexandrogschafer/spatial_network_analysis
+  path_to_book: ""
+  branch: main
+
+html:
+  use_issues_button: true
+  use_repository_button: true
+  use_edit_page_button: true
+  use_multitoc_numbering: true   # numeração contínua de capítulos entre as partes
+  home_page_in_navbar: true
+
+launch_buttons:
+  colab_url: https://colab.research.google.com
+  notebook_interface: classic
+
+# ---------------------------------------------------------------------------
+# Configurações do Sphinx: idioma, numeração de figuras, tabelas e equações
+# ---------------------------------------------------------------------------
+sphinx:
+  config:
+    language: pt_BR
+    numfig: true
+    numfig_secnum_depth: 1          # Figura 2.3, Tabela 3.1, ...
+    numfig_format:
+      figure: "Figura %s"
+      table: "Tabela %s"
+      code-block: "Listagem %s"
+      section: "Seção %s"
+    math_numfig: true
+    math_eqref_format: "Eq. ({number})"
+    bibtex_reference_style: author_year
+    bibtex_default_style: plain
+    nb_merge_streams: true

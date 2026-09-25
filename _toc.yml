@@ -1,0 +1,40 @@
+# Sumário do livro
+# Documentação: https://jupyterbook.org/en/stable/structure/toc.html
+
+format: jb-book
+root: intro
+defaults:
+  numbered: true
+parts:
+  - caption: "Parte I · Fundamentos de Grafos e Estruturas Espaciais"
+    numbered: true
+    chapters:
+      - file: parte1/cap01_fundamentos_grafos
+        title: Fundamentos de grafos e redes espaciais
+
+  - caption: "Parte II · Modelagem e Aquisição de Dados de Redes (OpenStreetMap/OSMnx)"
+    numbered: true
+    chapters:
+      - file: parte2/cap02_osmnx
+        title: Aquisição e modelagem com OSM e OSMnx
+
+  - caption: "Parte III · Algoritmos e Métricas de Centralidade Espacial"
+    numbered: true
+    chapters:
+      - file: parte3/cap03_metricas_centralidade
+        title: Métricas estruturais e centralidade
+
+  - caption: "Parte IV · Roteamento Avançado e Aplicações Práticas"
+    numbered: true
+    chapters:
+      - file: parte4/cap04_roteamento
+        title: Técnicas de roteamento
+      - file: parte4/cap05_isocronas
+        title: Isócronas e acessibilidade espacial
+      - file: parte4/cap06_geocodificacao_aplicacoes
+        title: Geocodificação e integração à rede
+
+  - caption: "Referências"
+    numbered: false
+    chapters:
+      - file: referencias

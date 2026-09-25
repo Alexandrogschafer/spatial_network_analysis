@@ -1,0 +1,16 @@
+# Saídas de build do Jupyter Book
+_build/
+
+# Cache de execução e de consultas da OSMnx
+cache/
+.jupyter_cache/
+
+# Dados gerados pelos notebooks (grafos salvos, GeoPackages)
+dados/
+
+# Artefatos de ambiente e editor
+.ipynb_checkpoints/
+__pycache__/
+*.pyc
+.DS_Store
+.venv/
